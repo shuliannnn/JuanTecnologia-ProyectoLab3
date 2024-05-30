@@ -1,0 +1,5 @@
+package Enumeradores;
+
+public enum ColorP {
+    BLANCO,NEGRO,GRIS,AZUL,CELESTE,ROSA,VERDE,ROJO,VIOLETA,MARRON,DORADO;
+}
