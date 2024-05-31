@@ -1,6 +1,5 @@
 package Producto;
-
-import Enumeradores.ColorP;
+import Enumeradores.*;
 
 public abstract class Computadora extends Producto{
 

@@ -1,6 +1,5 @@
 package Producto;
-
-import Enumeradores.ColorP;
+import Enumeradores.*;
 
 public class Pc extends Computadora{
 
