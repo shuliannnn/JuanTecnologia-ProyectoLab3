@@ -1,5 +1,7 @@
 package Producto;
 
+import org.json.JSONObject;
+
 import Enumeradores.*;
 
 public class Mouse extends Periferico{
@@ -36,6 +38,28 @@ public class Mouse extends Periferico{
     public void escanearDatosEspecificos() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("tipo", "Mouse");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("stock", stock);
+            json.put("inalambrico", inalambrico);
+            json.put("rgb", rgb);
+            json.put("conexion", conexion.toString());
+            json.put("dpi", dpi);
+            json.put("sensor", sensor.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
     

@@ -1,4 +1,7 @@
 package Producto;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import Enumeradores.*;
 public class Auricular extends Audio {
     private FormatoAuricular formato;
@@ -37,6 +40,28 @@ public class Auricular extends Audio {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
     }
-
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try{
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("color", color.toString());
+            json.put("stock", stock);
+            json.put("resistencia", resistencia.toString());
+            json.put("conexion", conexion.toString());
+            json.put("microfono", microfono);
+            json.put("inalambrico", inalambrico);
+            json.put("formato", formato.toString());
+            json.put("canal", canal.toString());
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return json;
+        
+    }
+    
     
 }

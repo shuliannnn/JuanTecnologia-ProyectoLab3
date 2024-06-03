@@ -1,4 +1,6 @@
 package Producto;
+import org.json.JSONObject;
+
 import Enumeradores.*;
 
 public class Portatil extends Computadora{
@@ -58,5 +60,31 @@ public class Portatil extends Computadora{
         throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
     }
 
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("tipo", "Portatil");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("stock", stock);
+            json.put("procesador", procesador);
+            json.put("memoriaRam", memoriaRam);
+            json.put("memoriaInterna", memoriaInterna);
+            json.put("pVideo", pVideo);
+            json.put("bluetooth", bluetooth);
+            json.put("mother", mother);
+            json.put("pulgadas", pulgadas);
+            json.put("ethernet", ethernet);
+            json.put("microfono", microfono);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
     
 }

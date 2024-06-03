@@ -1,5 +1,7 @@
 package Producto;
 
+import org.json.JSONObject;
+
 import Enumeradores.ColorP;
 import Enumeradores.Conexiones;
 
@@ -48,6 +50,30 @@ public class Teclado extends Periferico{
     public void escanearDatosEspecificos() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
+    
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("tipo", "Teclado");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("stock", stock);
+            json.put("inalambrico", inalambrico);
+            json.put("rgb", rgb);
+            json.put("conexion", conexion.toString());
+            json.put("porcentaje", porcentaje);
+            json.put("mecanico", mecanico);
+            json.put("cableRemovible", cableRemovible);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
     

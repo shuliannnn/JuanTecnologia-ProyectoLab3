@@ -1,5 +1,6 @@
 package Producto;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import Enumeradores.ColorP;
@@ -40,8 +41,21 @@ public class Cable extends Producto{
 
     @Override
     public JSONObject toJSON() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJSON'");
+        JSONObject json = new JSONObject();
+        try{
+            json.put("tipo", "Cable");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("stock", stock);
+            json.put("largo", largo);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return json;
     }
 
     

@@ -1,4 +1,6 @@
 package Producto;
+import org.json.JSONObject;
+
 import Enumeradores.*;
 public class Parlante extends Audio { 
     private Radios radio;
@@ -35,6 +37,30 @@ public class Parlante extends Audio {
     public void escanearDatosEspecificos() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("tipo", "Parlante");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("stock", stock);
+            json.put("resistencia", resistencia.toString());
+            json.put("conexion", conexion.toString());
+            json.put("microfono", microfono);
+            json.put("inalambrico", inalambrico);
+            json.put("radio", radio.toString());
+            json.put("potencia", potencia);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
     
     
