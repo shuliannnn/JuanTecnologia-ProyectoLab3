@@ -1,5 +1,7 @@
 package Producto;
 
+import org.json.JSONObject;
+
 import Enumeradores.ColorP;
 
 public class Cable extends Producto{
@@ -34,6 +36,12 @@ public class Cable extends Producto{
     public void escanearDatosEspecificos() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJSON'");
     }
 
     

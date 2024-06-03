@@ -1,5 +1,9 @@
 package Producto;
 import java.util.Scanner;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import Enumeradores.*;
 import Excepciones.*;
 
@@ -149,6 +153,30 @@ public class Celular extends Producto{
     public String toString() {
         return "Celular [memoriaRam=" + memoriaRam + ", memoriaInterna=" + memoriaInterna + ", pulgadas=" + pulgadas
                 + ", dobleSim=" + dobleSim + ", so=" + so + ", bateria=" + bateria + "]";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try{
+            json.put("tipo", "Celular");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("memoriaInterna", memoriaInterna);
+            json.put("memoriaRam", memoriaRam);
+            json.put("pulgadas", pulgadas);
+            json.put("bateria", bateria);
+            json.put("dobleSim", dobleSim);
+            json.put("so", so);
+
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+        return json;
     }
 
     

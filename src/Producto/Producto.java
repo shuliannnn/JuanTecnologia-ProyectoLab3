@@ -5,6 +5,8 @@ import Excepciones.InvalidInputException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import org.json.JSONObject;
+
 public abstract class Producto {
     protected String nombre;
     protected String marca;
@@ -17,6 +19,7 @@ public abstract class Producto {
 
     public abstract void escanearDatosComparables();
     public abstract void escanearDatosEspecificos();
+    public abstract JSONObject toJSON();
     protected String escanearNombre(){
         Scanner sc = new Scanner(System.in);
         String nombreString = null;
