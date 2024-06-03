@@ -7,8 +7,6 @@ public abstract class Audio extends Producto{
     protected boolean microfono;
     protected boolean inalambrico;
 
-    
-
     public Audio(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
             ResistenciasP resistencia, Conexiones conexion, boolean microfono, boolean inalambrico) {
         super(nombre, marca, precio, descripcion, color, stock);

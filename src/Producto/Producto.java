@@ -1,6 +1,8 @@
 package Producto;
 import Enumeradores.ColorP;
+import Excepciones.InvalidDoubleException;
 import Excepciones.InvalidInputException;
+import Excepciones.InvalidIntegerException;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -15,9 +17,16 @@ public abstract class Producto {
     protected ColorP color;
     protected int stock;
 
+    public int asignarId(){
+        int nuevoId  = contId;
+        contId++;
+        return nuevoId;
+    }
+    
     public abstract void escanearDatosComparables();
     public abstract void escanearDatosEspecificos();
-    protected String escanearNombre(){
+    
+    public String escanearNombre(){
         Scanner sc = new Scanner(System.in);
         String nombreString = null;
         boolean validInput;
@@ -40,7 +49,7 @@ public abstract class Producto {
         return nombreString;
     }
 
-    protected String escanearMarca(){
+    public String escanearMarca(){
         Scanner sc = new Scanner(System.in);
         String marcaString = null;
         boolean validInput;
@@ -79,6 +88,80 @@ public abstract class Producto {
         return colorP;
     }
 
+    protected String escanearDescripcion(){
+        Scanner sc = new Scanner(System.in);
+        String descripcion = null;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Descripcion: ");
+                descripcion = sc.nextLine();
+                if (!isValidInput(descripcion)) {
+                    throw new InvalidInputException("La descripcion solo puede contener letras y números.");
+                }
+                validInput = true;
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        sc.close();
+        return descripcion;
+    }
+
+    public int escanearStock(){
+        Scanner sc = new Scanner(System.in);
+        int stock = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Bateria (mAh): ");
+                if (!sc.hasNextInt()) {
+                    sc.next(); // Clear invalid input
+                    throw new InvalidIntegerException("El stock debe ser un número entero.");
+                }
+                stock = sc.nextInt();
+                sc.nextLine(); // Consume newline
+                if (stock < 0) {
+                    throw new InvalidIntegerException("El stock no puede ser menor a 0.");
+                }
+                validInput = true;
+            } catch (InvalidIntegerException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        sc.close();
+        return stock;
+    }
+
+    public double escanearPrecio(){
+        Scanner sc = new Scanner(System.in);
+        double precio = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Precio: ");
+                if (!sc.hasNextDouble()) {
+                    sc.next(); // Clear invalid input
+                    throw new InvalidDoubleException("El precio debe ser un número.");
+                }
+                precio = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                if (precio <= 0) {
+                    throw new InvalidDoubleException("El precio debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidDoubleException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+
+        sc.close();
+        return precio;
+    }
+    
     protected boolean isValidInput(String input) {
         return Pattern.matches("[a-zA-Z0-9]+", input);
     }
