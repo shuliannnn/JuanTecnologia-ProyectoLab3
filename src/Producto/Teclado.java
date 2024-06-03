@@ -39,6 +39,16 @@ public class Teclado extends Periferico{
         return "Teclado [porcentaje=" + porcentaje + ", mecanico=" + mecanico + ", cableRemovible=" + cableRemovible
                 + "]";
     }
+    @Override
+    public void escanearDatosComparables() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosComparables'");
+    }
+    @Override
+    public void escanearDatosEspecificos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
 
     
 }

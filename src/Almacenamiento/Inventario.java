@@ -44,7 +44,22 @@ public class Inventario<T extends Producto> implements ABML<T>{
     }
 
     public boolean altaProducto(T e){
-        return e.cargarProducto(this);
+        e.escanearDatosComparables();
+        boolean res = false;
+        if(contiene(e)){
+            System.out.println("El producto ya se encontraba en el sistema");
+            System.out.println("Desea modificar el stock?");
+            //res = stock
+            //lista
+            //archivo
+            return res;
+        }
+        else{
+            e.escanearDatosEspecificos();
+            System.out.println("Se agrego el objeto correctamente");
+            ///archivo
+            return agregar(e);
+        }
     }
     
 }

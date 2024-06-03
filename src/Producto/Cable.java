@@ -24,5 +24,17 @@ public class Cable extends Producto{
         return "Cable [largo=" + largo + "]";
     }
 
+    @Override
+    public void escanearDatosComparables() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosComparables'");
+    }
+
+    @Override
+    public void escanearDatosEspecificos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
+
     
 }

@@ -27,6 +27,16 @@ public class Auricular extends Audio {
     public String toString() {
         return "Auricular [formato=" + formato + ", canal=" + canal + "]";
     }
+    @Override
+    public void escanearDatosComparables() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosComparables'");
+    }
+    @Override
+    public void escanearDatosEspecificos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
 
     
 }

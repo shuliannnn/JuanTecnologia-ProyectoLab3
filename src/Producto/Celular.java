@@ -1,8 +1,5 @@
 package Producto;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-
-import Almacenamiento.Inventario;
 import Enumeradores.*;
 import Excepciones.*;
 
@@ -79,35 +76,16 @@ public class Celular extends Producto{
         
     }
     public void escanearDatosEspecificos(){
-
+        //doble sim
+        //so
+        //bateria
+        //pulgadas
+        //descripcion
+        //stock
+        //precio
+        //asignar id cont id
     }
 
-    public <T extends Producto> boolean cargarProducto(Inventario<T> lista){
-        
-        escanearDatosComparables();//Pedimos al usuario ingresar los datos requeridos en el equals
-
-        if(lista.contiene(this)){
-                //podria llamarse a otro metodo de lista que haga esto
-            System.out.println("El producto ya se encontraba en el sistema");
-            System.out.println("Desea modificar stock?");
-            System.out.println("Ingrese >0 para aumentar y <0 para decrementar");
-            int nuevoStock = sc.nextInt();
-            flag = lista.modificarStock(this, nuevoStock);
-            //modificar archivo
-        }
-        else{
-            System.out.println("Precio");
-            System.out.println("Descripcion");
-            System.out.println("Sistema Operativo");
-            System.out.println("Bateria");
-            System.out.println("Doble SIM");
-            flag = lista.agregar(aux);
-            //modificar archivo
-        }
-        return flag;
-    
-    }
-    
     public Celular(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
             int memoriaRam, int memoriaInterna, double pulgadas, boolean dobleSim, SoCelular so, int bateria) {
         super(nombre, marca, precio, descripcion, color, stock);

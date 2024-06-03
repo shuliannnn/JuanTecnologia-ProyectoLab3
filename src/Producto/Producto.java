@@ -5,7 +5,6 @@ import Excepciones.InvalidInputException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import Almacenamiento.*;
 public abstract class Producto {
     protected String nombre;
     protected String marca;
@@ -16,8 +15,8 @@ public abstract class Producto {
     protected ColorP color;
     protected int stock;
 
-    public abstract boolean cargarProducto(Inventario<? extends Producto> lista);
-
+    public abstract void escanearDatosComparables();
+    public abstract void escanearDatosEspecificos();
     protected String escanearNombre(){
         Scanner sc = new Scanner(System.in);
         String nombreString = null;

@@ -27,6 +27,16 @@ public class Mouse extends Periferico{
     public String toString() {
         return "Mouse [dpi=" + dpi + ", sensor=" + sensor + "]";
     }
+    @Override
+    public void escanearDatosComparables() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosComparables'");
+    }
+    @Override
+    public void escanearDatosEspecificos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+    }
 
     
 }
