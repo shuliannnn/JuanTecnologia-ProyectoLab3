@@ -6,8 +6,9 @@ import org.json.JSONObject;
 
 import Enumeradores.*;
 import Excepciones.*;
+import Interfaces.Memorias;
 
-public class Celular extends Producto{
+public class Celular extends Producto implements Memorias{
 
     private int memoriaRam;
     private int memoriaInterna;
@@ -16,22 +17,82 @@ public class Celular extends Producto{
     private SoCelular so;
     private int bateria;
 
-    protected int escanearMemoriaInterna(){
+    
+    public SoCelular escanearSo(){
         Scanner sc = new Scanner(System.in);
-        int memoria = -1;
+        SoCelular so= null;
         boolean validInput;
-
         do {
             try {
-                System.out.print("Almacenamiento (GB): ");
+                System.out.println("Sistemas Operativos disponibles: ");
+                for (SoCelular s : SoCelular.values()) {
+                    System.out.print(s+", ");
+                }
+                
+                System.out.print("Sistema Operativo: ");
+                String input = sc.nextLine().trim().toUpperCase();
+                
+                try {
+                    so = SoCelular.valueOf(input);
+                    validInput = true;
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidEnumException("Sistema Operativo inválido. Por favor, ingrese un valor válido.");
+                }
+                
+            } catch (InvalidEnumException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        
+        sc.close();
+        return so;
+    }
+    
+    public boolean escanearDobleSim(){
+        Scanner sc = new Scanner(System.in);
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene Doble Sim (t/f): ");
+                String input = sc.next();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                valor = input.charAt(0);
+                
+                if (valor == 't' || valor == 'f') {
+                    sc.close();
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+        sc.close();
+        return false;
+    }
+    public int escanearBateria(){
+        Scanner sc = new Scanner(System.in);
+        int bateria = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Bateria (mAh): ");
                 if (!sc.hasNextInt()) {
                     sc.next(); // Clear invalid input
-                    throw new InvalidIntegerException("El almacenamiento debe ser un número entero.");
+                    throw new InvalidIntegerException("La bateria debe ser un número entero.");
                 }
-                memoria = sc.nextInt();
+                bateria = sc.nextInt();
                 sc.nextLine(); // Consume newline
-                if (memoria <= 0) {
-                    throw new InvalidIntegerException("El almacenamiento debe ser un número positivo.");
+                if (bateria <= 0) {
+                    throw new InvalidIntegerException("La bateria debe ser un número positivo.");
                 }
                 validInput = true;
             } catch (InvalidIntegerException e) {
@@ -40,54 +101,80 @@ public class Celular extends Producto{
             }
         } while (!validInput);
         sc.close();
-        return memoria;
+        return bateria;
     }
-
-    public int escanearMemoriaRAM(){
+    public double escanearPulgadas(){
         Scanner sc = new Scanner(System.in);
-        int memoria = -1;
+        double pulgadas = -1;
         boolean validInput;
         do {
             try {
-                System.out.print("RAM (GB): ");
-                if (!sc.hasNextInt()) {
+                System.out.print("Tamaño Pantalla(pulgadas): ");
+                if (!sc.hasNextDouble()) {
                     sc.next(); // Clear invalid input
-                    throw new InvalidIntegerException("La memoria RAM debe ser un número entero.");
+                    throw new InvalidDoubleException("La pulgadas debe ser un número.");
                 }
-                memoria = sc.nextInt();
+                pulgadas = sc.nextDouble();
                 sc.nextLine(); // Consume newline
-                if (memoria <= 0) {
-                    throw new InvalidIntegerException("La memoria RAM debe ser un número positivo.");
+                if (pulgadas <= 0) {
+                    throw new InvalidDoubleException("La pulgadas debe ser un número positivo.");
                 }
                 validInput = true;
-            } catch (InvalidIntegerException e) {
+            } catch (InvalidDoubleException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
             }
         } while (!validInput);
 
         sc.close();
-        return memoria;
+        return pulgadas;
     }
-
-
+    
     public void escanearDatosComparables(){
+        ///en producto
         marca = escanearMarca();
         nombre = escanearNombre();
+        color = escanearColor();
+        ///en celular
         memoriaInterna = escanearMemoriaInterna();
         memoriaRam = escanearMemoriaRAM();
-        color = escanearColor();
-        
     }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + memoriaRam;
+        result = prime * result + memoriaInterna;
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Celular other = (Celular) obj;
+        if (memoriaRam != other.memoriaRam)
+            return false;
+        if (memoriaInterna != other.memoriaInterna)
+            return false;
+        return true;
+    }
+    
     public void escanearDatosEspecificos(){
-        //doble sim
-        //so
-        //bateria
-        //pulgadas
-        //descripcion
-        //stock
-        //precio
-        //asignar id cont id
+        ///en celular
+        dobleSim = escanearDobleSim();
+        so = escanearSo();
+        bateria = escanearBateria();
+        pulgadas = escanearPulgadas();
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+        id = asignarId();
     }
 
     public Celular(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,

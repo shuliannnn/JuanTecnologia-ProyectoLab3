@@ -60,6 +60,7 @@ public class Inventario<T extends Producto> implements ABML<T>{
         else{
             e.escanearDatosEspecificos();
             System.out.println("Se agrego el objeto correctamente");
+            ///mostrar.
             ///archivo
             return agregar(e);
         }
