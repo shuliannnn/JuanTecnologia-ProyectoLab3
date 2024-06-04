@@ -1,5 +1,10 @@
 package Producto;
+import java.util.Scanner;
+
 import Enumeradores.*;
+import Excepciones.InvalidCharacterException;
+import Excepciones.InvalidInputException;
+
 
 public abstract class Computadora extends Producto{
 
@@ -76,5 +81,104 @@ public abstract class Computadora extends Producto{
                 + memoriaInterna + ", pVideo=" + pVideo + ", bluetooth=" + bluetooth + ", mother=" + mother + "]";
     }
 
-    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + memoriaInterna;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Computadora other = (Computadora) obj;
+        if (memoriaInterna != other.memoriaInterna)
+            return false;
+        return true;
+    }
+
+    protected String escanearProcesador(){
+        Scanner sc = new Scanner(System.in);
+        String procesador = null;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Descripcion: ");
+                procesador = sc.nextLine();
+                if (!isValidInput(procesador)) {
+                    throw new InvalidInputException("El procesador solo puede contener letras y números.");
+                }
+                if(procesador.length() > 50){
+                    throw new InvalidInputException("El procesador no puede superar los 20 caracteres.");
+                }
+                validInput = true;
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        sc.close();
+        return procesador;
+    }
+
+    protected String escanearPlacaVideo(){
+        Scanner sc = new Scanner(System.in);
+        String placaVideo = null;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Placa de video: ");
+                placaVideo = sc.nextLine();
+                if (!isValidInput(placaVideo)) {
+                    throw new InvalidInputException("La placa de video solo puede contener letras y números.");
+                }
+                if(placaVideo.length() > 50){
+                    throw new InvalidInputException("La placa de video no puede superar los 20 caracteres.");
+                }
+                validInput = true;
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        sc.close();
+        return placaVideo;
+    }
+
+    public boolean escanearBluetooth(){
+        Scanner sc = new Scanner(System.in);
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene Bluetooth (t/f): ");
+                String input = sc.next();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                valor = input.charAt(0);
+                
+                if (valor == 't' || valor == 'f') {
+                    sc.close();
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+        sc.close();
+        return false;
+    }
+
 }

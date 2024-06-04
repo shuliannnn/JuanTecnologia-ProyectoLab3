@@ -5,7 +5,6 @@ import Excepciones.InvalidInputException;
 import Excepciones.InvalidIntegerException;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public abstract class Producto {
     protected String nombre;
@@ -28,15 +27,17 @@ public abstract class Producto {
     
     public String escanearNombre(){
         Scanner sc = new Scanner(System.in);
-        String nombreString = null;
+        String nombre = null;
         boolean validInput;
-
         do {
             try {
                 System.out.print("Nombre: ");
-                nombreString = sc.nextLine();
-                if (!isValidInput(nombreString)) {
+                nombre = sc.nextLine();
+                if (!isValidInput(nombre)) {
                     throw new InvalidInputException("El modelo solo puede contener letras y números.");
+                }
+                if(nombre.length() > 40){
+                    throw new InvalidInputException("El nombre no puede superar los 40 caracteres.");
                 }
                 validInput = true;
             } catch (InvalidInputException e) {
@@ -46,19 +47,22 @@ public abstract class Producto {
         } while (!validInput);
 
         sc.close();
-        return nombreString;
+        return nombre;
     }
 
     public String escanearMarca(){
         Scanner sc = new Scanner(System.in);
-        String marcaString = null;
+        String marca = null;
         boolean validInput;
         do {
             try {
                 System.out.print("Marca: ");
-                this.marca = sc.nextLine();
-                if (!isValidInput(this.marca)) {
+                marca = sc.nextLine();
+                if (!isValidInput(marca)) {
                     throw new InvalidInputException("La marca solo puede contener letras y números.");
+                }
+                if(marca.length() > 20){
+                    throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
                 }
                 validInput = true;
             } catch (InvalidInputException e) {
@@ -67,7 +71,7 @@ public abstract class Producto {
             }
         } while (!validInput);
         sc.close();
-        return marcaString;
+        return marca;
     }
 
     public ColorP escanearColor(){
@@ -98,6 +102,9 @@ public abstract class Producto {
                 descripcion = sc.nextLine();
                 if (!isValidInput(descripcion)) {
                     throw new InvalidInputException("La descripcion solo puede contener letras y números.");
+                }
+                if(descripcion.length() > 100){
+                    throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
                 }
                 validInput = true;
             } catch (InvalidInputException e) {
@@ -162,8 +169,9 @@ public abstract class Producto {
         return precio;
     }
     
-    protected boolean isValidInput(String input) {
-        return Pattern.matches("[a-zA-Z0-9]+", input);
+    protected boolean isValidInput(String cadena) {
+        // Permite letras, números, puntos, comas y guiones medios
+        return cadena.matches("^[a-zA-Z0-9.,-]*$");
     }
     
     public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
@@ -175,6 +183,39 @@ public abstract class Producto {
         this.stock = stock;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+        result = prime * result + ((color == null) ? 0 : color.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Producto other = (Producto) obj;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equalsIgnoreCase(other.nombre))
+            return false;
+        if (marca == null) {
+            if (other.marca != null)
+                return false;
+        } else if (!marca.equalsIgnoreCase(other.marca))
+            return false;
+        if (color != other.color)
+            return false;
+        return true;
+    }
 
     public String getNombre() {
         return nombre;

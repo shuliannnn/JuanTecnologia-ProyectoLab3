@@ -1,7 +1,11 @@
 package Producto;
-import Enumeradores.*;
+import java.util.Scanner;
 
-public class Pc extends Computadora{
+import Enumeradores.*;
+import Excepciones.InvalidCharacterException;
+import Interfaces.Memorias;
+
+public class Pc extends Computadora implements Memorias{
 
     private boolean perifericos;
     private boolean wifi;
@@ -36,19 +40,108 @@ public class Pc extends Computadora{
         return "Pc [perifericos=" + perifericos + ", wifi=" + wifi + "]";
     }
 
+
     @Override
     public void escanearDatosComparables() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosComparables'");
+        ///en producto
+        marca = escanearMarca();
+        nombre = escanearNombre();
+        color = escanearColor();
+        ///en computadora
+        memoriaInterna = escanearMemoriaInterna();
+        /// en pc 
+        perifericos = escanearPerifericos();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + (perifericos ? 1231 : 1237);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pc other = (Pc) obj;
+        if (perifericos != other.perifericos)
+            return false;
+        return true;
     }
 
     @Override
     public void escanearDatosEspecificos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
+        ///en computadora 
+        procesador = escanearProcesador();
+        memoriaRam = escanearMemoriaRAM();
+        pVideo = escanearPlacaVideo();
+        bluetooth = escanearBluetooth();
+        /// en pc 
+        wifi = escanearWifi();
+        ///producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+        id = asignarId();
     }
 
-    
+    public boolean escanearPerifericos(){
+        Scanner sc = new Scanner(System.in);
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Incluye perifericos (t/f): ");
+                String input = sc.next();
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                valor = input.charAt(0);
+                if (valor == 't' || valor == 'f') {
+                    sc.close();
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+        sc.close();
+        return false;
+    }
+
+    public boolean escanearWifi(){
+        Scanner sc = new Scanner(System.in);
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene Placa Wifi (t/f): ");
+                String input = sc.next();
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                valor = input.charAt(0);
+                if (valor == 't' || valor == 'f') {
+                    sc.close();
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+        sc.close();
+        return false;
+    }
     
 
 

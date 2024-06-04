@@ -2,8 +2,9 @@ package Producto;
 import java.util.Scanner;
 import Enumeradores.*;
 import Excepciones.*;
+import Interfaces.Memorias;
 
-public class Celular extends Producto{
+public class Celular extends Producto implements Memorias{
 
     private int memoriaRam;
     private int memoriaInterna;
@@ -12,58 +13,7 @@ public class Celular extends Producto{
     private SoCelular so;
     private int bateria;
 
-    public int escanearMemoriaInterna(){
-        Scanner sc = new Scanner(System.in);
-        int memoria = -1;
-        boolean validInput;
-
-        do {
-            try {
-                System.out.print("Almacenamiento (GB): ");
-                if (!sc.hasNextInt()) {
-                    sc.next(); // Clear invalid input
-                    throw new InvalidIntegerException("El almacenamiento debe ser un número entero.");
-                }
-                memoria = sc.nextInt();
-                sc.nextLine(); // Consume newline
-                if (memoria <= 0) {
-                    throw new InvalidIntegerException("El almacenamiento debe ser un número positivo.");
-                }
-                validInput = true;
-            } catch (InvalidIntegerException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-        sc.close();
-        return memoria;
-    }
-    public int escanearMemoriaRAM(){
-        Scanner sc = new Scanner(System.in);
-        int memoria = -1;
-        boolean validInput;
-        do {
-            try {
-                System.out.print("RAM (GB): ");
-                if (!sc.hasNextInt()) {
-                    sc.next(); // Clear invalid input
-                    throw new InvalidIntegerException("La memoria RAM debe ser un número entero.");
-                }
-                memoria = sc.nextInt();
-                sc.nextLine(); // Consume newline
-                if (memoria <= 0) {
-                    throw new InvalidIntegerException("La memoria RAM debe ser un número positivo.");
-                }
-                validInput = true;
-            } catch (InvalidIntegerException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-
-        sc.close();
-        return memoria;
-    }
+    
     public SoCelular escanearSo(){
         Scanner sc = new Scanner(System.in);
         SoCelular so= null;
@@ -82,10 +32,10 @@ public class Celular extends Producto{
                     so = SoCelular.valueOf(input);
                     validInput = true;
                 } catch (IllegalArgumentException e) {
-                    throw new InvalidSoException("Sistema Operativo inválido. Por favor, ingrese un valor válido.");
+                    throw new InvalidEnumException("Sistema Operativo inválido. Por favor, ingrese un valor válido.");
                 }
                 
-            } catch (InvalidSoException e) {
+            } catch (InvalidEnumException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
             }
@@ -94,6 +44,7 @@ public class Celular extends Producto{
         sc.close();
         return so;
     }
+    
     public boolean escanearDobleSim(){
         Scanner sc = new Scanner(System.in);
         char valor;
@@ -175,8 +126,6 @@ public class Celular extends Producto{
         return pulgadas;
     }
     
-    
-    
     public void escanearDatosComparables(){
         ///en producto
         marca = escanearMarca();
@@ -187,6 +136,29 @@ public class Celular extends Producto{
         memoriaRam = escanearMemoriaRAM();
     }
     
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + memoriaRam;
+        result = prime * result + memoriaInterna;
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Celular other = (Celular) obj;
+        if (memoriaRam != other.memoriaRam)
+            return false;
+        if (memoriaInterna != other.memoriaInterna)
+            return false;
+        return true;
+    }
     
     public void escanearDatosEspecificos(){
         ///en celular
