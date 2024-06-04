@@ -1,5 +1,6 @@
 package Producto;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import Enumeradores.ColorP;
@@ -70,11 +71,35 @@ public class Teclado extends Periferico{
             json.put("porcentaje", porcentaje);
             json.put("mecanico", mecanico);
             json.put("cableRemovible", cableRemovible);
-        } catch (Exception e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return json;
     }
 
+    public static Teclado fromJSON(JSONObject json) {
+        try {
+            String nombre = json.getString("nombre");
+            String marca = json.getString("marca");
+            double precio = json.getDouble("precio");
+            String descripcion = json.getString("descripcion");
+            ColorP color = ColorP.valueOf(json.getString("color"));
+            int stock = json.getInt("stock");
+            boolean inalambrico = json.getBoolean("inalambrico");
+            boolean rgb = json.getBoolean("rgb");
+            Conexiones conexion = Conexiones.valueOf(json.getString("conexion"));
+            short porcentaje = (short) json.getInt("porcentaje");
+            boolean mecanico = json.getBoolean("mecanico");
+            boolean cableRemovible = json.getBoolean("cableRemovible");
+            int id = json.getInt("id");
+
+            Teclado aux = new Teclado(nombre, marca, precio, descripcion, color, stock, inalambrico, rgb, conexion, porcentaje, mecanico, cableRemovible);
+            aux.setId(id);
+            return aux;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

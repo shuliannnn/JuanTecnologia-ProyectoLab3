@@ -58,5 +58,24 @@ public class Cable extends Producto{
         return json;
     }
 
+    public static Cable fromJSON(JSONObject json) {
+        try {
+            String nombre = json.getString("nombre");
+            String marca = json.getString("marca");
+            double precio = json.getDouble("precio");
+            String descripcion = json.getString("descripcion");
+            ColorP color = ColorP.valueOf(json.getString("color"));
+            int stock = json.getInt("stock");
+            double largo = json.getDouble("largo");
+            int id = json.getInt("id");
+            
+            Cable aux = new Cable(nombre, marca, precio, descripcion, color, stock, largo);
+            aux.setId(id);
+            return aux;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

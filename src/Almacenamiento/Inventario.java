@@ -6,6 +6,9 @@ import Interfaces.ABML;
 public class Inventario<T extends Producto> implements ABML<T>{
     private LinkedHashSet<T> lista = new LinkedHashSet<>();
 
+    public Inventario() {
+    }
+
     public boolean contiene(T e){
         for(T l: lista){
             if(l.equals(e))
@@ -60,6 +63,20 @@ public class Inventario<T extends Producto> implements ABML<T>{
             ///archivo
             return agregar(e);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public boolean leerInventario(String archivo){
+
+        Producto[] array = Archivo.leerListaProducto(archivo);
+
+        for (Producto p : array) {
+            lista.add((T) p);
+        }
+
+        if(array.length != lista.size()) return false;
+        
+        return true;
     }
     
 }

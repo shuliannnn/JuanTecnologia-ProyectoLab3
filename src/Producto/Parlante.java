@@ -1,4 +1,5 @@
 package Producto;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import Enumeradores.*;
@@ -57,11 +58,35 @@ public class Parlante extends Audio {
             json.put("inalambrico", inalambrico);
             json.put("radio", radio.toString());
             json.put("potencia", potencia);
-        } catch (Exception e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return json;
     }
     
+    public static Parlante fromJSON(JSONObject json) {
+        try {
+            String nombre = json.getString("nombre");
+            String marca = json.getString("marca");
+            double precio = json.getDouble("precio");
+            String descripcion = json.getString("descripcion");
+            ColorP color = ColorP.valueOf(json.getString("color"));
+            int stock = json.getInt("stock");
+            ResistenciasP resistencia = ResistenciasP.valueOf(json.getString("resistencia"));
+            Conexiones conexion = Conexiones.valueOf(json.getString("conexion"));
+            boolean microfono = json.getBoolean("microfono");
+            boolean inalambrico = json.getBoolean("inalambrico");
+            Radios radio = Radios.valueOf(json.getString("radio"));
+            short potencia = (short) json.getInt("potencia");
+            int id = json.getInt("id");
+
+            Parlante aux = new Parlante(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico, radio, potencia);
+            aux.setId(id);
+            return aux;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
 }

@@ -13,7 +13,7 @@ public abstract class Producto {
     protected double precio;
     protected String descripcion;
     protected int id;
-    protected static int contId = 0;
+    protected static int contId = 1;
     protected ColorP color;
     protected int stock;
 

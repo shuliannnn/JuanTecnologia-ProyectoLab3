@@ -172,11 +172,36 @@ public class Celular extends Producto{
             json.put("bateria", bateria);
             json.put("dobleSim", dobleSim);
             json.put("so", so);
+            json.put("stock", stock);
 
         } catch(JSONException e){
             e.printStackTrace();
         }
         return json;
+    }
+
+    public static Celular fromJSON(JSONObject json) {
+        try {
+            String nombre = json.getString("nombre");
+            String marca = json.getString("marca");
+            double precio = json.getDouble("precio");
+            String descripcion = json.getString("descripcion");
+            ColorP color = ColorP.valueOf(json.getString("color"));
+            int stock = json.getInt("stock");
+            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("sistemaOperativo"));
+            int almacenamiento = json.getInt("almacenamiento");
+            int ram = json.getInt("ram");
+            double tamanioPantalla = json.getDouble("tamanioPantalla");
+            int bateria = json.getInt("bateria");
+            boolean dobleSim = json.getBoolean("dobleSim");
+            int id = json.getInt("id");
+            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, ram, almacenamiento, tamanioPantalla, dobleSim, sistemaOperativo, bateria);
+            aux.setId(id);
+            return aux;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     
