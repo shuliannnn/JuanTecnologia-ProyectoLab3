@@ -3,12 +3,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Enumeradores.*;
+import Excepciones.InvalidInputException;
+import Excepciones.InvalidIntegerException;
 
 public class Portatil extends Computadora{
 
     private double pulgadas;
     private boolean ethernet;
     private boolean microfono;
+
+    @Override
+    public void escanearDatosComparables(){
+        marca = escanearMarca();
+        nombre = escanearNombre();
+        memoriaInterna = escanearMemoriaInterna();
+        color = escanearColor();
+    }
+
+    @Override
+    public void escanearDatosEspecificos(){
+        pVideo = escanearPvideo();
+        //bluetooth;
+        //mother;
+        //memoriaRam;
+        //procesador;
+        //pulgadas;
+        //ethernet;
+        //microfono;
+    }
     
     public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
             String procesador, int memoriaRam, int memoriaInterna, String pVideo, boolean bluetooth, String mother,
@@ -47,18 +69,6 @@ public class Portatil extends Computadora{
     @Override
     public String toString() {
         return "Portatil [pulgadas=" + pulgadas + ", ethernet=" + ethernet + ", microfono=" + microfono + "]";
-    }
-
-    @Override
-    public void escanearDatosComparables() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosComparables'");
-    }
-
-    @Override
-    public void escanearDatosEspecificos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'escanearDatosEspecificos'");
     }
 
     @Override
