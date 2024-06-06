@@ -2,9 +2,10 @@ package Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import App.App;
 import Enumeradores.*;
-import Excepciones.InvalidInputException;
-import Excepciones.InvalidIntegerException;
+import Excepciones.InvalidCharacterException;
+import Excepciones.InvalidDoubleException;
 import Interfaces.Memorias;
 
 public class Portatil extends Computadora implements Memorias{
@@ -12,6 +13,89 @@ public class Portatil extends Computadora implements Memorias{
     private double pulgadas;
     private boolean ethernet;
     private boolean microfono;
+
+    public double escanearPulgadas(){
+        double pulgadas = -1;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tamaño Pantalla(pulgadas): ");
+                if (!App.sc.hasNextDouble()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidDoubleException("La pulgadas debe ser un número.");
+                }
+                pulgadas = App.sc.nextDouble();
+                App.sc.nextLine(); // Consume newline
+                if (pulgadas <= 0) {
+                    throw new InvalidDoubleException("La pulgadas debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidDoubleException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+
+         
+        return pulgadas;
+    }
+
+    public boolean escanearEthernet(){
+        char ethernet;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene Ethernet (t/f): ");
+                String input = App.sc.nextLine();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                ethernet = input.charAt(0);
+                
+                if (ethernet == 't' || ethernet == 'f') {
+                     
+                    return ethernet == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+
+        return false;
+    }
+
+    public boolean escanearMicrofono(){
+        char microfono;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene microfono (t/f): ");
+                String input = App.sc.nextLine();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                microfono = input.charAt(0);
+                
+                if (microfono == 't' || microfono == 'f') {
+                     
+                    return microfono == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+
+        return false;
+    }
 
     @Override
     public void escanearDatosComparables(){
@@ -24,13 +108,13 @@ public class Portatil extends Computadora implements Memorias{
     @Override
     public void escanearDatosEspecificos(){
         pVideo = escanearPlacaVideo();
-        //bluetooth;
-        //mother;
-        //memoriaRam;
-        //procesador;
-        //pulgadas;
-        //ethernet;
-        //microfono;
+        bluetooth = escanearBluetooth();
+        mother = escanearMother();
+        memoriaRam = escanearMemoriaRAM();
+        procesador = escanearProcesador();
+        pulgadas = escanearPulgadas();
+        ethernet = escanearEthernet();
+        microfono = escanearMicrofono();
     }
     
     public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
