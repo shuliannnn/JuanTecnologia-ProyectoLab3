@@ -1,10 +1,9 @@
 package Producto;
-import java.util.Scanner;
 
 import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Excepciones.InvalidInputException;
-
+import App.App;
 
 public abstract class Computadora extends Producto{
 
@@ -104,13 +103,12 @@ public abstract class Computadora extends Producto{
     }
 
     protected String escanearProcesador(){
-        Scanner sc = new Scanner(System.in);
         String procesador = null;
         boolean validInput;
         do {
             try {
                 System.out.print("Descripcion: ");
-                procesador = sc.nextLine();
+                procesador = App.sc.nextLine();
                 if (!isValidInput(procesador)) {
                     throw new InvalidInputException("El procesador solo puede contener letras y números.");
                 }
@@ -123,18 +121,17 @@ public abstract class Computadora extends Producto{
                 validInput = false;
             }
         } while (!validInput);
-        sc.close();
+         
         return procesador;
     }
 
     protected String escanearPlacaVideo(){
-        Scanner sc = new Scanner(System.in);
         String placaVideo = null;
         boolean validInput;
         do {
             try {
                 System.out.print("Placa de video: ");
-                placaVideo = sc.nextLine();
+                placaVideo = App.sc.nextLine();
                 if (!isValidInput(placaVideo)) {
                     throw new InvalidInputException("La placa de video solo puede contener letras y números.");
                 }
@@ -147,18 +144,17 @@ public abstract class Computadora extends Producto{
                 validInput = false;
             }
         } while (!validInput);
-        sc.close();
+         
         return placaVideo;
     }
 
     public boolean escanearBluetooth(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Tiene Bluetooth (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -167,7 +163,7 @@ public abstract class Computadora extends Producto{
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -177,7 +173,7 @@ public abstract class Computadora extends Producto{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
 

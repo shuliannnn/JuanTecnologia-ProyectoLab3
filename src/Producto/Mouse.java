@@ -3,11 +3,10 @@ package Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Scanner;
-
 import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import Excepciones.InvalidIntegerException;
+import App.App;
 
 public class Mouse extends Periferico{
     private int dpi;
@@ -36,18 +35,17 @@ public class Mouse extends Periferico{
     }
     
     public int escanearDpi(){
-        Scanner sc = new Scanner(System.in);
         int dpi = -1;
         boolean validInput;
         do {
             try {
                 System.out.print("Dpi (máximo): ");
-                if (!sc.hasNextInt()) {
-                    sc.next(); // Clear invalid input
+                if (!App.sc.hasNextInt()) {
+                    App.sc.next(); // Clear invalid input
                     throw new InvalidIntegerException("El dpi debe ser un número entero.");
                 }
-                dpi = sc.nextInt();
-                sc.nextLine(); // Consume newline
+                dpi = App.sc.nextInt();
+                App.sc.nextLine(); // Consume newline
                 if (dpi <= 0) {
                     throw new InvalidIntegerException("El dpi debe ser un número positivo.");
                 }
@@ -57,12 +55,11 @@ public class Mouse extends Periferico{
                 validInput = false;
             }
         } while (!validInput);
-        sc.close();
+         
         return dpi;
     }
     
     public Sensores escanearSensor(){
-        Scanner sc = new Scanner(System.in);
         Sensores sensor= null;
         boolean validInput;
         do {
@@ -73,7 +70,7 @@ public class Mouse extends Periferico{
                 }
                 
                 System.out.print("Sensor: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
                 
                 try {
                     sensor = Sensores.valueOf(input);
@@ -88,7 +85,7 @@ public class Mouse extends Periferico{
             }
         } while (!validInput);
         
-        sc.close();
+         
         return sensor;
     }
 /// comparables en periferico

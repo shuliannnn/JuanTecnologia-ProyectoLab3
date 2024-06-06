@@ -1,14 +1,12 @@
 package Producto;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Scanner;
-
-
 import Enumeradores.*;
 import Excepciones.InvalidEnumException;
+import App.App;
+
 public class Auricular extends Audio {
     private FormatoAuricular formato;
     private CanalesAudio canal;
@@ -87,7 +85,6 @@ public class Auricular extends Audio {
     }
     
     public FormatoAuricular escanearFormato(){
-        Scanner sc = new Scanner(System.in);
         FormatoAuricular formato= null;
         boolean validInput;
         do {
@@ -98,7 +95,7 @@ public class Auricular extends Audio {
                 }
                 
                 System.out.print("FormatoAuricular: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
                 
                 try {
                     formato = FormatoAuricular.valueOf(input);
@@ -112,12 +109,11 @@ public class Auricular extends Audio {
             }
         } while (!validInput);
         
-        sc.close();
+         
         return formato;
     }
     
     public CanalesAudio escanearCanal(){
-        Scanner sc = new Scanner(System.in);
         CanalesAudio canal= null;
         boolean validInput;
         do {
@@ -128,7 +124,7 @@ public class Auricular extends Audio {
                 }
                 
                 System.out.print("Canal: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
                 
                 try {
                     canal = CanalesAudio.valueOf(input);
@@ -142,7 +138,7 @@ public class Auricular extends Audio {
             }
         } while (!validInput);
         
-        sc.close();
+         
         return canal;
     }
     

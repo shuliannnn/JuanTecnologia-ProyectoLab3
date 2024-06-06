@@ -3,10 +3,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Enumeradores.*;
-import java.util.Scanner;
-
 import Excepciones.InvalidCharacterException;
 import Interfaces.Memorias;
+import App.App;
 
 public class Pc extends Computadora implements Memorias{
 
@@ -95,19 +94,18 @@ public class Pc extends Computadora implements Memorias{
     }
 
     public boolean escanearPerifericos(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Incluye perifericos (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
                 }
                 valor = input.charAt(0);
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -116,24 +114,23 @@ public class Pc extends Computadora implements Memorias{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
 
     public boolean escanearWifi(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Tiene Placa Wifi (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
                 }
                 valor = input.charAt(0);
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -142,7 +139,7 @@ public class Pc extends Computadora implements Memorias{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
     

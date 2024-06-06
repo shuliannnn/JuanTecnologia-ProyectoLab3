@@ -2,10 +2,10 @@ package Producto;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.Scanner;
 
 import Enumeradores.*;
 import Excepciones.*;
+import App.App;
 
 public class Teclado extends Periferico{
 
@@ -45,18 +45,17 @@ public class Teclado extends Periferico{
     }
     
     public short escanearPorcentaje(){
-        Scanner sc = new Scanner(System.in);
         short porcentaje = -1;
         boolean validInput;
         do {
             try {
                 System.out.print("Porcentaje (%): ");
-                if (!sc.hasNextShort()) {
-                    sc.next(); // Clear invalid input
+                if (!App.sc.hasNextShort()) {
+                    App.sc.next(); // Clear invalid input
                     throw new InvalidIntegerException("El porcentaje debe ser un número entero.");
                 }
-                porcentaje = sc.nextShort();
-                sc.nextLine(); // Consume newline
+                porcentaje = App.sc.nextShort();
+                App.sc.nextLine(); // Consume newline
                 if (porcentaje <= 0) {
                     throw new InvalidIntegerException("El porcentaje debe ser un número positivo.");
                 }
@@ -67,18 +66,17 @@ public class Teclado extends Periferico{
             }
         } while (!validInput);
 
-        sc.close();
+         
         return porcentaje;
     }
 
     public boolean escanearMecanico(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Es mecanico (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -87,7 +85,7 @@ public class Teclado extends Periferico{
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -97,18 +95,17 @@ public class Teclado extends Periferico{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
 
     public boolean escanearCableRemovible(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Posee cable removible (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -117,7 +114,7 @@ public class Teclado extends Periferico{
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -127,7 +124,7 @@ public class Teclado extends Periferico{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
     
