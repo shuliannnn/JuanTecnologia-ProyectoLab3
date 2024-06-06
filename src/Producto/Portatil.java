@@ -1,12 +1,14 @@
 package Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
+import App.App;
 
 import Enumeradores.*;
-import Excepciones.InvalidInputException;
-import Excepciones.InvalidIntegerException;
+import Excepciones.*;
 
-public class Portatil extends Computadora{
+import Interfaces.Memorias;
+
+public class Portatil extends Computadora implements Memorias{
 
     private double pulgadas;
     private boolean ethernet;
@@ -14,24 +16,117 @@ public class Portatil extends Computadora{
 
     @Override
     public void escanearDatosComparables(){
+        ///en producto
         marca = escanearMarca();
         nombre = escanearNombre();
-        memoriaInterna = escanearMemoriaInterna();
         color = escanearColor();
+        ///computadora
+        memoriaInterna = escanearMemoriaInterna();
     }
 
     @Override
     public void escanearDatosEspecificos(){
-        pVideo = escanearPvideo();
-        //bluetooth;
-        //mother;
-        //memoriaRam;
-        //procesador;
-        //pulgadas;
-        //ethernet;
-        //microfono;
+        
+        ///en computadora
+        procesador = escanearProcesador();
+        memoriaRam = escanearMemoriaRAM();
+        pVideo = escanearPlacaVideo();
+        bluetooth = escanearBluetooth();
+        mother = escanearMother();
+        /// en portatil
+        pulgadas = escanearPulgadas();
+         ethernet = escanearEthernet();
+        /// microfono = 
+        /// en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+        id = asignarId();
     }
     
+    public double escanearPulgadas(){
+        double pulgadas = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Pulgadas: ");
+                if (!App.sc.hasNextDouble()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidDoubleException("Las pulgadas debe ser un número.");
+                }
+                pulgadas = App.sc.nextDouble();
+                App.sc.nextLine(); // Consume newline
+                if (pulgadas <= 0) {
+                    throw new InvalidDoubleException("Las pulgadas debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidDoubleException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+
+        return pulgadas;
+    }
+    
+    public boolean escanearMicrofono(){
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Posee entrada Microfono (t/f): ");
+                String input = App.sc.next();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                valor = input.charAt(0);
+                
+                if (valor == 't' || valor == 'f') {
+                     
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+         
+        return false;
+    }
+
+    public boolean escanearEthernet(){
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Posee entrada Ethernet (t/f): ");
+                String input = App.sc.next();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                valor = input.charAt(0);
+                
+                if (valor == 't' || valor == 'f') {
+                     
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+         
+        return false;
+    }
+
     public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
             String procesador, int memoriaRam, int memoriaInterna, String pVideo, boolean bluetooth, String mother,
             double pulgadas, boolean ethernet, boolean microfono) {

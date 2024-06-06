@@ -84,6 +84,7 @@ public class Pc extends Computadora implements Memorias{
         memoriaRam = escanearMemoriaRAM();
         pVideo = escanearPlacaVideo();
         bluetooth = escanearBluetooth();
+        mother = escanearMother();
         /// en pc 
         wifi = escanearWifi();
         ///producto
