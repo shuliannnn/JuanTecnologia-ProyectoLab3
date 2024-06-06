@@ -1,11 +1,10 @@
 package Producto;
 
-import java.util.Scanner;
-
 import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Excepciones.InvalidEnumException;
 import Interfaces.Conectividad;
+import App.App;
 
 public abstract class Audio extends Producto implements Conectividad {
     protected ResistenciasP resistencia;
@@ -67,7 +66,6 @@ public abstract class Audio extends Producto implements Conectividad {
     
     
     public ResistenciasP escanearResistencia() {
-        Scanner sc = new Scanner(System.in);
         ResistenciasP res = null;
         boolean validInput;
         do {
@@ -78,7 +76,7 @@ public abstract class Audio extends Producto implements Conectividad {
                 }
 
                 System.out.print("Resistencia: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
 
                 try {
                     res = ResistenciasP.valueOf(input);
@@ -92,18 +90,18 @@ public abstract class Audio extends Producto implements Conectividad {
             }
         } while (!validInput);
 
-        sc.close();
+         
         return res;
     }
 
     public boolean escanearMicrofono() {
-        Scanner sc = new Scanner(System.in);
+         
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Tiene Microfono (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -112,7 +110,7 @@ public abstract class Audio extends Producto implements Conectividad {
                 valor = input.charAt(0);
 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -122,7 +120,7 @@ public abstract class Audio extends Producto implements Conectividad {
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
 

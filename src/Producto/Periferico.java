@@ -1,9 +1,10 @@
 package Producto;
-import java.util.Scanner;
 
 import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Interfaces.Conectividad;
+import App.App;
+
 public abstract class Periferico extends Producto implements Conectividad{
     protected boolean inalambrico;
     protected boolean rgb;
@@ -48,13 +49,12 @@ public abstract class Periferico extends Producto implements Conectividad{
     }
 
     public boolean escanearRgb(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Es RGB (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -63,7 +63,7 @@ public abstract class Periferico extends Producto implements Conectividad{
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -73,7 +73,7 @@ public abstract class Periferico extends Producto implements Conectividad{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
 

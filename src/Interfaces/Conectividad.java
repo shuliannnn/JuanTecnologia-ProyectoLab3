@@ -1,18 +1,17 @@
 package Interfaces;
-import java.util.Scanner;
 
 import Enumeradores.Conexiones;
 import Excepciones.*;
+import App.App;
 public interface Conectividad {
 
     default boolean escanearInalambrico(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Es inalambrico (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -21,7 +20,7 @@ public interface Conectividad {
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                    App.sc.close();
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -31,12 +30,11 @@ public interface Conectividad {
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+
         return false;
     }
 
     default Conexiones escanearConexion(){
-        Scanner sc = new Scanner(System.in);
         Conexiones conexion= null;
         boolean validInput;
         do {
@@ -47,7 +45,7 @@ public interface Conectividad {
                 }
                 
                 System.out.print("Conexion: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
                 
                 try {
                     conexion = Conexiones.valueOf(input);
@@ -61,7 +59,6 @@ public interface Conectividad {
             }
         } while (!validInput);
         
-        sc.close();
         return conexion;
     }
 }

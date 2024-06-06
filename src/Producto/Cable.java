@@ -2,11 +2,10 @@ package Producto;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.Scanner;
-
 
 import Enumeradores.ColorP;
 import Excepciones.InvalidDoubleException;
+import App.App;
 
 public class Cable extends Producto{
     private double largo;
@@ -111,18 +110,17 @@ public class Cable extends Producto{
     }
 
     public double escanearLargo(){
-        Scanner sc = new Scanner(System.in);
         double largo = -1;
         boolean validInput;
         do {
             try {
                 System.out.print("Largo del cable(metros, Ej: 1.5): ");
-                if (!sc.hasNextDouble()) {
-                    sc.next(); // Clear invalid input
+                if (!App.sc.hasNextDouble()) {
+                    App.sc.next(); // Clear invalid input
                     throw new InvalidDoubleException("El largo debe ser un número.");
                 }
-                largo = sc.nextDouble();
-                sc.nextLine(); // Consume newline
+                largo = App.sc.nextDouble();
+                App.sc.nextLine(); // Consume newline
                 if (largo <= 0) {
                     throw new InvalidDoubleException("El largo debe ser un número positivo.");
                 }
@@ -133,7 +131,7 @@ public class Cable extends Producto{
             }
         } while (!validInput);
 
-        sc.close();
+         
         return largo;
     }
 }

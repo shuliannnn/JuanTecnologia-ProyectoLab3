@@ -1,5 +1,4 @@
 package Producto;
-import java.util.Scanner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,6 +6,7 @@ import org.json.JSONObject;
 import Enumeradores.*;
 import Excepciones.*;
 import Interfaces.Memorias;
+import App.App;
 
 public class Celular extends Producto implements Memorias{
 
@@ -19,7 +19,6 @@ public class Celular extends Producto implements Memorias{
 
     
     public SoCelular escanearSo(){
-        Scanner sc = new Scanner(System.in);
         SoCelular so= null;
         boolean validInput;
         do {
@@ -30,7 +29,7 @@ public class Celular extends Producto implements Memorias{
                 }
                 
                 System.out.print("Sistema Operativo: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
                 
                 try {
                     so = SoCelular.valueOf(input);
@@ -45,18 +44,17 @@ public class Celular extends Producto implements Memorias{
             }
         } while (!validInput);
         
-        sc.close();
+         
         return so;
     }
     
     public boolean escanearDobleSim(){
-        Scanner sc = new Scanner(System.in);
         char valor;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Tiene Doble Sim (t/f): ");
-                String input = sc.next();
+                String input = App.sc.next();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -65,7 +63,7 @@ public class Celular extends Producto implements Memorias{
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    sc.close();
+                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -75,22 +73,21 @@ public class Celular extends Producto implements Memorias{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-        sc.close();
+         
         return false;
     }
     public int escanearBateria(){
-        Scanner sc = new Scanner(System.in);
         int bateria = -1;
         boolean validInput;
         do {
             try {
                 System.out.print("Bateria (mAh): ");
-                if (!sc.hasNextInt()) {
-                    sc.next(); // Clear invalid input
+                if (!App.sc.hasNextInt()) {
+                    App.sc.next(); // Clear invalid input
                     throw new InvalidIntegerException("La bateria debe ser un número entero.");
                 }
-                bateria = sc.nextInt();
-                sc.nextLine(); // Consume newline
+                bateria = App.sc.nextInt();
+                App.sc.nextLine(); // Consume newline
                 if (bateria <= 0) {
                     throw new InvalidIntegerException("La bateria debe ser un número positivo.");
                 }
@@ -100,22 +97,21 @@ public class Celular extends Producto implements Memorias{
                 validInput = false;
             }
         } while (!validInput);
-        sc.close();
+         
         return bateria;
     }
     public double escanearPulgadas(){
-        Scanner sc = new Scanner(System.in);
         double pulgadas = -1;
         boolean validInput;
         do {
             try {
                 System.out.print("Tamaño Pantalla(pulgadas): ");
-                if (!sc.hasNextDouble()) {
-                    sc.next(); // Clear invalid input
+                if (!App.sc.hasNextDouble()) {
+                    App.sc.next(); // Clear invalid input
                     throw new InvalidDoubleException("La pulgadas debe ser un número.");
                 }
-                pulgadas = sc.nextDouble();
-                sc.nextLine(); // Consume newline
+                pulgadas = App.sc.nextDouble();
+                App.sc.nextLine(); // Consume newline
                 if (pulgadas <= 0) {
                     throw new InvalidDoubleException("La pulgadas debe ser un número positivo.");
                 }
@@ -126,7 +122,7 @@ public class Celular extends Producto implements Memorias{
             }
         } while (!validInput);
 
-        sc.close();
+         
         return pulgadas;
     }
     
@@ -175,6 +171,10 @@ public class Celular extends Producto implements Memorias{
         stock = escanearStock();
         precio = escanearPrecio();
         id = asignarId();
+    }
+
+    public Celular(){
+        super();
     }
 
     public Celular(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,

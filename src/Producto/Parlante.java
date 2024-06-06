@@ -1,11 +1,12 @@
 package Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.Scanner;
 
 import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import Excepciones.InvalidIntegerException;
+import App.App;
+
 public class Parlante extends Audio { 
     private Radios radio;
     private short potencia;
@@ -43,7 +44,6 @@ public class Parlante extends Audio {
     
 
     public Radios escanearRadio(){
-        Scanner sc = new Scanner(System.in);
         Radios radio= null;
         boolean validInput;
         do {
@@ -54,7 +54,7 @@ public class Parlante extends Audio {
                 }
                 
                 System.out.print("Radio: ");
-                String input = sc.nextLine().trim().toUpperCase();
+                String input = App.sc.nextLine().trim().toUpperCase();
                 
                 try {
                     radio = Radios.valueOf(input);
@@ -68,23 +68,22 @@ public class Parlante extends Audio {
             }
         } while (!validInput);
         
-        sc.close();
+         
         return radio;
     }
 
     public short escanearPotencia(){
-        Scanner sc = new Scanner(System.in);
         short potencia = -1;
         boolean validInput;
         do {
             try {
                 System.out.print("Potencia (W): ");
-                if (!sc.hasNextShort()) {
-                    sc.next(); // Clear invalid input
+                if (!App.sc.hasNextShort()) {
+                    App.sc.next(); // Clear invalid input
                     throw new InvalidIntegerException("La potencia debe ser un número entero.");
                 }
-                potencia = sc.nextShort();
-                sc.nextLine(); // Consume newline
+                potencia = App.sc.nextShort();
+                App.sc.nextLine(); // Consume newline
                 if (potencia <= 0) {
                     throw new InvalidIntegerException("La potencia debe ser un número positivo.");
                 }
@@ -95,7 +94,7 @@ public class Parlante extends Audio {
             }
         } while (!validInput);
 
-        sc.close();
+         
         return potencia;
     }
    
