@@ -5,8 +5,9 @@ import org.json.JSONObject;
 import Enumeradores.*;
 import Excepciones.InvalidInputException;
 import Excepciones.InvalidIntegerException;
+import Interfaces.Memorias;
 
-public class Portatil extends Computadora{
+public class Portatil extends Computadora implements Memorias{
 
     private double pulgadas;
     private boolean ethernet;
@@ -22,7 +23,7 @@ public class Portatil extends Computadora{
 
     @Override
     public void escanearDatosEspecificos(){
-        pVideo = escanearPvideo();
+        pVideo = escanearPlacaVideo();
         //bluetooth;
         //mother;
         //memoriaRam;
