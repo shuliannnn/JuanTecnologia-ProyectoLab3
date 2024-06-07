@@ -102,7 +102,7 @@ public abstract class Computadora extends Producto{
         return true;
     }
 
-    protected String escanearProcesador(){
+    public String escanearProcesador(){
         String procesador = null;
         boolean validInput;
         do {
@@ -125,7 +125,7 @@ public abstract class Computadora extends Producto{
         return procesador;
     }
 
-    protected String escanearPlacaVideo(){
+    public String escanearPlacaVideo(){
         String placaVideo = null;
         boolean validInput;
         do {
@@ -136,7 +136,7 @@ public abstract class Computadora extends Producto{
                     throw new InvalidInputException("La placa de video solo puede contener letras y números.");
                 }
                 if(placaVideo.length() > 50){
-                    throw new InvalidInputException("La placa de video no puede superar los 20 caracteres.");
+                    throw new InvalidInputException("La placa de video no puede superar los 50 caracteres.");
                 }
                 validInput = true;
             } catch (InvalidInputException e) {
@@ -200,4 +200,27 @@ public abstract class Computadora extends Producto{
         return false;
     }
 
+    public String escanearMother(){
+        String mother = null;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Motherboard: ");
+                mother = App.sc.nextLine();
+                if (!isValidInput(mother)) {
+                    throw new InvalidInputException("La motherboard solo puede contener letras y números.");
+                }
+                if(mother.length() > 50){
+                    throw new InvalidInputException("La motherboard no puede superar los 20 caracteres.");
+                }
+                validInput = true;
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+         
+        return mother;
+    }
+
 }
+

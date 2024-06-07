@@ -8,11 +8,95 @@ import Excepciones.*;
 
 import Interfaces.Memorias;
 
+
 public class Portatil extends Computadora implements Memorias{
 
     private double pulgadas;
     private boolean ethernet;
     private boolean microfono;
+
+    public double escanearPulgadas(){
+        double pulgadas = -1;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tamaño Pantalla(pulgadas): ");
+                if (!App.sc.hasNextDouble()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidDoubleException("La pulgadas debe ser un número.");
+                }
+                pulgadas = App.sc.nextDouble();
+                App.sc.nextLine(); // Consume newline
+                if (pulgadas <= 0) {
+                    throw new InvalidDoubleException("La pulgadas debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidDoubleException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+
+         
+        return pulgadas;
+    }
+
+    public boolean escanearEthernet(){
+        char ethernet;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene Ethernet (t/f): ");
+                String input = App.sc.nextLine();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                ethernet = input.charAt(0);
+                
+                if (ethernet == 't' || ethernet == 'f') {
+                     
+                    return ethernet == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+
+        return false;
+    }
+
+    public boolean escanearMicrofono(){
+        char microfono;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene microfono (t/f): ");
+                String input = App.sc.nextLine();
+                
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                
+                microfono = input.charAt(0);
+                
+                if (microfono == 't' || microfono == 'f') {
+                     
+                    return microfono == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+                
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+
+        return false;
+    }
 
     @Override
     public void escanearDatosComparables(){
@@ -44,89 +128,7 @@ public class Portatil extends Computadora implements Memorias{
         id = asignarId();
     }
     
-    public double escanearPulgadas(){
-        double pulgadas = -1;
-        boolean validInput;
-        do {
-            try {
-                System.out.print("Pulgadas: ");
-                if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
-                    throw new InvalidDoubleException("Las pulgadas debe ser un número.");
-                }
-                pulgadas = App.sc.nextDouble();
-                App.sc.nextLine(); // Consume newline
-                if (pulgadas <= 0) {
-                    throw new InvalidDoubleException("Las pulgadas debe ser un número positivo.");
-                }
-                validInput = true;
-            } catch (InvalidDoubleException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-
-        return pulgadas;
-    }
     
-    public boolean escanearMicrofono(){
-        char valor;
-        boolean validInput = false;
-        do {
-            try {
-                System.out.print("Posee entrada Microfono (t/f): ");
-                String input = App.sc.next();
-                
-                if (input.length() != 1) {
-                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
-                }
-                
-                valor = input.charAt(0);
-                
-                if (valor == 't' || valor == 'f') {
-                     
-                    return valor == 't';
-                } else {
-                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
-                }
-                
-            } catch (InvalidCharacterException e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!validInput);
-         
-        return false;
-    }
-
-    public boolean escanearEthernet(){
-        char valor;
-        boolean validInput = false;
-        do {
-            try {
-                System.out.print("Posee entrada Ethernet (t/f): ");
-                String input = App.sc.next();
-                
-                if (input.length() != 1) {
-                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
-                }
-                
-                valor = input.charAt(0);
-                
-                if (valor == 't' || valor == 'f') {
-                     
-                    return valor == 't';
-                } else {
-                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
-                }
-                
-            } catch (InvalidCharacterException e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!validInput);
-         
-        return false;
-    }
-
     public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
             String procesador, int memoriaRam, int memoriaInterna, String pVideo, boolean bluetooth, String mother,
             double pulgadas, boolean ethernet, boolean microfono) {

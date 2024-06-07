@@ -19,33 +19,20 @@ public class Celular extends Producto implements Memorias{
 
     
     public SoCelular escanearSo(){
-        SoCelular so= null;
+        SoCelular soCelular = null;
         boolean validInput;
         do {
             try {
-                System.out.println("Sistemas Operativos disponibles: ");
-                for (SoCelular s : SoCelular.values()) {
-                    System.out.print(s+", ");
-                }
-                
                 System.out.print("Sistema Operativo: ");
-                String input = App.sc.nextLine().trim().toUpperCase();
-                
-                try {
-                    so = SoCelular.valueOf(input);
-                    validInput = true;
-                } catch (IllegalArgumentException e) {
-                    throw new InvalidEnumException("Sistema Operativo inválido. Por favor, ingrese un valor válido.");
-                }
-                
-            } catch (InvalidEnumException e) {
-                System.out.println(e.getMessage());
+                soCelular = SoCelular.valueOf(App.sc.nextLine().toUpperCase());
+                validInput = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("El sistema operativo debe ser uno de los valores especificados.");
                 validInput = false;
             }
         } while (!validInput);
-        
          
-        return so;
+        return soCelular;
     }
     
     public boolean escanearDobleSim(){
@@ -54,7 +41,7 @@ public class Celular extends Producto implements Memorias{
         do {
             try {
                 System.out.print("Tiene Doble Sim (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -73,12 +60,14 @@ public class Celular extends Producto implements Memorias{
                 System.out.println(e.getMessage());
             }
         } while (!validInput);
-         
+
         return false;
     }
+
+
     public int escanearBateria(){
         int bateria = -1;
-        boolean validInput;
+        boolean validInput = false;
         do {
             try {
                 System.out.print("Bateria (mAh): ");
@@ -92,17 +81,19 @@ public class Celular extends Producto implements Memorias{
                     throw new InvalidIntegerException("La bateria debe ser un número positivo.");
                 }
                 validInput = true;
+
             } catch (InvalidIntegerException e) {
                 System.out.println(e.getMessage());
-                validInput = false;
             }
         } while (!validInput);
          
         return bateria;
     }
+
+
     public double escanearPulgadas(){
         double pulgadas = -1;
-        boolean validInput;
+        boolean validInput = false;
         do {
             try {
                 System.out.print("Tamaño Pantalla(pulgadas): ");
@@ -118,7 +109,6 @@ public class Celular extends Producto implements Memorias{
                 validInput = true;
             } catch (InvalidDoubleException e) {
                 System.out.println(e.getMessage());
-                validInput = false;
             }
         } while (!validInput);
 
@@ -275,14 +265,14 @@ public class Celular extends Producto implements Memorias{
             String descripcion = json.getString("descripcion");
             ColorP color = ColorP.valueOf(json.getString("color"));
             int stock = json.getInt("stock");
-            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("sistemaOperativo"));
-            int almacenamiento = json.getInt("almacenamiento");
-            int ram = json.getInt("ram");
-            double tamanioPantalla = json.getDouble("tamanioPantalla");
+            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("so"));
+            int memoriaInterna = json.getInt("memoriaInterna");
+            int memoriaRam = json.getInt("memoriaRam");
+            double pulgadas = json.getDouble("pulgadas");
             int bateria = json.getInt("bateria");
             boolean dobleSim = json.getBoolean("dobleSim");
             int id = json.getInt("id");
-            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, ram, almacenamiento, tamanioPantalla, dobleSim, sistemaOperativo, bateria);
+            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, memoriaRam, memoriaInterna, pulgadas, dobleSim, sistemaOperativo, bateria);
             aux.setId(id);
             return aux;
         } catch (JSONException e) {

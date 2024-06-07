@@ -14,8 +14,9 @@ import Producto.*;
 
 public abstract class Archivo {
 
-    public static final String ARCHIVO_ID = "../data" + "id.json";
+    public static final String ARCHIVO_ID = "id.json";
     public static final String CONT_ID_KEY = "contador";
+
 
     private static JSONArray leerArchivoProducto(String archivo) {
         JSONArray productos = new JSONArray();
@@ -43,25 +44,27 @@ public abstract class Archivo {
     public static boolean cambiarStock(Producto p, int variacionStock){
         String archivo = obtenerNombreArchivo(p);
         JSONArray productos = leerArchivoProducto(archivo);
-        int stock;
-        boolean modificado = false;
+        int stock;        
 
-        if(productos.length() == 0) return modificado;
+        if(productos.length() == 0) return false;
 
         for(int i = 0; i < productos.length(); i++){
             try {
                 JSONObject prod = productos.getJSONObject(i);
                 if(prod.getInt("id") == p.getId()){
                     stock = prod.getInt("stock");
+                    if(stock < variacionStock) throw new IllegalArgumentException("El stock no puede quedar negativo");
                     prod.put("stock", stock + variacionStock);//puede sumar o restar
-                    modificado = true;
+                    uploadJSON(productos, archivo);
+                    return true;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
             }
         }
-        uploadJSON(productos, archivo);
-        return modificado;
+        return false;
     }
 
     public static Producto[] leerListaProducto(String archivo){
@@ -99,10 +102,10 @@ public abstract class Archivo {
         }
     }
 
-    public static void subirContadorId(int contId){
+    public static void subirContadorId(){
         JSONObject json = new JSONObject();
         try{
-            json.put(CONT_ID_KEY, contId);
+            json.put(CONT_ID_KEY, leerContadorId()+1);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -110,9 +113,17 @@ public abstract class Archivo {
     }
 
     public static int leerContadorId(){
-        String res = downloadJSON(ARCHIVO_ID);
+        File file = new File("data/" + ARCHIVO_ID);
         try{
+            if(!file.exists()){
+                JSONObject jo = new JSONObject();
+                jo.put(CONT_ID_KEY, 0);
+                uploadJSON(jo, ARCHIVO_ID);
+                return 0;
+            }
+            String res = downloadJSON(ARCHIVO_ID);
             JSONObject json = new JSONObject(res);
+
             return json.getInt(CONT_ID_KEY);
         }catch (JSONException e) {
             e.printStackTrace();

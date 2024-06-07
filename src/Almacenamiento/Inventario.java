@@ -58,14 +58,16 @@ public class Inventario<T extends Producto> implements ABML<T>{
             return res;
         }
         else{
-            e.escanearDatosEspecificos();
+            e.escanearDatosEspecificos(); //agregar contador id al archivo
             System.out.println("Se agrego el objeto correctamente");
-            ///mostrar.
-            ///archivo
+            System.out.println(e);
+
+            Archivo.subirProducto(e);
             return agregar(e);
         }
     }
 
+    
     @SuppressWarnings("unchecked")
     public boolean leerInventario(String archivo){
 
@@ -80,4 +82,12 @@ public class Inventario<T extends Producto> implements ABML<T>{
         return true;
     }
     
+    @Override
+    public String toString() {
+        String contenido = "";
+        for(T e: lista){
+            contenido += e.getMarca() + "  |  " + e.getNombre() + "  |  " + e.getColor() + "\n";
+        }
+        return contenido;
+    }
 }
