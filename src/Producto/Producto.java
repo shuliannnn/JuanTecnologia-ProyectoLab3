@@ -2,6 +2,7 @@ package Producto;
 
 import org.json.JSONObject;
 
+import Almacenamiento.Archivo;
 import Enumeradores.ColorP;
 import Excepciones.InvalidDoubleException;
 import Excepciones.InvalidInputException;
@@ -14,13 +15,12 @@ public abstract class Producto {
     protected double precio;
     protected String descripcion;
     protected int id;
-    protected static int contId = 1;
     protected ColorP color;
     protected int stock;
 
     public int asignarId(){
-        int nuevoId  = contId;
-        contId++;
+        int nuevoId  = Archivo.leerContadorId();
+        Archivo.subirContadorId();
         return nuevoId;
     }
     
@@ -236,10 +236,6 @@ public abstract class Producto {
         return id;
     }
 
-    public static int getContId() {
-        return contId;
-    }
-
     public ColorP getColor() {
         return color;
     }
@@ -267,10 +263,6 @@ public abstract class Producto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public static void setContId(int contId) {
-        Producto.contId = contId;
     }
 
     public void setColor(ColorP color) {

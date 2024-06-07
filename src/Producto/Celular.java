@@ -265,14 +265,14 @@ public class Celular extends Producto implements Memorias{
             String descripcion = json.getString("descripcion");
             ColorP color = ColorP.valueOf(json.getString("color"));
             int stock = json.getInt("stock");
-            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("sistemaOperativo"));
-            int almacenamiento = json.getInt("almacenamiento");
-            int ram = json.getInt("ram");
-            double tamanioPantalla = json.getDouble("tamanioPantalla");
+            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("so"));
+            int memoriaInterna = json.getInt("memoriaInterna");
+            int memoriaRam = json.getInt("memoriaRam");
+            double pulgadas = json.getDouble("pulgadas");
             int bateria = json.getInt("bateria");
             boolean dobleSim = json.getBoolean("dobleSim");
             int id = json.getInt("id");
-            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, ram, almacenamiento, tamanioPantalla, dobleSim, sistemaOperativo, bateria);
+            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, memoriaRam, memoriaInterna, pulgadas, dobleSim, sistemaOperativo, bateria);
             aux.setId(id);
             return aux;
         } catch (JSONException e) {
