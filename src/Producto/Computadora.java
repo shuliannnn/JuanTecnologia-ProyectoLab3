@@ -148,29 +148,6 @@ public abstract class Computadora extends Producto{
         return placaVideo;
     }
 
-    protected String escanearMother(){
-        String mother = null;
-        boolean validInput;
-        do {
-            try {
-                System.out.print("Placa Madre: ");
-                mother = App.sc.nextLine();
-                if (!isValidInput(mother)) {
-                    throw new InvalidInputException("La plata madre solo puede contener letras y números.");
-                }
-                if(mother.length() > 50){
-                    throw new InvalidInputException("La placa madre no puede superar los 20 caracteres.");
-                }
-                validInput = true;
-            } catch (InvalidInputException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-         
-        return mother;
-    }
-
     public boolean escanearBluetooth(){
         char valor;
         boolean validInput = false;
