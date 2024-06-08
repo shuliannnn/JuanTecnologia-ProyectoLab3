@@ -2,6 +2,7 @@ package Almacenamiento;
 import java.util.LinkedHashSet;
 import Producto.Producto;
 import Interfaces.ABML;
+import App.App;
 
 public class Inventario<T extends Producto> implements ABML<T>{
     private LinkedHashSet<T> lista = new LinkedHashSet<>();
@@ -46,24 +47,35 @@ public class Inventario<T extends Producto> implements ABML<T>{
         return lista.add(e);
     }
 
-    public boolean altaProducto(T e){
+    public void altaProducto(T e){
         e.escanearDatosComparables();
-        boolean res = false;
+        boolean confirmacion;
         if(contiene(e)){
             System.out.println("El producto ya se encontraba en el sistema");
             System.out.println("Desea modificar el stock?");
-            //res = stock
-            //lista
-            //archivo
-            return res;
+            confirmacion = confirmar("Si","No","", "Saliendo...");
+            if(!confirmacion) return;
+
+                ///vamos al objeto
+            for (T t : lista) {
+                if(t.getId() == e.getId()) {
+                    t.modificarStock();
+                    Archivo.modificarProducto(t);
+                    System.out.println("Se modifico el stock correctamente");
+                    return;
+                }
+            }
+            
         }
         else{
-            e.escanearDatosEspecificos(); //agregar contador id al archivo
-            System.out.println("Se agrego el objeto correctamente");
+            e.escanearDatosEspecificos(); 
             System.out.println(e);
-
-            Archivo.subirProducto(e);
-            return agregar(e);
+            System.out.println("El producto quedaria cargado asi desea añadirlo al sistema?");
+            confirmacion = confirmar("Añadir","Borrar","Se añadió al sistema correctamente","No se añadio al sistema");
+            if(confirmacion){
+                agregar(e);
+                Archivo.subirProducto(e);
+            }
         }
     }
 
@@ -80,6 +92,28 @@ public class Inventario<T extends Producto> implements ABML<T>{
         if(array.length != lista.size()) return false;
         
         return true;
+    }
+
+    private boolean confirmar(String entradaT, String entradaF, String resT, String resF){
+        int opcion;
+            do {
+                System.out.println("1." + entradaT);
+                System.out.println("2." + entradaF);
+                opcion = App.sc.nextInt();
+                App.sc.nextLine();//LIMPIAR BUFFER YO HACER
+                switch (opcion) {
+                    case 1:
+                        System.out.println(resT);
+                        return true;
+                    case 2:
+                        System.out.println(resF);
+                        return false;
+                    default:
+                        System.out.println("Por favor ingrese una opcion valida");
+                        break;
+                }
+            } while (opcion != 1 && opcion != 2);
+            return false;
     }
     
     @Override

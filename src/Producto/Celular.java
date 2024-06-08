@@ -163,6 +163,67 @@ public class Celular extends Producto implements Memorias{
         id = asignarId();
     }
 
+
+    @Override
+    public String toString() {
+        return "Celular [memoriaRam=" + memoriaRam + ", memoriaInterna=" + memoriaInterna + ", pulgadas=" + pulgadas
+                + ", dobleSim=" + dobleSim + ", so=" + so + ", bateria=" + bateria + "]";
+    }
+
+    /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try{
+            json.put("tipo", "Celular");
+            json.put("nombre", nombre);
+            json.put("marca", marca);
+            json.put("precio", precio);
+            json.put("descripcion", descripcion);
+            json.put("id", id);
+            json.put("color", color.toString());
+            json.put("memoriaInterna", memoriaInterna);
+            json.put("memoriaRam", memoriaRam);
+            json.put("pulgadas", pulgadas);
+            json.put("bateria", bateria);
+            json.put("dobleSim", dobleSim);
+            json.put("so", so);
+            json.put("stock", stock);
+
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    public static Celular fromJSON(JSONObject json) {
+        try {
+            String nombre = json.getString("nombre");
+            String marca = json.getString("marca");
+            double precio = json.getDouble("precio");
+            String descripcion = json.getString("descripcion");
+            ColorP color = ColorP.valueOf(json.getString("color"));
+            int stock = json.getInt("stock");
+            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("so"));
+            int memoriaInterna = json.getInt("memoriaInterna");
+            int memoriaRam = json.getInt("memoriaRam");
+            double pulgadas = json.getDouble("pulgadas");
+            int bateria = json.getInt("bateria");
+            boolean dobleSim = json.getBoolean("dobleSim");
+            int id = json.getInt("id");
+            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, memoriaRam, memoriaInterna, pulgadas, dobleSim, sistemaOperativo, bateria);
+            aux.setId(id);
+            return aux;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    
+    /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
+
     public Celular(){
         super();
     }
@@ -225,63 +286,4 @@ public class Celular extends Producto implements Memorias{
     public void setBateria(int bateria) {
         this.bateria = bateria;
     }
-
-    @Override
-    public String toString() {
-        return "Celular [memoriaRam=" + memoriaRam + ", memoriaInterna=" + memoriaInterna + ", pulgadas=" + pulgadas
-                + ", dobleSim=" + dobleSim + ", so=" + so + ", bateria=" + bateria + "]";
-    }
-
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        try{
-            json.put("tipo", "Celular");
-            json.put("nombre", nombre);
-            json.put("marca", marca);
-            json.put("precio", precio);
-            json.put("descripcion", descripcion);
-            json.put("id", id);
-            json.put("color", color.toString());
-            json.put("memoriaInterna", memoriaInterna);
-            json.put("memoriaRam", memoriaRam);
-            json.put("pulgadas", pulgadas);
-            json.put("bateria", bateria);
-            json.put("dobleSim", dobleSim);
-            json.put("so", so);
-            json.put("stock", stock);
-
-        } catch(JSONException e){
-            e.printStackTrace();
-        }
-        return json;
-    }
-
-    public static Celular fromJSON(JSONObject json) {
-        try {
-            String nombre = json.getString("nombre");
-            String marca = json.getString("marca");
-            double precio = json.getDouble("precio");
-            String descripcion = json.getString("descripcion");
-            ColorP color = ColorP.valueOf(json.getString("color"));
-            int stock = json.getInt("stock");
-            SoCelular sistemaOperativo = SoCelular.valueOf(json.getString("so"));
-            int memoriaInterna = json.getInt("memoriaInterna");
-            int memoriaRam = json.getInt("memoriaRam");
-            double pulgadas = json.getDouble("pulgadas");
-            int bateria = json.getInt("bateria");
-            boolean dobleSim = json.getBoolean("dobleSim");
-            int id = json.getInt("id");
-            Celular aux = new Celular(nombre, marca, precio, descripcion, color, stock, memoriaRam, memoriaInterna, pulgadas, dobleSim, sistemaOperativo, bateria);
-            aux.setId(id);
-            return aux;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    
-
-
 }

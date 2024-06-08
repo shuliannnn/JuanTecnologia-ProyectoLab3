@@ -27,7 +27,27 @@ public abstract class Producto {
     public abstract void escanearDatosComparables();
     public abstract void escanearDatosEspecificos();
     public abstract JSONObject toJSON();
-
+    
+    public void modificarStock(){
+        int input = 0;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Ingrese la variacion de stock(+/-): ");
+                if (!App.sc.hasNextInt()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidIntegerException("El stock debe ser un número entero.");
+                }
+                input = App.sc.nextInt();
+                App.sc.nextLine(); // Consume newline
+                validInput = true;
+            } catch (InvalidIntegerException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        stock += input;
+    }
     
     public String escanearNombre(){
         String nombre = null;
@@ -37,7 +57,7 @@ public abstract class Producto {
                 System.out.print("Nombre: ");
                 nombre = App.sc.nextLine();
                 if (!isValidInput(nombre)) {
-                    throw new InvalidInputException("El modelo solo puede contener letras y números.");
+                    throw new InvalidInputException("El nombre contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
                 }
                 if(nombre.length() > 40){
                     throw new InvalidInputException("El nombre no puede superar los 40 caracteres.");
@@ -48,8 +68,6 @@ public abstract class Producto {
                 validInput = false;
             }
         } while (!validInput);
-
-         
         return nombre;
     }
 
@@ -61,7 +79,7 @@ public abstract class Producto {
                 System.out.print("Marca: ");
                 marca = App.sc.nextLine();
                 if (!isValidInput(marca)) {
-                    throw new InvalidInputException("La marca solo puede contener letras y números.");
+                    throw new InvalidInputException("La marca contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
                 }
                 if(marca.length() > 20){
                     throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
@@ -80,7 +98,7 @@ public abstract class Producto {
         boolean validInput;
         do {
             try {
-                System.out.print("Color : ");
+                System.out.print("Color: ");
                 colorP = ColorP.valueOf(App.sc.nextLine().toUpperCase());
                 validInput = true;
             } catch (IllegalArgumentException e) {
@@ -88,7 +106,6 @@ public abstract class Producto {
                 validInput = false;
             }
         } while (!validInput);
-         
         return colorP;
     }
 
@@ -100,10 +117,10 @@ public abstract class Producto {
                 System.out.print("Descripcion: ");
                 descripcion = App.sc.nextLine();
                 if (!isValidInput(descripcion)) {
-                    throw new InvalidInputException("La descripcion solo puede contener letras y números.");
+                    throw new InvalidInputException("La descripcion contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
                 }
                 if(descripcion.length() > 100){
-                    throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
+                    throw new InvalidInputException("La descripcion no puede superar los 100 caracteres.");
                 }
                 validInput = true;
             } catch (InvalidInputException e) {
@@ -111,9 +128,9 @@ public abstract class Producto {
                 validInput = false;
             }
         } while (!validInput);
-         
         return descripcion;
     }
+
 
     public int escanearStock(){
         int stock = -1;
@@ -136,7 +153,6 @@ public abstract class Producto {
                 validInput = false;
             }
         } while (!validInput);
-         
         return stock;
     }
 
@@ -161,35 +177,19 @@ public abstract class Producto {
                 validInput = false;
             }
         } while (!validInput);
-
-         
         return precio;
     }
     
+
     protected boolean isValidInput(String cadena) {
-        // Permite letras, números, puntos, comas y guiones medios
-        return cadena.matches("^[a-zA-Z0-9.,-]*$");
-    }
-    public Producto(){
-    }
-    
-    public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
-        this.nombre = nombre;
-        this.marca = marca;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.color = color;
-        this.stock = stock;
+    // Permite letras, números, puntos, comas, guiones medios y espacios
+    return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((marca == null) ? 0 : marca.hashCode());
-        result = prime * result + ((color == null) ? 0 : color.hashCode());
-        return result;
+    public String toString() {
+        return "Producto [nombre=" + nombre + ", marca=" + marca + ", precio=" + precio + ", descripcion=" + descripcion
+                + ", id=" + id + ", color=" + color + ", stock=" + stock + "]";
     }
 
     @Override
@@ -214,6 +214,29 @@ public abstract class Producto {
         if (color != other.color)
             return false;
         return true;
+    }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = prime * result + ((marca == null) ? 0 : marca.hashCode());
+        result = prime * result + ((color == null) ? 0 : color.hashCode());
+        return result;
+    }
+
+    /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public Producto(){
+    }
+    
+    public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
+        this.nombre = nombre;
+        this.marca = marca;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.color = color;
+        this.stock = stock;
     }
 
     public String getNombre() {
@@ -244,7 +267,6 @@ public abstract class Producto {
         return stock;
     }
     
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -273,11 +295,6 @@ public abstract class Producto {
         this.stock = stock;
     }
 
-    @Override
-    public String toString() {
-        return "Producto [nombre=" + nombre + ", marca=" + marca + ", precio=" + precio + ", descripcion=" + descripcion
-                + ", id=" + id + ", color=" + color + ", stock=" + stock + "]";
-    }
 
     
 }

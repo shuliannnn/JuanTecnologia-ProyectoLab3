@@ -62,5 +62,21 @@
         "id": 3,
         "so": "IOS",
         "stock": 4
+    },
+    {
+        "descripcion": "asdadasdasd",
+        "bateria": 23,
+        "tipo": "Celular",
+        "dobleSim": true,
+        "color": "ROJO",
+        "memoriaInterna": 321,
+        "nombre": "NombreCelular",
+        "marca": "Celular",
+        "precio": 123,
+        "pulgadas": 123,
+        "memoriaRam": 2,
+        "id": 4,
+        "so": "IOS",
+        "stock": 333
     }
 ]

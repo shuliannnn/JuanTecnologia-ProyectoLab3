@@ -12,36 +12,25 @@ public class Teclado extends Periferico{
     private short porcentaje;
     private boolean mecanico;
     private boolean cableRemovible;
-    public Teclado(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
-            boolean inalambrico, boolean rgb, Conexiones conexion, short porcentaje, boolean mecanico,
-            boolean cableRemovible) {
-        super(nombre, marca, precio, descripcion, color, stock, inalambrico, rgb, conexion);
-        this.porcentaje = porcentaje;
-        this.mecanico = mecanico;
-        this.cableRemovible = cableRemovible;
-    }
-    public short getPorcentaje() {
-        return porcentaje;
-    }
-    public void setPorcentaje(short porcentaje) {
-        this.porcentaje = porcentaje;
-    }
-    public boolean isMecanico() {
-        return mecanico;
-    }
-    public void setMecanico(boolean mecanico) {
-        this.mecanico = mecanico;
-    }
-    public boolean isCableRemovible() {
-        return cableRemovible;
-    }
-    public void setCableRemovible(boolean cableRemovible) {
-        this.cableRemovible = cableRemovible;
-    }
+    
+    /// comparables en periferico
+
+    ///equals en periferico
+
     @Override
-    public String toString() {
-        return "Teclado [porcentaje=" + porcentaje + ", mecanico=" + mecanico + ", cableRemovible=" + cableRemovible
-                + "]";
+    public void escanearDatosEspecificos() {
+        ///en periferico
+        conexion = escanearConexion();
+        inalambrico = escanearInalambrico();
+        ///en teclado
+        porcentaje = escanearPorcentaje();
+        mecanico = escanearMecanico();
+        cableRemovible = escanearCableRemovible();
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+        id = asignarId();
     }
     
     public short escanearPorcentaje(){
@@ -128,28 +117,15 @@ public class Teclado extends Periferico{
         return false;
     }
     
-    
-    /// comparables en periferico
-
-    ///equals en periferico
-
     @Override
-    public void escanearDatosEspecificos() {
-        ///en periferico
-        conexion = escanearConexion();
-        inalambrico = escanearInalambrico();
-        ///en teclado
-        porcentaje = escanearPorcentaje();
-        mecanico = escanearMecanico();
-        cableRemovible = escanearCableRemovible();
-        ///en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
-        id = asignarId();
+    public String toString() {
+        return "Teclado [porcentaje=" + porcentaje + ", mecanico=" + mecanico + ", cableRemovible=" + cableRemovible
+                + "]";
     }
     
-    @Override
+   /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   @Override
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();
         try {
@@ -198,4 +174,33 @@ public class Teclado extends Periferico{
         }
     }
     
+    
+/// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------ 
+   
+    public Teclado(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
+            boolean inalambrico, boolean rgb, Conexiones conexion, short porcentaje, boolean mecanico,
+            boolean cableRemovible) {
+        super(nombre, marca, precio, descripcion, color, stock, inalambrico, rgb, conexion);
+        this.porcentaje = porcentaje;
+        this.mecanico = mecanico;
+        this.cableRemovible = cableRemovible;
+    }
+    public short getPorcentaje() {
+        return porcentaje;
+    }
+    public void setPorcentaje(short porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+    public boolean isMecanico() {
+        return mecanico;
+    }
+    public void setMecanico(boolean mecanico) {
+        this.mecanico = mecanico;
+    }
+    public boolean isCableRemovible() {
+        return cableRemovible;
+    }
+    public void setCableRemovible(boolean cableRemovible) {
+        this.cableRemovible = cableRemovible;
+    }
 }

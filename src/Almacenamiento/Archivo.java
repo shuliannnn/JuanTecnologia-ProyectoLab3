@@ -41,28 +41,22 @@ public abstract class Archivo {
 
     }
 
-    public static boolean cambiarStock(Producto p, int variacionStock){
+    public static boolean modificarProducto(Producto p){
         String archivo = obtenerNombreArchivo(p);
         JSONArray productos = leerArchivoProducto(archivo);
-        int stock;        
+        JSONObject prod = new JSONObject();
 
-        if(productos.length() == 0) return false;
-
-        for(int i = 0; i < productos.length(); i++){
-            try {
-                JSONObject prod = productos.getJSONObject(i);
-                if(prod.getInt("id") == p.getId()){
-                    stock = prod.getInt("stock");
-                    if(stock < variacionStock) throw new IllegalArgumentException("El stock no puede quedar negativo");
-                    prod.put("stock", stock + variacionStock);//puede sumar o restar
-                    uploadJSON(productos, archivo);
-                    return true;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+        try{
+            for (int i = 0; i < productos.length(); i++) {
+                prod = productos.getJSONObject(i);
+                if(prod.getInt("id") == p.getId())
+                    prod = p.toJSON();
             }
+            uploadJSON(productos, archivo);
+            return true;
+        }
+        catch(JSONException e){
+            e.printStackTrace();
         }
         return false;
     }

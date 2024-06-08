@@ -2,10 +2,8 @@ package Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
 import App.App;
-
 import Enumeradores.*;
 import Excepciones.*;
-
 import Interfaces.Memorias;
 
 
@@ -15,6 +13,36 @@ public class Portatil extends Computadora implements Memorias{
     private boolean ethernet;
     private boolean microfono;
 
+    @Override
+    public void escanearDatosComparables(){
+        ///en producto
+        marca = escanearMarca();
+        nombre = escanearNombre();
+        color = escanearColor();
+        ///computadora
+        memoriaInterna = escanearMemoriaInterna();
+    }
+
+    @Override
+    public void escanearDatosEspecificos(){
+        
+        ///en computadora
+        procesador = escanearProcesador();
+        memoriaRam = escanearMemoriaRAM();
+        pVideo = escanearPlacaVideo();
+        bluetooth = escanearBluetooth();
+        mother = escanearMother();
+        /// en portatil
+        pulgadas = escanearPulgadas();
+         ethernet = escanearEthernet();
+        /// microfono = 
+        /// en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+        id = asignarId();
+    }
+    
     public double escanearPulgadas(){
         double pulgadas = -1;
         boolean validInput = false;
@@ -98,75 +126,13 @@ public class Portatil extends Computadora implements Memorias{
         return false;
     }
 
-    @Override
-    public void escanearDatosComparables(){
-        ///en producto
-        marca = escanearMarca();
-        nombre = escanearNombre();
-        color = escanearColor();
-        ///computadora
-        memoriaInterna = escanearMemoriaInterna();
-    }
-
-    @Override
-    public void escanearDatosEspecificos(){
-        
-        ///en computadora
-        procesador = escanearProcesador();
-        memoriaRam = escanearMemoriaRAM();
-        pVideo = escanearPlacaVideo();
-        bluetooth = escanearBluetooth();
-        mother = escanearMother();
-        /// en portatil
-        pulgadas = escanearPulgadas();
-         ethernet = escanearEthernet();
-        /// microfono = 
-        /// en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
-        id = asignarId();
-    }
     
-    
-    public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
-            String procesador, int memoriaRam, int memoriaInterna, String pVideo, boolean bluetooth, String mother,
-            double pulgadas, boolean ethernet, boolean microfono) {
-        super(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam, memoriaInterna, pVideo,
-                bluetooth, mother);
-        this.pulgadas = pulgadas;
-        this.ethernet = ethernet;
-        this.microfono = microfono;
-    }
-
-    public double getPulgadas() {
-        return pulgadas;
-    }
-
-    public void setPulgadas(double pulgadas) {
-        this.pulgadas = pulgadas;
-    }
-
-    public boolean isEthernet() {
-        return ethernet;
-    }
-
-    public void setEthernet(boolean ethernet) {
-        this.ethernet = ethernet;
-    }
-
-    public boolean isMicrofono() {
-        return microfono;
-    }
-
-    public void setMicrofono(boolean microfono) {
-        this.microfono = microfono;
-    }
-
     @Override
     public String toString() {
         return "Portatil [pulgadas=" + pulgadas + ", ethernet=" + ethernet + ", microfono=" + microfono + "]";
     }
+
+    /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public JSONObject toJSON() {
@@ -221,5 +187,41 @@ public class Portatil extends Computadora implements Memorias{
             e.printStackTrace();
             return null;
         }
+    }
+    
+    /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
+            String procesador, int memoriaRam, int memoriaInterna, String pVideo, boolean bluetooth, String mother,
+            double pulgadas, boolean ethernet, boolean microfono) {
+        super(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam, memoriaInterna, pVideo,
+                bluetooth, mother);
+        this.pulgadas = pulgadas;
+        this.ethernet = ethernet;
+        this.microfono = microfono;
+    }
+
+    public double getPulgadas() {
+        return pulgadas;
+    }
+
+    public void setPulgadas(double pulgadas) {
+        this.pulgadas = pulgadas;
+    }
+
+    public boolean isEthernet() {
+        return ethernet;
+    }
+
+    public void setEthernet(boolean ethernet) {
+        this.ethernet = ethernet;
+    }
+
+    public boolean isMicrofono() {
+        return microfono;
+    }
+
+    public void setMicrofono(boolean microfono) {
+        this.microfono = microfono;
     }
 }

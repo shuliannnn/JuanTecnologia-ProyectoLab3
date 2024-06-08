@@ -11,27 +11,6 @@ public class Parlante extends Audio {
     private Radios radio;
     private short potencia;
 
-/// constructores getters setters tostring
-    public Parlante(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
-            ResistenciasP resistencia, Conexiones conexion, boolean microfono, boolean inalambrico, Radios radio,
-            short potencia) {
-        super(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico);
-        this.radio = radio;
-        this.potencia = potencia;
-    }
-    
-    public Radios getRadio() {
-        return radio;
-    }
-    public void setRadio(Radios radio) {
-        this.radio = radio;
-    }
-    public short getPotencia() {
-        return potencia;
-    }
-    public void setPotencia(short potencia) {
-        this.potencia = potencia;
-    }
 
    
     @Override
@@ -40,7 +19,7 @@ public class Parlante extends Audio {
     }
 
 
-///--------------------------------------------------------------------------------------------------------------------------
+
     
 
     public Radios escanearRadio(){
@@ -117,6 +96,8 @@ public class Parlante extends Audio {
         id = asignarId();
     }
 
+    /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     @Override
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();
@@ -166,4 +147,26 @@ public class Parlante extends Audio {
         }
     }
     
+/// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public Parlante(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
+            ResistenciasP resistencia, Conexiones conexion, boolean microfono, boolean inalambrico, Radios radio,
+            short potencia) {
+        super(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico);
+        this.radio = radio;
+        this.potencia = potencia;
+    }
+    
+    public Radios getRadio() {
+        return radio;
+    }
+    public void setRadio(Radios radio) {
+        this.radio = radio;
+    }
+    public short getPotencia() {
+        return potencia;
+    }
+    public void setPotencia(short potencia) {
+        this.potencia = potencia;
+    }
 }
