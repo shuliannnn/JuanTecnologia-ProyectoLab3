@@ -13,6 +13,7 @@ public class Portatil extends Computadora implements Memorias{
     private boolean ethernet;
     private boolean microfono;
 
+
     @Override
     public void escanearDatosComparables(){
         ///en producto
@@ -40,7 +41,6 @@ public class Portatil extends Computadora implements Memorias{
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
     
     public double escanearPulgadas(){
@@ -126,7 +126,11 @@ public class Portatil extends Computadora implements Memorias{
         return false;
     }
 
-    
+    @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
+    }
+
     @Override
     public String toString() {
         return "Portatil [pulgadas=" + pulgadas + ", ethernet=" + ethernet + ", microfono=" + microfono + "]";
@@ -201,6 +205,11 @@ public class Portatil extends Computadora implements Memorias{
         this.microfono = microfono;
     }
 
+    
+
+    public Portatil() {
+    }
+
     public double getPulgadas() {
         return pulgadas;
     }
@@ -224,4 +233,10 @@ public class Portatil extends Computadora implements Memorias{
     public void setMicrofono(boolean microfono) {
         this.microfono = microfono;
     }
+
+	@Override
+	public Producto clone() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'clone'");
+	}
 }

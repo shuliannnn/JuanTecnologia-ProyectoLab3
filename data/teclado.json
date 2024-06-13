@@ -1,0 +1,16 @@
+[{
+    "descripcion": "TEclado muy pro",
+    "tipo": "Teclado",
+    "color": "NEGRO",
+    "inalambrico": true,
+    "rgb": true,
+    "nombre": "Nisuta ngk60",
+    "marca": "Nisuta",
+    "precio": 190,
+    "mecanico": true,
+    "cableRemovible": true,
+    "conexion": "USB",
+    "id": 1,
+    "porcentaje": 60,
+    "stock": 2
+}]

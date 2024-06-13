@@ -22,7 +22,7 @@ public abstract class Periferico extends Producto implements Conectividad{
         do {
             try {
                 System.out.print("Es RGB (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -86,6 +86,10 @@ public abstract class Periferico extends Producto implements Conectividad{
         this.inalambrico = inalambrico;
         this.rgb = rgb;
         this.conexion = conexion;
+    }
+    
+
+    public Periferico() {
     }
 
     public boolean isInalambrico() {

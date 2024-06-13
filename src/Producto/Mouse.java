@@ -76,6 +76,16 @@ public class Mouse extends Periferico{
 
 ///equals en periferico
 
+    @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
+    }
+
+    @Override
+    public Producto clone() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Override
     public void escanearDatosEspecificos() {
@@ -89,7 +99,6 @@ public class Mouse extends Periferico{
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
     
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,6 +158,10 @@ public class Mouse extends Periferico{
         this.dpi = dpi;
         this.sensor = sensor;
     }
+    public Mouse() {
+    }
+
+
     public int getDpi() {
         return dpi;
     }

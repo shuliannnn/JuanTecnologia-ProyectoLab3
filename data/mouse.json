@@ -1,0 +1,15 @@
+[{
+    "descripcion": "caca",
+    "tipo": "Mouse",
+    "color": "BLANCO",
+    "inalambrico": false,
+    "rgb": true,
+    "nombre": "muy rpo",
+    "marca": "redragon",
+    "precio": 1444,
+    "conexion": "USB",
+    "sensor": "OPTICO",
+    "id": 0,
+    "stock": 4,
+    "dpi": 600000
+}]

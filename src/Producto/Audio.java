@@ -57,7 +57,7 @@ public abstract class Audio extends Producto implements Conectividad {
         do {
             try {
                 System.out.print("Tiene Microfono (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -124,6 +124,9 @@ public abstract class Audio extends Producto implements Conectividad {
         this.conexion = conexion;
         this.microfono = microfono;
         this.inalambrico = inalambrico;
+    }
+    
+    public Audio() {
     }
 
     public ResistenciasP getResistencia() {

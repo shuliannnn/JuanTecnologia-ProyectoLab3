@@ -48,12 +48,12 @@ public abstract class Computadora extends Producto{
         boolean validInput;
         do {
             try {
-                System.out.print("Descripcion: ");
+                System.out.print("Procesador: ");
                 procesador = App.sc.nextLine();
                 if (!isValidInput(procesador)) {
                     throw new InvalidInputException("El procesador solo puede contener letras y números.");
                 }
-                if(procesador.length() > 50){
+                if(procesador.length() > 20){
                     throw new InvalidInputException("El procesador no puede superar los 20 caracteres.");
                 }
                 validInput = true;
@@ -95,7 +95,7 @@ public abstract class Computadora extends Producto{
         do {
             try {
                 System.out.print("Tiene Bluetooth (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -119,16 +119,16 @@ public abstract class Computadora extends Producto{
     }
 
     public String escanearMother(){
-        String mother = null;
+        String motherV = null;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Motherboard: ");
-                mother = App.sc.nextLine();
-                if (!isValidInput(mother)) {
+                motherV = App.sc.nextLine();
+                if (!isValidInput(motherV)) {
                     throw new InvalidInputException("La motherboard solo puede contener letras y números.");
                 }
-                if(mother.length() > 50){
+                if(motherV.length() > 50){
                     throw new InvalidInputException("La motherboard no puede superar los 20 caracteres.");
                 }
                 validInput = true;
@@ -137,7 +137,7 @@ public abstract class Computadora extends Producto{
             }
         } while (!validInput);
          
-        return mother;
+        return motherV;
     }
     
     /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,6 +151,10 @@ public abstract class Computadora extends Producto{
         this.pVideo = pVideo;
         this.bluetooth = bluetooth;
         this.mother = mother;
+    }
+    
+
+    public Computadora() {
     }
 
     public String getProcesador() {

@@ -12,7 +12,7 @@ public class Cable extends Producto{
 
     @Override
     public String toString() {
-        return "Cable [largo=" + largo + "]";
+        return "Cable [largo=" + largo + "Stock=" + getStock() + "]";
     }
 
     @Override
@@ -54,7 +54,6 @@ public class Cable extends Producto{
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
 
     public double escanearLargo(){
@@ -62,7 +61,7 @@ public class Cable extends Producto{
         boolean validInput;
         do {
             try {
-                System.out.print("Largo del cable(metros, Ej: 1.5): ");
+                System.out.print("Largo del cable(metros, Ej: 1,5): ");
                 if (!App.sc.hasNextDouble()) {
                     App.sc.next(); // Clear invalid input
                     throw new InvalidDoubleException("El largo debe ser un número.");
@@ -83,8 +82,20 @@ public class Cable extends Producto{
         return largo;
     }
 
+    @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
+    }
+    
+
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
+    @Override
+    public Producto clone() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     @Override
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();
@@ -131,6 +142,9 @@ public class Cable extends Producto{
             double largo) {
         super(nombre, marca, precio, descripcion, color, stock);
         this.largo = largo;
+    }
+
+    public Cable() {
     }
 
     public double getLargo() {

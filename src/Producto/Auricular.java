@@ -75,11 +75,89 @@ public class Auricular extends Audio {
          
         return canal;
     }
+
+    public void modificarProducto(){
+        int opcion;
+
+        
+        do {
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7. Resistencia");
+            System.out.println("8. Conexion");
+            System.out.println("9. Tiene Microfono");
+            System.out.println("10. Es Inalambrico");
+            System.out.println("11. Formato");
+            System.out.println("12. Canal");
+            System.out.println("0. Salir");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();///buffer
+            
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+                    break;
+                case 2:
+                    marca = escanearMarca();   
+                    break;
+                case 3:
+                        
+                    break;
+                case 4:
+                        
+                    break;
+                case 5:
+                        
+                    break;
+                case 6:
+                        
+                    break;
+                case 7:
+                        
+                    break;
+                case 8:
+                        
+                    break;
+                case 9:
+                        
+                    break;
+                case 10:
+                        
+                    break;
+                case 11:
+                        
+                    break;
+                case 12:
+                        
+                    break;
+                case 13:
+                        
+                    break;
+                case 0:
+                    System.out.println("");
+                    break;
+            
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    break;
+            }
+
+
+        } while (opcion != 0);
+
+    }
     
     ///datos comparables en audio
 
     ///equals en audio
-
+    
     @Override
     public void escanearDatosEspecificos() {
         ///en audio
@@ -92,8 +170,13 @@ public class Auricular extends Audio {
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
+
+    @Override
+    public Auricular clone(){
+        return new Auricular(this.nombre, this.marca, this.precio, this.descripcion, this.color, this.stock, this.resistencia, this.conexion, this.microfono, this.inalambrico, this.formato, this.canal);
+    }
+
     
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -101,6 +184,7 @@ public class Auricular extends Audio {
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();
         try{
+            json.put("tipo", "Auricular");
             json.put("nombre", nombre);
             json.put("marca", marca);
             json.put("precio", precio);
@@ -157,6 +241,11 @@ public class Auricular extends Audio {
         this.canal = canal;
     }
     
+    
+    public Auricular() {
+    }
+
+
     public FormatoAuricular getFormato() {
         return formato;
     }

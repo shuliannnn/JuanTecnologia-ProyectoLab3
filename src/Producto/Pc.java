@@ -67,7 +67,6 @@ public class Pc extends Computadora implements Memorias{
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
 
     public boolean escanearPerifericos(){
@@ -76,7 +75,7 @@ public class Pc extends Computadora implements Memorias{
         do {
             try {
                 System.out.print("Incluye perifericos (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
                 }
@@ -101,13 +100,12 @@ public class Pc extends Computadora implements Memorias{
         do {
             try {
                 System.out.print("Tiene Placa Wifi (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
                 }
                 valor = input.charAt(0);
                 if (valor == 't' || valor == 'f') {
-                     
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
@@ -118,6 +116,11 @@ public class Pc extends Computadora implements Memorias{
         } while (!validInput);
          
         return false;
+    }
+
+    @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
     }
     
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,6 +189,12 @@ public class Pc extends Computadora implements Memorias{
         this.wifi = wifi;
     }
 
+    
+
+    public Pc() {
+    }
+
+
     public boolean isPerifericos() {
         return perifericos;
     }
@@ -201,4 +210,11 @@ public class Pc extends Computadora implements Memorias{
     public void setWifi(boolean wifi) {
         this.wifi = wifi;
     }
+
+
+	@Override
+	public Producto clone() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'clone'");
+	}
 }

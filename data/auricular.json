@@ -1,0 +1,34 @@
+[
+    {
+        "descripcion": "es un excelente bicho",
+        "tipo": "Auricular",
+        "color": "NEGRO",
+        "resistencia": "IPXX",
+        "formato": "IN_EAR",
+        "inalambrico": true,
+        "nombre": "JBL1",
+        "marca": "JBL",
+        "precio": 12312,
+        "microfono": true,
+        "conexion": "USB",
+        "canal": "ESTEREO",
+        "id": 3,
+        "stock": 2
+    },
+    {
+        "descripcion": "es un bicho",
+        "tipo": "Auricular",
+        "color": "NEGRO",
+        "resistencia": "IPXX",
+        "formato": "ON_EAR",
+        "inalambrico": true,
+        "nombre": "JBL2",
+        "marca": "JBL",
+        "precio": 342567,
+        "microfono": true,
+        "conexion": "USB",
+        "canal": "MONO",
+        "id": 4,
+        "stock": 7
+    }
+]

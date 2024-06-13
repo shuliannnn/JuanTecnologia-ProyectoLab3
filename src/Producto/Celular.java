@@ -40,7 +40,7 @@ public class Celular extends Producto implements Memorias{
         boolean validInput = false;
         do {
             try {
-                System.out.print("Tiene Doble Sim (t/f): ");
+                //System.out.print("Tiene Doble Sim (t/f): ");
                 String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
@@ -114,7 +114,7 @@ public class Celular extends Producto implements Memorias{
 
          
         return pulgadas;
-    }
+    } 
     
     public void escanearDatosComparables(){
         ///en producto
@@ -124,6 +124,28 @@ public class Celular extends Producto implements Memorias{
         ///en celular
         memoriaInterna = escanearMemoriaInterna();
         memoriaRam = escanearMemoriaRAM();
+    }
+
+    public void escanearDatosEspecificos(){
+        ///en celular
+        dobleSim = escanearDobleSim();
+        so = escanearSo();
+        bateria = escanearBateria();
+        pulgadas = escanearPulgadas();
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+    }
+    
+    @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
+    }
+
+    @Override
+    public Celular clone(){
+        return new Celular(this.nombre, this.marca, this.precio, this.descripcion, this.color, this.stock, this.memoriaRam, this.memoriaInterna, this.pulgadas, this.dobleSim, this.so, this.bateria);
     }
     
     @Override
@@ -150,25 +172,14 @@ public class Celular extends Producto implements Memorias{
         return true;
     }
     
-    public void escanearDatosEspecificos(){
-        ///en celular
-        dobleSim = escanearDobleSim();
-        so = escanearSo();
-        bateria = escanearBateria();
-        pulgadas = escanearPulgadas();
-        ///en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
-        id = asignarId();
-    }
-
 
     @Override
     public String toString() {
         return "Celular [memoriaRam=" + memoriaRam + ", memoriaInterna=" + memoriaInterna + ", pulgadas=" + pulgadas
                 + ", dobleSim=" + dobleSim + ", so=" + so + ", bateria=" + bateria + "]";
     }
+
+    
 
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -225,7 +236,6 @@ public class Celular extends Producto implements Memorias{
     /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
 
     public Celular(){
-        super();
     }
 
     public Celular(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,

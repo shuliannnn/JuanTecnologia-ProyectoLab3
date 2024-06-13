@@ -45,12 +45,17 @@ public abstract class Archivo {
         String archivo = obtenerNombreArchivo(p);
         JSONArray productos = leerArchivoProducto(archivo);
         JSONObject prod = new JSONObject();
+        Producto aux;
 
         try{
             for (int i = 0; i < productos.length(); i++) {
                 prod = productos.getJSONObject(i);
-                if(prod.getInt("id") == p.getId())
+                aux = fromJSON(prod);
+                if(aux.getId() == p.getId()){
                     prod = p.toJSON();
+                    productos.put(i, prod);
+                    break;
+                }
             }
             uploadJSON(productos, archivo);
             return true;
@@ -88,7 +93,7 @@ public abstract class Archivo {
             case "Celular": return Celular.fromJSON(json);
             case "Mouse": return Mouse.fromJSON(json);
             case "Parlante": return Parlante.fromJSON(json);
-            case "Pc": return Pc.fromJSON(json);
+            case "PC": return Pc.fromJSON(json);
             case "Portatil": return Portatil.fromJSON(json);
             case "Teclado": return Teclado.fromJSON(json);
             
@@ -126,7 +131,7 @@ public abstract class Archivo {
     }
 
     public static String obtenerNombreArchivo(Producto p) {
-        return p.getClass().getName().toLowerCase() + ".json";
+        return p.getClass().getSimpleName().toLowerCase() + ".json";
     }
 
 
@@ -138,7 +143,7 @@ public abstract class Archivo {
             file.flush();
             file.close();
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            
         }
     }
 
@@ -150,7 +155,7 @@ public abstract class Archivo {
             file.flush();
             file.close();
         }catch(IOException | JSONException e){
-            e.printStackTrace();
+            
         }
     }
 
@@ -158,9 +163,16 @@ public abstract class Archivo {
         String contenido = "";
         try {
             File f = new File("data", archivo);
-            contenido = new String(Files.readAllBytes(Paths.get(f.getPath())));
+            if (!f.exists()) {
+                // Crea el archivo y escribe un contenido inicial si es necesario
+                f.getParentFile().mkdirs(); // Asegura que los directorios padres existen
+                try (FileWriter writer = new FileWriter(f)) {
+                    writer.write(""); // Puedes escribir un contenido inicial aquí
+                }
+            }
+            else contenido = new String(Files.readAllBytes(Paths.get(f.getPath())));
         } catch (IOException e) {
-            e.printStackTrace();
+            
         }
         return contenido;
     }

@@ -30,7 +30,6 @@ public class Teclado extends Periferico{
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
     
     public short escanearPorcentaje(){
@@ -65,7 +64,7 @@ public class Teclado extends Periferico{
         do {
             try {
                 System.out.print("Es mecanico (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -94,7 +93,7 @@ public class Teclado extends Periferico{
         do {
             try {
                 System.out.print("Posee cable removible (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -115,6 +114,11 @@ public class Teclado extends Periferico{
         } while (!validInput);
          
         return false;
+    }
+    
+    @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
     }
     
     @Override
@@ -185,6 +189,10 @@ public class Teclado extends Periferico{
         this.mecanico = mecanico;
         this.cableRemovible = cableRemovible;
     }
+    
+    public Teclado() {
+    }
+
     public short getPorcentaje() {
         return porcentaje;
     }
@@ -203,4 +211,10 @@ public class Teclado extends Periferico{
     public void setCableRemovible(boolean cableRemovible) {
         this.cableRemovible = cableRemovible;
     }
+
+	@Override
+	public Producto clone() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'clone'");
+	}
 }

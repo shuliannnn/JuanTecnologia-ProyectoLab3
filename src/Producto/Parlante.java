@@ -80,6 +80,11 @@ public class Parlante extends Audio {
    ///equals de audio
 
    ///datos comparables de audio
+
+   @Override
+    public void modificarProducto(){
+        throw new RuntimeException("Metodo no codeado");
+    }
    
     @Override
     public void escanearDatosEspecificos() {
@@ -93,7 +98,6 @@ public class Parlante extends Audio {
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
-        id = asignarId();
     }
 
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,6 +161,13 @@ public class Parlante extends Audio {
         this.potencia = potencia;
     }
     
+    public Parlante() {
+    }
+
+
+
+
+
     public Radios getRadio() {
         return radio;
     }
@@ -169,4 +180,14 @@ public class Parlante extends Audio {
     public void setPotencia(short potencia) {
         this.potencia = potencia;
     }
+
+
+
+
+
+	@Override
+	public Producto clone() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'clone'");
+	}
 }

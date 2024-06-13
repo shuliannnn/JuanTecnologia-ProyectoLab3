@@ -11,7 +11,7 @@ public interface Conectividad {
         do {
             try {
                 System.out.print("Es inalambrico (t/f): ");
-                String input = App.sc.next();
+                String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
@@ -20,7 +20,6 @@ public interface Conectividad {
                 valor = input.charAt(0);
                 
                 if (valor == 't' || valor == 'f') {
-                    App.sc.close();
                     return valor == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");

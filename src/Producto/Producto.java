@@ -26,6 +26,8 @@ public abstract class Producto {
     
     public abstract void escanearDatosComparables();
     public abstract void escanearDatosEspecificos();
+    public abstract void modificarProducto();
+    public abstract Producto clone();
     public abstract JSONObject toJSON();
     
     public void modificarStock(){
@@ -40,6 +42,8 @@ public abstract class Producto {
                 }
                 input = App.sc.nextInt();
                 App.sc.nextLine(); // Consume newline
+                if(input < 0 && Math.abs(input) > stock) throw new InvalidIntegerException("El stock no puede quedar negativo.");
+
                 validInput = true;
             } catch (InvalidIntegerException e) {
                 System.out.println(e.getMessage());
