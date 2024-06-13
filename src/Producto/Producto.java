@@ -18,19 +18,23 @@ public abstract class Producto {
     protected ColorP color;
     protected int stock;
 
-    public int asignarId(){
-        int nuevoId  = Archivo.leerContadorId();
+    public int asignarId() {
+        int nuevoId = Archivo.leerContadorId();
         Archivo.subirContadorId();
         return nuevoId;
     }
-    
+
     public abstract void escanearDatosComparables();
+
     public abstract void escanearDatosEspecificos();
+
     public abstract void modificarProducto();
+
     public abstract Producto clone();
+
     public abstract JSONObject toJSON();
-    
-    public void modificarStock(){
+
+    public void modificarStock() {
         int input = 0;
         boolean validInput;
         do {
@@ -42,7 +46,8 @@ public abstract class Producto {
                 }
                 input = App.sc.nextInt();
                 App.sc.nextLine(); // Consume newline
-                if(input < 0 && Math.abs(input) > stock) throw new InvalidIntegerException("El stock no puede quedar negativo.");
+                if (input < 0 && Math.abs(input) > stock)
+                    throw new InvalidIntegerException("El stock no puede quedar negativo.");
 
                 validInput = true;
             } catch (InvalidIntegerException e) {
@@ -52,8 +57,8 @@ public abstract class Producto {
         } while (!validInput);
         stock += input;
     }
-    
-    public String escanearNombre(){
+
+    public String escanearNombre() {
         String nombre = null;
         boolean validInput;
         do {
@@ -61,9 +66,10 @@ public abstract class Producto {
                 System.out.print("Nombre: ");
                 nombre = App.sc.nextLine();
                 if (!isValidInput(nombre)) {
-                    throw new InvalidInputException("El nombre contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
+                    throw new InvalidInputException(
+                            "El nombre contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
                 }
-                if(nombre.length() > 40){
+                if (nombre.length() > 40) {
                     throw new InvalidInputException("El nombre no puede superar los 40 caracteres.");
                 }
                 validInput = true;
@@ -75,7 +81,7 @@ public abstract class Producto {
         return nombre;
     }
 
-    public String escanearMarca(){
+    public String escanearMarca() {
         String marca = null;
         boolean validInput;
         do {
@@ -83,9 +89,10 @@ public abstract class Producto {
                 System.out.print("Marca: ");
                 marca = App.sc.nextLine();
                 if (!isValidInput(marca)) {
-                    throw new InvalidInputException("La marca contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
+                    throw new InvalidInputException(
+                            "La marca contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
                 }
-                if(marca.length() > 20){
+                if (marca.length() > 20) {
                     throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
                 }
                 validInput = true;
@@ -97,7 +104,7 @@ public abstract class Producto {
         return marca;
     }
 
-    public ColorP escanearColor(){
+    public ColorP escanearColor() {
         ColorP colorP = null;
         boolean validInput;
         do {
@@ -113,7 +120,7 @@ public abstract class Producto {
         return colorP;
     }
 
-    protected String escanearDescripcion(){
+    protected String escanearDescripcion() {
         String descripcion = null;
         boolean validInput;
         do {
@@ -121,9 +128,10 @@ public abstract class Producto {
                 System.out.print("Descripcion: ");
                 descripcion = App.sc.nextLine();
                 if (!isValidInput(descripcion)) {
-                    throw new InvalidInputException("La descripcion contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
+                    throw new InvalidInputException(
+                            "La descripcion contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
                 }
-                if(descripcion.length() > 100){
+                if (descripcion.length() > 100) {
                     throw new InvalidInputException("La descripcion no puede superar los 100 caracteres.");
                 }
                 validInput = true;
@@ -135,8 +143,7 @@ public abstract class Producto {
         return descripcion;
     }
 
-
-    public int escanearStock(){
+    public int escanearStock() {
         int stock = -1;
         boolean validInput;
         do {
@@ -160,7 +167,7 @@ public abstract class Producto {
         return stock;
     }
 
-    public double escanearPrecio(){
+    public double escanearPrecio() {
         double precio = -1;
         boolean validInput;
         do {
@@ -183,11 +190,10 @@ public abstract class Producto {
         } while (!validInput);
         return precio;
     }
-    
 
     protected boolean isValidInput(String cadena) {
-    // Permite letras, números, puntos, comas, guiones medios y espacios
-    return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
+        // Permite letras, números, puntos, comas, guiones medios y espacios
+        return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
     }
 
     @Override
@@ -219,6 +225,7 @@ public abstract class Producto {
             return false;
         return true;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -229,11 +236,12 @@ public abstract class Producto {
         return result;
     }
 
-    /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    public Producto(){
+    /// Constructores getters y setters
+    /// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public Producto() {
     }
-    
+
     public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
         this.nombre = nombre;
         this.marca = marca;
@@ -270,7 +278,7 @@ public abstract class Producto {
     public int getStock() {
         return stock;
     }
-    
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -299,6 +307,95 @@ public abstract class Producto {
         this.stock = stock;
     }
 
+    public static Producto elegirCategoria() {
+        int opcion, opcionC, opcionA, opcionP;
+        do {
+            System.out.println("Categorias");
+            System.out.println("1. Celulares");
+            System.out.println("2. Computadoras");
+            System.out.println("3. Audio");
+            System.out.println("4. Periféricos");
+            System.out.println("5. Cables");
+            System.out.println("0. Atras");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    return new Celular();
+                case 2:
+                    do {
+                        System.out.println("Computadoras");
+                        System.out.println("    1. Pc");
+                        System.out.println("    2. Portatil");
+                        System.out.println("    0. Atras");
+                        opcionC = App.sc.nextInt();
+                        App.sc.nextLine();
+                        switch (opcionC) {
+                            case 1:
+                                return new Pc();
+                            case 2:
+                                return new Portatil();
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Por favor ingrese un caracter valido");
+                                break;
+                        }
 
-    
+                    } while (opcionC != 0);
+                case 3:
+                    do {
+                        System.out.println("Audio");
+                        System.out.println("    1. Auriculares");
+                        System.out.println("    2. Parlantes");
+                        System.out.println("    0. Atras");
+                        opcionA = App.sc.nextInt();
+                        App.sc.nextLine();
+                        switch (opcionA) {
+                            case 1:
+                                return new Auricular();
+                            case 2:
+                                return new Parlante();
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Por favor ingrese un caracter valido");
+                                break;
+                        }
+
+                    } while (opcionA != 0);
+                case 4:
+                    do {
+                        System.out.println("Perifericos");
+                        System.out.println("    1. Mouse");
+                        System.out.println("    2. Teclado");
+                        System.out.println("    0. Atras");
+                        opcionP = App.sc.nextInt();
+                        App.sc.nextLine();
+                        switch (opcionP) {
+                            case 1:
+                                return new Mouse();
+                            case 2:
+                                return new Teclado();
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Por favor ingrese un caracter valido");
+                                break;
+                        }
+
+                    } while (opcionP != 0);
+                case 5:
+                    return new Cable();
+                case 0:
+                    break;
+                default:
+                    System.out.println("Por favor ingrese una entrada válida");
+                    break;
+            }
+        } while (opcion != 0);
+
+        return null;
+    }
+
 }

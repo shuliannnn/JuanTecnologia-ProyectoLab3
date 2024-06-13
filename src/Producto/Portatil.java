@@ -205,8 +205,6 @@ public class Portatil extends Computadora implements Memorias{
         this.microfono = microfono;
     }
 
-    
-
     public Portatil() {
     }
 
