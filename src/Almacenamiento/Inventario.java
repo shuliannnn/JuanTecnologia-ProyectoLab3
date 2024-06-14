@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import Producto.Producto;
 import Interfaces.ABML;
 import App.App;
+import App.Menu;
 
 public class Inventario<T extends Producto> implements ABML<T> {
     private LinkedHashSet<T> lista = new LinkedHashSet<>();
@@ -64,19 +65,25 @@ public class Inventario<T extends Producto> implements ABML<T> {
             /// vamos al objeto
             for (T t : lista) {
                 if (t.equals(e)) {
+                    Menu.clearScreen();
+                    System.out.println("Stock actual: " + t.getStock());
                     t.modificarStock();
                     Archivo.modificarProducto(t);
-                    System.out.println("Stock modificado correctamente.");
+                    System.out.println("Modificado correctamente.");
+                    System.out.println("Stock actual: " + t.getStock());
+                    Menu.systemPause();
                     return;
                 }
             }
 
         } else {
             e.escanearDatosEspecificos();
+            Menu.clearScreen();
             System.out.println(e);
             System.out.println("El producto quedaria cargado asi desea añadirlo al sistema?");
             confirmacion = confirmar("Añadir", "Borrar", "Se añadió al sistema correctamente",
                     "No se añadio al sistema");
+            Menu.systemPause();
             if (confirmacion) {
                 e.setId(e.asignarId());
                 agregar(e);
@@ -88,26 +95,28 @@ public class Inventario<T extends Producto> implements ABML<T> {
     @SuppressWarnings("unchecked")
     public void modificarProducto(T e) {
 
-        System.out.println("¿Como desea buscar el producto?");
         int opcion;
-        System.out.println("1. ID");
-        System.out.println("2. Datos principales");
-        System.out.println("0. Salir");
-        opcion = App.sc.nextInt();
-        App.sc.nextLine();/// buffer
         int id;
         T eCopia;
         boolean flag = false;
         do {
+            System.out.println("¿Como desea buscar el producto?");
+            System.out.println("1. ID");
+            System.out.println("2. Datos principales");
+            System.out.println("0. Salir");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();/// buffer
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese un id: ");
                     id = App.sc.nextInt();
                     App.sc.nextLine();
+                    Menu.clearScreen();
 
                     e = buscar(id);
                     if (e == null) {
                         System.out.println("No se encontro el producto");
+                        Menu.systemPause();
                         return;
                     }
                     opcion = 0;
@@ -138,21 +147,21 @@ public class Inventario<T extends Producto> implements ABML<T> {
         eCopia = (T) e.clone();
         eCopia.setId(e.getId());
         eCopia.modificarProducto();
-        for(T t: lista){
-            if(eCopia.equals(t) && eCopia.getId() != t.getId()){
+        for (T t : lista) {
+            if (eCopia.equals(t) && eCopia.getId() != t.getId()) {
                 System.out.println("Ocurrio un error: La modificacion realizada es igual a un producto existente");
                 System.out.println("Se cancelaron la modificaciones");
                 return;
             }
         }
-        
+
         System.out.println("Producto original: ");
         System.out.println(e);
         System.out.println("Producto modificado: ");
         System.out.println(eCopia);
         System.out.println("Desea realizar estos cambios?");
         if (confirmar("Si", "No", "Producto modificado correctamente",
-            "Se deshicieron las modificaciones")) { // Confirmar
+                "Se deshicieron las modificaciones")) { // Confirmar
             lista.remove(e);
             lista.add(eCopia);
             Archivo.modificarProducto(eCopia);
@@ -200,6 +209,14 @@ public class Inventario<T extends Producto> implements ABML<T> {
 
     @Override
     public String toString() {
+        String contenido = "";
+        for (T e : lista) {
+            contenido += e.toString();
+        }
+        return contenido;
+    }
+
+    public String toStringCorto() {
         String contenido = "";
         for (T e : lista) {
             contenido += e.getId() + "  |  " + e.getMarca() + "  |  " + e.getNombre() + "  |  " + e.getColor() + "\n";

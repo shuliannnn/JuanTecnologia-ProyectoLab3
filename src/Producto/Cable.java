@@ -12,12 +12,14 @@ public class Cable extends Producto{
 
     @Override
     public String toString() {
-        return "Cable [largo=" + largo + "Stock=" + getStock() + "]";
+        return "Cable:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n       Largo: " + getLargo() + "\n       Descripcion: " + getDescripcion();
     }
-
+    
     @Override
     public void escanearDatosComparables() {
         ///en producto
+        System.out.println("Cargando cable: ");
         marca = escanearMarca();
         nombre = escanearNombre();
         color = escanearColor();
@@ -35,7 +37,7 @@ public class Cable extends Producto{
         return result;
     }
 
-    
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -49,6 +51,7 @@ public class Cable extends Producto{
         return true;
     }
 
+    @Override
     public void escanearDatosEspecificos() {
         ///en producto
         descripcion = escanearDescripcion();
@@ -84,18 +87,66 @@ public class Cable extends Producto{
 
     @Override
     public void modificarProducto(){
-        throw new RuntimeException("Metodo no codeado");
+        int opcion;
+
+        do {
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7. Largo");
+            System.out.println("0. Listo");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();///buffer
+            
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+                    break;
+                case 2:
+                    marca = escanearMarca();   
+                    break;
+                case 3:
+                    precio = escanearPrecio();
+                    break;
+                case 4:
+                    descripcion = escanearDescripcion();
+                    break;
+                case 5:
+                    color = escanearColor();
+                    break;
+                case 6:
+                    stock = escanearStock();
+                    break;
+                case 7:
+                    largo = escanearLargo();
+                    break;
+                case 0:
+                    break;
+            
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    break;
+            }
+
+
+        } while (opcion != 0);
+
+    }
+
+    @Override
+    public Cable clone() {
+        return new Cable(nombre, marca, precio, descripcion, color, stock, largo);
     }
     
 
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    @Override
-    public Producto clone() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     @Override
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();

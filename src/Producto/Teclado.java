@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import Enumeradores.*;
 import Excepciones.*;
 import App.App;
+import App.Menu;
 
 public class Teclado extends Periferico{
 
@@ -13,7 +14,14 @@ public class Teclado extends Periferico{
     private boolean mecanico;
     private boolean cableRemovible;
     
+    
+    
     /// comparables en periferico
+    @Override
+    public void escanearDatosComparables() {
+        System.out.println("Cargando Teclado");
+        super.escanearDatosComparables();
+    }
 
     ///equals en periferico
 
@@ -118,13 +126,88 @@ public class Teclado extends Periferico{
     
     @Override
     public void modificarProducto(){
-        throw new RuntimeException("Metodo no codeado");
+        int opcion;
+
+        
+        do {
+            Menu.clearScreen();
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7.Conexion");
+            System.out.println("8. Inalambrico");
+            System.out.println("9. RGB");
+            System.out.println("10. Porcentaje");
+            System.out.println("11. Mecanico");
+            System.out.println("12. Cable removible");
+            System.out.println("0. Listo");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();///buffer
+            
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+
+                    break;
+                case 2:
+                    marca = escanearMarca();   
+                    break;
+                case 3:
+                    precio = escanearPrecio();
+                    break;
+                case 4:
+                    descripcion = escanearDescripcion();
+                    break;
+                case 5:
+                    color = escanearColor();
+                    break;
+                case 6:
+                    stock = escanearStock();
+                    break;
+                case 7:
+                    conexion = escanearConexion();
+                    break;
+                case 8:
+                    inalambrico = escanearInalambrico();
+                    break;
+                case 9:
+                    rgb = escanearRgb();
+                    break;
+                case 10:
+                    porcentaje = escanearPorcentaje();
+                    break;
+                case 11:
+                    cableRemovible = escanearCableRemovible();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    Menu.systemPause();
+                    break;
+            }
+
+        } while (opcion != 0);
+
     }
+    
+    
+	@Override
+	public Teclado clone() {
+		return new Teclado(nombre, marca, precio, descripcion, color, stock, inalambrico, rgb, conexion, porcentaje, mecanico, cableRemovible);
+	}
     
     @Override
     public String toString() {
-        return "Teclado [porcentaje=" + porcentaje + ", mecanico=" + mecanico + ", cableRemovible=" + cableRemovible
-                + "]";
+        return "Teclado:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Es RGB: " + (rgb ? "Si" : "No") + "\n      Conexion: " + getConexion() + " \n      Porcentaje: " + getPorcentaje() +
+          " \n      Mecanico: " + (mecanico ? "Si" : "No") + "\n      Cable Removible: " + (cableRemovible ? "Si" : "No") + "\n     Descripcion: " + getDescripcion();
     }
     
    /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -212,9 +295,4 @@ public class Teclado extends Periferico{
         this.cableRemovible = cableRemovible;
     }
 
-	@Override
-	public Producto clone() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'clone'");
-	}
 }

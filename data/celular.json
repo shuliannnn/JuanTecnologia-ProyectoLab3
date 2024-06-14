@@ -1,0 +1,16 @@
+[{
+    "descripcion": "Un celular y si",
+    "bateria": 912,
+    "tipo": "Celular",
+    "dobleSim": true,
+    "color": "ROJO",
+    "memoriaInterna": 128,
+    "nombre": "B32",
+    "marca": "Samson",
+    "precio": 76.9,
+    "pulgadas": 5,
+    "memoriaRam": 4,
+    "id": 5,
+    "so": "IOS",
+    "stock": 1
+}]

@@ -1,4 +1,5 @@
 package Producto;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import App.App;
@@ -6,28 +7,111 @@ import Enumeradores.*;
 import Excepciones.*;
 import Interfaces.Memorias;
 
-
-public class Portatil extends Computadora implements Memorias{
+public class Portatil extends Computadora implements Memorias {
 
     private double pulgadas;
     private boolean ethernet;
     private boolean microfono;
 
+    @Override
+    public void modificarProducto() {
+        int opcion;
+
+        do {
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7.Procesador");
+            System.out.println("8. RAM");
+            System.out.println("9. Almacenamiento");
+            System.out.println("10. Placa de Video");
+            System.out.println("11. Bluetooth");
+            System.out.println("12. Motherboard");
+            System.out.println("13. Pulgadas");
+            System.out.println("14. Ethernet");
+            System.out.println("15. Microfono");
+            System.out.println("0. Listo");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();/// buffer
+
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+                    break;
+                case 2:
+                    marca = escanearMarca();
+                    break;
+                case 3:
+                    precio = escanearPrecio();
+                    break;
+                case 4:
+                    descripcion = escanearDescripcion();
+                    break;
+                case 5:
+                    color = escanearColor();
+                    break;
+                case 6:
+                    stock = escanearStock();
+                    break;
+                case 7:
+                    procesador = escanearProcesador();
+                    break;
+                case 8:
+                    memoriaRam = escanearMemoriaRAM();
+                    break;
+                case 9:
+                    memoriaInterna = escanearMemoriaInterna();
+                    break;
+                case 10:
+                    pVideo = escanearPlacaVideo();
+                    break;
+                case 11:
+                    bluetooth = escanearBluetooth();
+                    break;
+                case 12:
+                    mother = escanearMother();
+                    break;
+                case 13:
+                    pulgadas = escanearPulgadas();
+                    break;
+                case 14:
+                    ethernet = escanearEthernet();
+                    break;
+                case 15:
+                    microfono = escanearMicrofono();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    break;
+            }
+
+        } while (opcion != 0);
+
+    }
 
     @Override
-    public void escanearDatosComparables(){
-        ///en producto
+    public void escanearDatosComparables() {
+        System.out.println("Cargando Portatil");
+        /// en producto
         marca = escanearMarca();
         nombre = escanearNombre();
         color = escanearColor();
-        ///computadora
+        /// computadora
         memoriaInterna = escanearMemoriaInterna();
     }
 
     @Override
-    public void escanearDatosEspecificos(){
-        
-        ///en computadora
+    public void escanearDatosEspecificos() {
+
+        /// en computadora
         procesador = escanearProcesador();
         memoriaRam = escanearMemoriaRAM();
         pVideo = escanearPlacaVideo();
@@ -35,15 +119,15 @@ public class Portatil extends Computadora implements Memorias{
         mother = escanearMother();
         /// en portatil
         pulgadas = escanearPulgadas();
-         ethernet = escanearEthernet();
-        /// microfono = 
+        ethernet = escanearEthernet();
+        /// microfono =
         /// en producto
         descripcion = escanearDescripcion();
         stock = escanearStock();
         precio = escanearPrecio();
     }
-    
-    public double escanearPulgadas(){
+
+    public double escanearPulgadas() {
         double pulgadas = -1;
         boolean validInput = false;
         do {
@@ -64,31 +148,30 @@ public class Portatil extends Computadora implements Memorias{
             }
         } while (!validInput);
 
-         
         return pulgadas;
     }
 
-    public boolean escanearEthernet(){
+    public boolean escanearEthernet() {
         char ethernet;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Tiene Ethernet (t/f): ");
                 String input = App.sc.nextLine();
-                
+
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
                 }
-                
+
                 ethernet = input.charAt(0);
-                
+
                 if (ethernet == 't' || ethernet == 'f') {
-                     
+
                     return ethernet == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
                 }
-                
+
             } catch (InvalidCharacterException e) {
                 System.out.println(e.getMessage());
             }
@@ -97,27 +180,27 @@ public class Portatil extends Computadora implements Memorias{
         return false;
     }
 
-    public boolean escanearMicrofono(){
+    public boolean escanearMicrofono() {
         char microfono;
         boolean validInput = false;
         do {
             try {
                 System.out.print("Tiene microfono (t/f): ");
                 String input = App.sc.nextLine();
-                
+
                 if (input.length() != 1) {
                     throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
                 }
-                
+
                 microfono = input.charAt(0);
-                
+
                 if (microfono == 't' || microfono == 'f') {
-                     
+
                     return microfono == 't';
                 } else {
                     throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
                 }
-                
+
             } catch (InvalidCharacterException e) {
                 System.out.println(e.getMessage());
             }
@@ -127,16 +210,21 @@ public class Portatil extends Computadora implements Memorias{
     }
 
     @Override
-    public void modificarProducto(){
-        throw new RuntimeException("Metodo no codeado");
+    public Portatil clone() {
+        return new Portatil(nombre, marca, precio, descripcion, color, stock, procesador, memoriaInterna,
+                memoriaInterna, pVideo, bluetooth, mother, pulgadas, ethernet, microfono);
     }
 
     @Override
     public String toString() {
-        return "Portatil [pulgadas=" + pulgadas + ", ethernet=" + ethernet + ", microfono=" + microfono + "]";
+        return "Portatil:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Procesador: " + getProcesador() + " \n       RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
+            "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
+            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n     Descripcion: " + getDescripcion();
     }
 
-    /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
+    /// Archivos
+    /// -------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public JSONObject toJSON() {
@@ -184,7 +272,8 @@ public class Portatil extends Computadora implements Memorias{
             boolean microfono = json.getBoolean("microfono");
             int id = json.getInt("id");
 
-            Portatil aux = new Portatil(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam, memoriaInterna, pVideo, bluetooth, mother, pulgadas, ethernet, microfono);
+            Portatil aux = new Portatil(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam,
+                    memoriaInterna, pVideo, bluetooth, mother, pulgadas, ethernet, microfono);
             aux.setId(id);
             return aux;
         } catch (JSONException e) {
@@ -192,8 +281,9 @@ public class Portatil extends Computadora implements Memorias{
             return null;
         }
     }
-    
-    /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    /// Constructores getters y setters
+    /// ------------------------------------------------------------------------------------------------------------------------------------------------
 
     public Portatil(String nombre, String marca, double precio, String descripcion, ColorP color, int stock,
             String procesador, int memoriaRam, int memoriaInterna, String pVideo, boolean bluetooth, String mother,
@@ -232,9 +322,4 @@ public class Portatil extends Computadora implements Memorias{
         this.microfono = microfono;
     }
 
-	@Override
-	public Producto clone() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'clone'");
-	}
 }

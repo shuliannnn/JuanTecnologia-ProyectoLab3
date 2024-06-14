@@ -11,13 +11,6 @@ public class Auricular extends Audio {
     private FormatoAuricular formato;
     private CanalesAudio canal;
     
-    
-    @Override
-    public String toString() {
-        return "Auricular [formato=" + formato + ", canal=" + canal + "]";
-    }
-
-    
     public FormatoAuricular escanearFormato(){
         FormatoAuricular formato= null;
         boolean validInput;
@@ -79,7 +72,6 @@ public class Auricular extends Audio {
     public void modificarProducto(){
         int opcion;
 
-        
         do {
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
@@ -96,7 +88,7 @@ public class Auricular extends Audio {
             System.out.println("10. Es Inalambrico");
             System.out.println("11. Formato");
             System.out.println("12. Canal");
-            System.out.println("0. Salir");
+            System.out.println("0. Listo");
             opcion = App.sc.nextInt();
             App.sc.nextLine();///buffer
             
@@ -108,40 +100,36 @@ public class Auricular extends Audio {
                     marca = escanearMarca();   
                     break;
                 case 3:
-                        
+                    precio = escanearPrecio();
                     break;
                 case 4:
-                        
+                    descripcion = escanearDescripcion();
                     break;
                 case 5:
-                        
+                    color = escanearColor();
                     break;
                 case 6:
-                        
+                    stock = escanearStock();
                     break;
                 case 7:
-                        
+                    resistencia = escanearResistencia();
                     break;
                 case 8:
-                        
+                    conexion = escanearConexion();
                     break;
                 case 9:
-                        
+                    microfono = escanearMicrofono();
                     break;
                 case 10:
-                        
+                    inalambrico = escanearInalambrico();
                     break;
                 case 11:
-                        
+                    formato = escanearFormato();
                     break;
                 case 12:
-                        
-                    break;
-                case 13:
-                        
+                    canal = escanearCanal();
                     break;
                 case 0:
-                    System.out.println("");
                     break;
             
                 default:
@@ -173,8 +161,20 @@ public class Auricular extends Audio {
     }
 
     @Override
+    public void escanearDatosComparables() {
+        System.out.println("Cargando Auricular: ");
+        super.escanearDatosComparables();
+    }
+
+    @Override
     public Auricular clone(){
-        return new Auricular(this.nombre, this.marca, this.precio, this.descripcion, this.color, this.stock, this.resistencia, this.conexion, this.microfono, this.inalambrico, this.formato, this.canal);
+        return new Auricular(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico, formato, canal);
+    }
+    @Override
+    public String toString() {
+        return "Auricular:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono" +  (microfono ? "Si" : "No") +
+        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Formato: " + getFormato() + " \n      Canal: " + getCanal() + "\n     Descripcion" + getDescripcion();
     }
 
     
@@ -241,10 +241,8 @@ public class Auricular extends Audio {
         this.canal = canal;
     }
     
-    
     public Auricular() {
     }
-
 
     public FormatoAuricular getFormato() {
         return formato;

@@ -11,16 +11,10 @@ public class Pc extends Computadora implements Memorias{
 
     private boolean perifericos;
     private boolean wifi;
-    
-
-    @Override
-    public String toString() {
-        return "Pc [perifericos=" + perifericos + ", wifi=" + wifi + "]";
-    }
-
 
     @Override
     public void escanearDatosComparables() {
+        System.out.println("Cargando Pc");
         ///en producto
         marca = escanearMarca();
         nombre = escanearNombre();
@@ -120,8 +114,98 @@ public class Pc extends Computadora implements Memorias{
 
     @Override
     public void modificarProducto(){
-        throw new RuntimeException("Metodo no codeado");
+        int opcion;
+
+        do {
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7. Proceador");
+            System.out.println("8. Memoria Ram");
+            System.out.println("9. Memoria Interna");
+            System.out.println("10. Placa de Video");
+            System.out.println("11. Bluetooth");
+            System.out.println("12. Mother");
+            System.out.println("13. Tiene Perifericos");
+            System.out.println("14. TIene WiFi");
+            System.out.println("0. Listo");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();///buffer
+            
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+                    break;
+                case 2:
+                    marca = escanearMarca();   
+                    break;
+                case 3:
+                    precio = escanearPrecio();
+                    break;
+                case 4:
+                    descripcion = escanearDescripcion();
+                    break;
+                case 5:
+                    color = escanearColor();
+                    break;
+                case 6:
+                    stock = escanearStock();
+                    break;
+                case 7:
+                    procesador = escanearProcesador();
+                    break;
+                case 8:
+                    memoriaRam = escanearMemoriaRAM();
+                    break;
+                case 9:
+                    memoriaInterna = escanearMemoriaInterna();
+                    break;
+                case 10:
+                    pVideo = escanearPlacaVideo();
+                    break;
+                case 11:
+                    bluetooth = escanearBluetooth();
+                    break;
+                case 12:
+                    mother = escanearMother();
+                    break;
+                case 13:
+                    perifericos = escanearPerifericos();
+                    break;
+                case 14:
+                    wifi = escanearWifi();
+                    break;
+                case 0:
+                    break;
+            
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    break;
+            }
+
+
+        } while (opcion != 0);
+    
     }
+
+    @Override
+    public String toString() {
+        return "PC:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Procesador: " + getProcesador() + " \n       RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
+            "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
+            "\n      Tiene Perifericos: " + (perifericos ? "Si" : "No") + "\n      Wifi: " + (wifi ? "Si" : "No") + "\n     Descripcion: " + getDescripcion();
+    }
+    
+	@Override
+	public Pc clone() {
+		return new Pc(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam, memoriaInterna, pVideo, bluetooth, mother, perifericos, wifi);
+	}
     
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -210,11 +294,5 @@ public class Pc extends Computadora implements Memorias{
     public void setWifi(boolean wifi) {
         this.wifi = wifi;
     }
-
-
-	@Override
-	public Producto clone() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'clone'");
-	}
+ 
 }

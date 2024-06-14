@@ -11,17 +11,6 @@ public class Parlante extends Audio {
     private Radios radio;
     private short potencia;
 
-
-   
-    @Override
-    public String toString() {
-        return "Parlante [radio=" + radio + ", potencia=" + potencia + "]";
-    }
-
-
-
-    
-
     public Radios escanearRadio(){
         Radios radio= null;
         boolean validInput;
@@ -82,10 +71,96 @@ public class Parlante extends Audio {
    ///datos comparables de audio
 
    @Override
-    public void modificarProducto(){
-        throw new RuntimeException("Metodo no codeado");
+    public void escanearDatosComparables() {
+        System.out.println("Cargando Parlante: ");
+        super.escanearDatosComparables();
+    }
+
+   @Override
+   public void modificarProducto(){
+        int opcion;
+
+        do {
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7. Resistencia");
+            System.out.println("8. Conexion");
+            System.out.println("9. Tiene Microfono");
+            System.out.println("10. Es Inalambrico");
+            System.out.println("11. Radio");
+            System.out.println("12. Potencia");
+            System.out.println("0. Listo");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();///buffer
+            
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+                    break;
+                case 2:
+                    marca = escanearMarca();   
+                    break;
+                case 3:
+                    precio = escanearPrecio();
+                    break;
+                case 4:
+                    descripcion = escanearDescripcion();
+                    break;
+                case 5:
+                    color = escanearColor();
+                    break;
+                case 6:
+                    stock = escanearStock();
+                    break;
+                case 7:
+                    resistencia = escanearResistencia();
+                    break;
+                case 8:
+                    conexion = escanearConexion();
+                    break;
+                case 9:
+                    microfono = escanearMicrofono();
+                    break;
+                case 10:
+                    inalambrico = escanearInalambrico();
+                    break;
+                case 11:
+                    radio = escanearRadio();
+                    break;
+                case 12:
+                    potencia = escanearPotencia();
+                    break;
+                case 0:
+                    break;
+            
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    break;
+            }
+
+
+        } while (opcion != 0);
+    
     }
    
+    @Override
+    public String toString() {
+        return "Parlante:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono" +  (microfono ? "Si" : "No") +
+        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Radio: " + getRadio() + " \n      Potencia: " + getPotencia() + "\n     Descripcion" + getDescripcion();
+    }
+
+    @Override
+    public Parlante clone() {
+        return new Parlante(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico, radio, potencia);
+    }
     @Override
     public void escanearDatosEspecificos() {
         ///en audio
@@ -99,6 +174,7 @@ public class Parlante extends Audio {
         stock = escanearStock();
         precio = escanearPrecio();
     }
+
 
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -164,10 +240,6 @@ public class Parlante extends Audio {
     public Parlante() {
     }
 
-
-
-
-
     public Radios getRadio() {
         return radio;
     }
@@ -181,13 +253,4 @@ public class Parlante extends Audio {
         this.potencia = potencia;
     }
 
-
-
-
-
-	@Override
-	public Producto clone() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'clone'");
-	}
 }

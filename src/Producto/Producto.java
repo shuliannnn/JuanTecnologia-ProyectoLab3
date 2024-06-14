@@ -8,6 +8,7 @@ import Excepciones.InvalidDoubleException;
 import Excepciones.InvalidInputException;
 import Excepciones.InvalidIntegerException;
 import App.App;
+import App.Menu;
 
 public abstract class Producto {
     protected String nombre;
@@ -109,7 +110,11 @@ public abstract class Producto {
         boolean validInput;
         do {
             try {
-                System.out.print("Color: ");
+                System.out.print("Color ( ");
+                for (ColorP s : ColorP.values()) {
+                    System.out.print(s+", ");
+                }
+                System.out.print("): ");
                 colorP = ColorP.valueOf(App.sc.nextLine().toUpperCase());
                 validInput = true;
             } catch (IllegalArgumentException e) {
@@ -309,6 +314,7 @@ public abstract class Producto {
 
     public static Producto elegirCategoria() {
         int opcion, opcionC, opcionA, opcionP;
+        Menu.clearScreen();
         do {
             System.out.println("Categorias");
             System.out.println("1. Celulares");
@@ -319,8 +325,10 @@ public abstract class Producto {
             System.out.println("0. Atras");
             opcion = App.sc.nextInt();
             App.sc.nextLine();
+            Menu.clearScreen();
             switch (opcion) {
                 case 1:
+                    opcion = 0;
                     return new Celular();
                 case 2:
                     do {
@@ -330,10 +338,15 @@ public abstract class Producto {
                         System.out.println("    0. Atras");
                         opcionC = App.sc.nextInt();
                         App.sc.nextLine();
+                        Menu.clearScreen();
                         switch (opcionC) {
                             case 1:
+                                opcionC = 0;
+                                opcion = 0;
                                 return new Pc();
                             case 2:
+                                opcionC = 0;
+                                opcion = 0;
                                 return new Portatil();
                             case 0:
                                 break;
@@ -351,10 +364,15 @@ public abstract class Producto {
                         System.out.println("    0. Atras");
                         opcionA = App.sc.nextInt();
                         App.sc.nextLine();
+                        Menu.clearScreen();
                         switch (opcionA) {
                             case 1:
+                                opcionA = 0;
+                                opcion = 0;
                                 return new Auricular();
                             case 2:
+                                opcionA = 0;
+                                opcion = 0;
                                 return new Parlante();
                             case 0:
                                 break;
@@ -372,10 +390,15 @@ public abstract class Producto {
                         System.out.println("    0. Atras");
                         opcionP = App.sc.nextInt();
                         App.sc.nextLine();
+                        Menu.clearScreen();
                         switch (opcionP) {
                             case 1:
+                                opcionP = 0;
+                                opcion = 0;
                                 return new Mouse();
                             case 2:
+                                opcionP = 0;
+                                opcion = 0;
                                 return new Teclado();
                             case 0:
                                 break;
@@ -386,6 +409,7 @@ public abstract class Producto {
 
                     } while (opcionP != 0);
                 case 5:
+                    opcion = 0;
                     return new Cable();
                 case 0:
                     break;

@@ -40,7 +40,7 @@ public class Celular extends Producto implements Memorias{
         boolean validInput = false;
         do {
             try {
-                //System.out.print("Tiene Doble Sim (t/f): ");
+                System.out.print("Tiene Doble Sim (t/f): ");
                 String input = App.sc.nextLine();
                 
                 if (input.length() != 1) {
@@ -117,6 +117,7 @@ public class Celular extends Producto implements Memorias{
     } 
     
     public void escanearDatosComparables(){
+        System.out.println("Cargando celular: ");
         ///en producto
         marca = escanearMarca();
         nombre = escanearNombre();
@@ -140,13 +141,74 @@ public class Celular extends Producto implements Memorias{
     
     @Override
     public void modificarProducto(){
-        throw new RuntimeException("Metodo no codeado");
+        int opcion;
+
+        do {
+            System.out.println("Producto con modificaciones actuales: ");
+            System.out.println(this.toString() + '\n');
+            System.out.println("Ingrese campo a modificar");
+            System.out.println("1. Nombre");
+            System.out.println("2. Marca");
+            System.out.println("3. Precio");
+            System.out.println("4. Descripcion");
+            System.out.println("5. Color");
+            System.out.println("6. Stock");
+            System.out.println("7. Memoria Ram");
+            System.out.println("8. Memoria Interna");
+            System.out.println("9. Pulgadas");
+            System.out.println("10. Tiene doble sim");
+            System.out.println("11. Bateria(mAh)");
+            System.out.println("0. Listo");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();///buffer
+            
+            switch (opcion) {
+                case 1:
+                    nombre = escanearNombre();
+                    break;
+                case 2:
+                    marca = escanearMarca();   
+                    break;
+                case 3:
+                    precio = escanearPrecio();
+                    break;
+                case 4:
+                    descripcion = escanearDescripcion();
+                    break;
+                case 5:
+                    color = escanearColor();
+                    break;
+                case 6:
+                    stock = escanearStock();
+                    break;
+                case 7:
+                    memoriaRam = escanearMemoriaRAM();
+                    break;
+                case 8:
+                    memoriaInterna = escanearMemoriaInterna();
+                    break;
+                case 9:
+                    pulgadas = escanearPulgadas();
+                    break;
+                case 10:
+                    dobleSim = escanearDobleSim();
+                    break;
+                case 11:
+                    bateria = escanearBateria();
+                    break;
+                case 0:
+                    break;
+            
+                default:
+                    System.out.println("Ingrese un caracter válido");
+                    break;
+            }
+
+
+        } while (opcion != 0);
+
     }
 
-    @Override
-    public Celular clone(){
-        return new Celular(this.nombre, this.marca, this.precio, this.descripcion, this.color, this.stock, this.memoriaRam, this.memoriaInterna, this.pulgadas, this.dobleSim, this.so, this.bateria);
-    }
     
     @Override
     public int hashCode() {
@@ -172,11 +234,16 @@ public class Celular extends Producto implements Memorias{
         return true;
     }
     
+    @Override
+    public Celular clone(){
+        return new Celular(nombre, marca, precio, descripcion, color, stock, memoriaRam, memoriaInterna, pulgadas, dobleSim, so, bateria);
+    }
 
     @Override
     public String toString() {
-        return "Celular [memoriaRam=" + memoriaRam + ", memoriaInterna=" + memoriaInterna + ", pulgadas=" + pulgadas
-                + ", dobleSim=" + dobleSim + ", so=" + so + ", bateria=" + bateria + "]";
+        return "Celular:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+         " | Precio: " + getPrecio() + " |" + " \n      Memoria RAM: " + getMemoriaRam() + "\n      Memoria Interna: " + getMemoriaInterna() + "\n      Pulgadas:" +  getPulgadas() +
+        " \n      Doble SIM: " + (dobleSim ? "Si" : "No") + " \n      SO: " + getSo() + " \n      Bateria()mAh: " + getBateria() + "\n     Descripcion" + getDescripcion();
     }
 
     
