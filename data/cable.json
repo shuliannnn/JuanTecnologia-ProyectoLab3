@@ -1,11 +1,46 @@
-[{
-    "descripcion": "es un cable muy interasante",
-    "marca": "c",
-    "tipo": "Cable",
-    "precio": 100,
-    "color": "ROJO",
-    "largo": 1.4,
-    "id": 2,
-    "stock": 5,
-    "nombre": "c"
-}]
+[
+    {
+        "descripcion": "es un cable muy interasante",
+        "marca": "c",
+        "tipo": "Cable",
+        "precio": 100,
+        "color": "ROJO",
+        "largo": 1.4,
+        "id": 2,
+        "stock": 5,
+        "nombre": "c"
+    },
+    {
+        "descripcion": "soy el cable",
+        "marca": "Cablerio",
+        "tipo": "Cable",
+        "precio": 21,
+        "color": "ROJO",
+        "largo": 1.4,
+        "id": 6,
+        "stock": 2,
+        "nombre": "USB C 3400 super PRO"
+    },
+    {
+        "descripcion": "hola",
+        "marca": "cable",
+        "tipo": "Cable",
+        "precio": 123,
+        "color": "ROJO",
+        "largo": 1,
+        "id": 7,
+        "stock": 423,
+        "nombre": "cableee"
+    },
+    {
+        "descripcion": "cablessssssssss",
+        "marca": "Cableados",
+        "tipo": "Cable",
+        "precio": 5554,
+        "color": "NEGRO",
+        "largo": 1.6,
+        "id": 9,
+        "stock": 7,
+        "nombre": "Cable usb"
+    }
+]
