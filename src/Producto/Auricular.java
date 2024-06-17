@@ -1,5 +1,7 @@
 package Producto;
 
+import java.util.InputMismatchException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -91,8 +93,14 @@ public class Auricular extends Audio {
             System.out.println("11. Formato");
             System.out.println("12. Canal");
             System.out.println("0. Listo");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();///buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+                App.sc.nextLine();
+            } catch (InputMismatchException ex) {
+                App.sc.nextLine();
+                opcion = -1;
+            }
             
             switch (opcion) {
                 case 1:

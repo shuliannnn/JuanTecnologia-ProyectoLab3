@@ -1,5 +1,6 @@
 package Almacenamiento;
 
+import java.util.InputMismatchException;
 import java.util.LinkedHashSet;
 
 import Producto.Producto;
@@ -112,12 +113,18 @@ public class Inventario<T extends Producto> implements ABML<T> {
         T eCopia;
         boolean flag = false;
         do {
+            Menu.clearScreen();
             System.out.println("¿Como desea buscar el producto?");
             System.out.println("1. ID");
             System.out.println("2. Datos principales");
             System.out.println("0. Salir");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();/// buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese un id: ");
@@ -153,6 +160,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     return;
                 default:
                     System.out.println("Por favor ingrese una opcion valida");
+                    Menu.systemPause();
                     break;
             }
         } while (opcion != 0);
@@ -194,8 +202,13 @@ public class Inventario<T extends Producto> implements ABML<T> {
             System.out.println("1. ID");
             System.out.println("2. Datos principales");
             System.out.println("0. Salir");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();/// buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese un id: ");
@@ -269,8 +282,13 @@ public class Inventario<T extends Producto> implements ABML<T> {
         do {
             System.out.println("1." + entradaT);
             System.out.println("2." + entradaF);
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();// LIMPIAR BUFFER YO HACER
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
             switch (opcion) {
                 case 1:
                     System.out.println(resT);
@@ -298,35 +316,42 @@ public class Inventario<T extends Producto> implements ABML<T> {
     public void filtrarYMostrar() {
         int opcion;
         Menu.clearScreen();
-        System.out.println("Como desea filtrar: ");
-        System.out.println("1. Marca");
-        System.out.println("2. Stock");
-        System.out.println("0. Atras");
-        System.out.print("-->");
-        opcion = App.sc.nextInt();
-        App.sc.nextLine();
-        switch (opcion) {
-            case 1:
-                Menu.clearScreen();
-                filtroMarca(Producto.escanearMarca());
-                Menu.systemPause();
-                Menu.clearScreen();
-                break;
-            case 2:
-                Menu.clearScreen();
-                System.out.println("Mostrara los productos que tengan stock menor al valor ingresado.");
-                filtroStock(Producto.escanearStock());
-                Menu.systemPause();
-                Menu.clearScreen();
-                break;
-            case 0:
-                break;
-            default:
-                System.out.println("Por favor ingrese un caracter valido.");
-                Menu.systemPause();
-                Menu.clearScreen();
-                break;
-        }
+        do{
+            System.out.println("Como desea filtrar: ");
+            System.out.println("1. Marca");
+            System.out.println("2. Stock");
+            System.out.println("0. Atras");
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    Menu.clearScreen();
+                    filtroMarca(Producto.escanearMarca());
+                    Menu.systemPause();
+                    Menu.clearScreen();
+                    return;
+                case 2:
+                    Menu.clearScreen();
+                    System.out.println("Mostrara los productos que tengan stock menor al valor ingresado.");
+                    filtroStock(Producto.escanearStock());
+                    Menu.systemPause();
+                    Menu.clearScreen();
+                    return;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Por favor ingrese un caracter valido.");
+                    Menu.systemPause();
+                    Menu.clearScreen();
+                    break;
+            }
+        }while(opcion != 0);
+        
 
     }
 

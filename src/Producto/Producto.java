@@ -1,5 +1,7 @@
 package Producto;
 
+import java.util.InputMismatchException;
+
 import org.json.JSONObject;
 
 import Almacenamiento.Archivo;
@@ -323,7 +325,12 @@ public abstract class Producto {
             System.out.println("4. Periféricos");
             System.out.println("5. Cables");
             System.out.println("0. Atras");
-            opcion = App.sc.nextInt();
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
             App.sc.nextLine();
             Menu.clearScreen();
             switch (opcion) {
@@ -336,7 +343,13 @@ public abstract class Producto {
                         System.out.println("    1. Pc");
                         System.out.println("    2. Portatil");
                         System.out.println("    0. Atras");
-                        opcionC = App.sc.nextInt();
+                        System.out.print("-->");
+                        try {
+                            opcionC = App.sc.nextInt();
+                        } catch (InputMismatchException ex) {
+                            opcionC = -1;
+                        }
+                        App.sc.nextLine();
                         App.sc.nextLine();
                         Menu.clearScreen();
                         switch (opcionC) {
@@ -363,7 +376,12 @@ public abstract class Producto {
                         System.out.println("    1. Auriculares");
                         System.out.println("    2. Parlantes");
                         System.out.println("    0. Atras");
-                        opcionA = App.sc.nextInt();
+                        System.out.print("-->");
+                        try {
+                            opcionA = App.sc.nextInt();
+                        } catch (InputMismatchException ex) {
+                            opcionA = -1;
+                        }
                         App.sc.nextLine();
                         Menu.clearScreen();
                         switch (opcionA) {
@@ -390,7 +408,12 @@ public abstract class Producto {
                         System.out.println("    1. Mouse");
                         System.out.println("    2. Teclado");
                         System.out.println("    0. Atras");
-                        opcionP = App.sc.nextInt();
+                        System.out.print("-->");
+                        try {
+                            opcionP = App.sc.nextInt();
+                        } catch (InputMismatchException ex) {
+                            opcionP = -1;
+                        }
                         App.sc.nextLine();
                         Menu.clearScreen();
                         switch (opcionP) {

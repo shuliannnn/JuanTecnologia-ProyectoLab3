@@ -1,5 +1,7 @@
 package Producto;
 
+import java.util.InputMismatchException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import App.App;
@@ -39,8 +41,13 @@ public class Portatil extends Computadora implements Memorias {
             System.out.println("14. Ethernet");
             System.out.println("15. Microfono");
             System.out.println("0. Listo");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();/// buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
 
             switch (opcion) {
                 case 1:

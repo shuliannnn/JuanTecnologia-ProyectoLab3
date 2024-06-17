@@ -140,7 +140,7 @@ public abstract class Archivo {
         try{
             if(!file.exists()){
                 JSONObject jo = new JSONObject();
-                jo.put(CONT_ID_KEY, 0);
+                jo.put(CONT_ID_KEY, 1);
                 uploadJSON(jo, ARCHIVO_ID);
                 return 0;
             }

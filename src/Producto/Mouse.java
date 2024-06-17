@@ -1,5 +1,7 @@
 package Producto;
 
+import java.util.InputMismatchException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -105,8 +107,13 @@ public class Mouse extends Periferico{
             System.out.println("10. Dpi");
             System.out.println("11. Sensor");
             System.out.println("0. Listo");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();///buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
             
             switch (opcion) {
                 case 1:

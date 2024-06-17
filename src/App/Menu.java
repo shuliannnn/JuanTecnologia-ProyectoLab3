@@ -1,5 +1,7 @@
 package App;
 
+import java.util.InputMismatchException;
+
 import Almacenamiento.*;
 import Producto.*;
 
@@ -38,8 +40,14 @@ public class Menu {
             System.out.println("7. Baja de producto");
             System.out.println("0. Salir del programa");
             System.out.print("-->");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();
+            try {
+                opcion = App.sc.nextInt();
+                App.sc.nextLine();
+            } catch (InputMismatchException ex) {
+                App.sc.nextLine();
+                opcion = -1;
+            }
+
             switch (opcion) {
                 case 1:
                     clearScreen();
@@ -111,7 +119,12 @@ public class Menu {
             System.out.println("1. Categoria");
             System.out.println("2. Todos");
             System.out.println("0. Atras");
-            opcion = App.sc.nextInt();
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
             App.sc.nextLine();
             switch (opcion) {
                 case 1:

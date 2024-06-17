@@ -1,5 +1,7 @@
 package Producto;
 
+import java.util.InputMismatchException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -103,8 +105,14 @@ public class Cable extends Producto{
             System.out.println("6. Stock");
             System.out.println("7. Largo");
             System.out.println("0. Listo");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();///buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+                App.sc.nextLine();
+            } catch (InputMismatchException ex) {
+                App.sc.nextLine();
+                opcion = -1;
+            }
             
             switch (opcion) {
                 case 1:

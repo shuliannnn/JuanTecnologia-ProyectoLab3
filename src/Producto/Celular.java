@@ -1,5 +1,7 @@
 package Producto;
 
+import java.util.InputMismatchException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -165,8 +167,14 @@ public class Celular extends Producto implements Memorias{
             System.out.println("10. Tiene doble sim");
             System.out.println("11. Bateria(mAh)");
             System.out.println("0. Listo");
-            opcion = App.sc.nextInt();
-            App.sc.nextLine();///buffer
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+                App.sc.nextLine();
+            } catch (InputMismatchException ex) {
+                App.sc.nextLine();
+                opcion = -1;
+            }
             
             switch (opcion) {
                 case 1:
