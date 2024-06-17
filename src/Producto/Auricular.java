@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import App.App;
+import App.Menu;
 
 public class Auricular extends Audio {
     private FormatoAuricular formato;
@@ -73,6 +74,7 @@ public class Auricular extends Audio {
         int opcion;
 
         do {
+            Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
             System.out.println("Ingrese campo a modificar");
@@ -172,8 +174,8 @@ public class Auricular extends Audio {
     }
     @Override
     public String toString() {
-        return "Auricular: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
-         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono" +  (microfono ? "Si" : "No") +
+        return "Auricular: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono: " +  (microfono ? "Si" : "No") +
         " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Formato: " + getFormato() + " \n      Canal: " + getCanal() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 

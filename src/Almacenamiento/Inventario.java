@@ -67,12 +67,11 @@ public class Inventario<T extends Producto> implements ABML<T> {
 
     public void altaProducto(T e) {
         e.escanearDatosComparables();
-        boolean confirmacion;
         if (contiene(e)) {
             System.out.println("El producto ya se encontraba en el sistema");
             System.out.println("Desea modificar el stock?");
-            confirmacion = confirmar("Si", "No", "", "Saliendo...");
-            if (!confirmacion)
+            
+            if (!confirmar("Si", "No", "", "Saliendo..."))
                 return;
 
             /// vamos al objeto
@@ -94,14 +93,14 @@ public class Inventario<T extends Producto> implements ABML<T> {
             Menu.clearScreen();
             System.out.println(e);
             System.out.println("El producto quedaria cargado asi desea añadirlo al sistema?");
-            confirmacion = confirmar("Añadir", "Borrar", "Se añadió al sistema correctamente",
-                    "No se añadio al sistema");
-            Menu.systemPause();
-            if (confirmacion) {
+            
+            if (confirmar("Añadir", "Borrar", "Se añadió al sistema correctamente",
+                    "No se añadio al sistema")) {
                 e.setId(e.asignarId());
                 agregar(e);
                 Archivo.subirProducto(e);
             }
+            Menu.systemPause();
         }
     }
 
@@ -145,12 +144,13 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     }
                     if (!flag) {
                         System.out.println("No se encotro el producto");
+                        Menu.systemPause();
                         return;
                     }
                     opcion = 0;
                     break;
                 case 0:
-                    break;
+                    return;
                 default:
                     System.out.println("Por favor ingrese una opcion valida");
                     break;
@@ -160,14 +160,15 @@ public class Inventario<T extends Producto> implements ABML<T> {
         eCopia = (T) e.clone();
         eCopia.setId(e.getId());
         eCopia.modificarProducto();
+        Menu.clearScreen();
         for (T t : lista) {
             if (eCopia.equals(t) && eCopia.getId() != t.getId()) {
                 System.out.println("Ocurrio un error: La modificacion realizada es igual a un producto existente");
                 System.out.println("Se cancelaron la modificaciones");
+                Menu.systemPause();
                 return;
             }
         }
-
         System.out.println("Producto original: ");
         System.out.println(e);
         System.out.println("Producto modificado: ");
@@ -179,6 +180,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
             lista.add(eCopia);
             Archivo.modificarProducto(eCopia);
         }
+            Menu.systemPause();
     }
 
     public void bajaProducto(T e) {
@@ -187,6 +189,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
         int id;
         boolean flag = false;
         do {
+            Menu.clearScreen();
             System.out.println("¿Como desea buscar el producto?");
             System.out.println("1. ID");
             System.out.println("2. Datos principales");
@@ -228,6 +231,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     return;
                 default:
                     System.out.println("Por favor ingrese una opcion valida");
+                    Menu.systemPause();
                     break;
             }
         } while (opcion != 0);
@@ -240,6 +244,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
             lista.remove(e);
             Archivo.eliminarProducto(e);
         }
+            Menu.systemPause();
     }
 
     @SuppressWarnings("unchecked")
@@ -292,6 +297,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
 
     public void filtrarYMostrar() {
         int opcion;
+        Menu.clearScreen();
         System.out.println("Como desea filtrar: ");
         System.out.println("1. Marca");
         System.out.println("2. Stock");
@@ -301,11 +307,13 @@ public class Inventario<T extends Producto> implements ABML<T> {
         App.sc.nextLine();
         switch (opcion) {
             case 1:
+                Menu.clearScreen();
                 filtroMarca(Producto.escanearMarca());
                 Menu.systemPause();
                 Menu.clearScreen();
                 break;
             case 2:
+                Menu.clearScreen();
                 System.out.println("Mostrara los productos que tengan stock menor al valor ingresado.");
                 filtroStock(Producto.escanearStock());
                 Menu.systemPause();
@@ -315,6 +323,8 @@ public class Inventario<T extends Producto> implements ABML<T> {
                 break;
             default:
                 System.out.println("Por favor ingrese un caracter valido.");
+                Menu.systemPause();
+                Menu.clearScreen();
                 break;
         }
 

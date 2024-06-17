@@ -356,6 +356,7 @@ public abstract class Producto {
                         }
 
                     } while (opcionC != 0);
+                    break;
                 case 3:
                     do {
                         System.out.println("Audio");
@@ -382,6 +383,7 @@ public abstract class Producto {
                         }
 
                     } while (opcionA != 0);
+                    break;
                 case 4:
                     do {
                         System.out.println("Perifericos");
@@ -408,6 +410,7 @@ public abstract class Producto {
                         }
 
                     } while (opcionP != 0);
+                    break;
                 case 5:
                     opcion = 0;
                     return new Cable();

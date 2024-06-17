@@ -1,4 +1,5 @@
 package App;
+
 import Almacenamiento.*;
 import Producto.*;
 
@@ -23,11 +24,11 @@ public class Menu {
         listaT.leerInventario("teclado.json");
         listaCa.leerInventario("cable.json");
 
-        System.out.println("Bienvenido al Sistema de Stock Juan Tecnologias");
         int opcion;
         T e;
         Inventario<T> lista;
         do {
+            System.out.println("Bienvenido al Sistema de Stock Juan Tecnologias");
             System.out.println("1. Buscar producto");
             System.out.println("2. Cargar producto");
             System.out.println("3. Modificar Stock No code");
@@ -58,13 +59,12 @@ public class Menu {
                     break;
                 case 4:
                     menuFiltrado();
-                    systemPause();
                     clearScreen();
                     break;
                 case 5:
                     clearScreen();
                     System.out.println("Todos los productos");
-                    System.out.println(unificarListas()); 
+                    System.out.println(unificarListas());
                     systemPause();
                     clearScreen();
                     break;
@@ -74,7 +74,6 @@ public class Menu {
                         break;
                     lista = (Inventario<T>) obtenerLista(e);
                     lista.modificarProducto(e);
-                    clearScreen();
                     clearScreen();
                     break;
                 case 7:
@@ -101,12 +100,13 @@ public class Menu {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Producto> void menuFiltrado(){
+    public static <T extends Producto> void menuFiltrado() {
 
         int opcion;
         T e = null;
         Inventario<T> lista;
-        do{
+        do {
+            clearScreen();
             System.out.println("Donde desea aplicar los filtros: ");
             System.out.println("1. Categoria");
             System.out.println("2. Todos");
@@ -120,20 +120,24 @@ public class Menu {
                         break;
                     lista = (Inventario<T>) obtenerLista(e);
                     lista.filtrarYMostrar();
-                    break;
+                    clearScreen();
+                    return;
                 case 2:
                     Inventario<Producto> productos = new Inventario<>();
                     productos = unificarListas();
                     productos.filtrarYMostrar();
-                    break;
+                    clearScreen();
+                    return;
                 case 0:
-                    break;
+                    return;
                 default:
                     System.out.println("Por favor ingrese un caracter valido");
+                    systemPause();
+                    clearScreen();
                     break;
             }
 
-        }while(opcion != 0);
+        } while (opcion != 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -169,7 +173,7 @@ public class Menu {
         productos.leerInventario(Archivo.obtenerNombreArchivo(new Cable()));
 
         return productos;
-        
+
     }
 
     public static void clearScreen() {

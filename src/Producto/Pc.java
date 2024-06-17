@@ -6,6 +6,7 @@ import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Interfaces.Memorias;
 import App.App;
+import App.Menu;
 
 public class Pc extends Computadora implements Memorias{
 
@@ -117,6 +118,7 @@ public class Pc extends Computadora implements Memorias{
         int opcion;
 
         do {
+            Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
             System.out.println("Ingrese campo a modificar");
@@ -196,10 +198,10 @@ public class Pc extends Computadora implements Memorias{
 
     @Override
     public String toString() {
-        return "PC: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          "\n      Procesador: " + getProcesador() + " \n       RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
+        return "PC: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Procesador: " + getProcesador() + " \n      RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
             "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
-            "\n      Tiene Perifericos: " + (perifericos ? "Si" : "No") + "\n      Wifi: " + (wifi ? "Si" : "No") + "\n     Descripcion: " + getDescripcion() + '\n';
+            "\n      Tiene Perifericos: " + (perifericos ? "Si" : "No") + "\n      Wifi: " + (wifi ? "Si" : "No") + "\n      Descripcion: " + getDescripcion() + '\n';
     }
     
 	@Override

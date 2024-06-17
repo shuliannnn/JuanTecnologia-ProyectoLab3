@@ -6,13 +6,14 @@ import org.json.JSONObject;
 import Enumeradores.ColorP;
 import Excepciones.InvalidDoubleException;
 import App.App;
+import App.Menu;
 
 public class Cable extends Producto{
     private double largo;
 
     @Override
     public String toString() {
-        return "Cable: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+        return "Cable: ID: " +(getId()==0?"No asignado":getId())+ "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
           "\n      Largo: " + getLargo() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
     
@@ -90,6 +91,7 @@ public class Cable extends Producto{
         int opcion;
 
         do {
+            Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
             System.out.println("Ingrese campo a modificar");

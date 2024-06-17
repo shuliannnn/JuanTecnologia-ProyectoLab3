@@ -6,6 +6,7 @@ import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import Excepciones.InvalidIntegerException;
 import App.App;
+import App.Menu;
 
 public class Parlante extends Audio { 
     private Radios radio;
@@ -81,6 +82,7 @@ public class Parlante extends Audio {
         int opcion;
 
         do {
+            Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
             System.out.println("Ingrese campo a modificar");
@@ -152,9 +154,9 @@ public class Parlante extends Audio {
    
     @Override
     public String toString() {
-        return "Parlante: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
-         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono" +  (microfono ? "Si" : "No") +
-        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Radio: " + getRadio() + " \n      Potencia: " + getPotencia() + "\n     Descripcion: " + getDescripcion() + '\n';
+        return "Parlante: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono: " +  (microfono ? "Si" : "No") +
+        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Radio: " + getRadio() + " \n      Potencia: " + getPotencia() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
     @Override

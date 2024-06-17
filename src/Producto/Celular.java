@@ -7,6 +7,7 @@ import Enumeradores.*;
 import Excepciones.*;
 import Interfaces.Memorias;
 import App.App;
+import App.Menu;
 
 public class Celular extends Producto implements Memorias{
 
@@ -23,7 +24,11 @@ public class Celular extends Producto implements Memorias{
         boolean validInput;
         do {
             try {
-                System.out.print("Sistema Operativo: ");
+                System.out.print("Sistema Operativo ( ");
+                for (SoCelular s : SoCelular.values()) {
+                    System.out.print(s+", ");
+                }
+                System.out.print("): ");
                 soCelular = SoCelular.valueOf(App.sc.nextLine().toUpperCase());
                 validInput = true;
             } catch (IllegalArgumentException e) {
@@ -144,6 +149,7 @@ public class Celular extends Producto implements Memorias{
         int opcion;
 
         do {
+            Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
             System.out.println("Ingrese campo a modificar");
@@ -241,7 +247,7 @@ public class Celular extends Producto implements Memorias{
 
     @Override
     public String toString() {
-        return "Celular: ID: " + getId() + "\n | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+        return "Celular: ID: " + (getId()==0?"No asignado":getId()) + "\n | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n | Stock: " + getStock() +
          " | Precio: " + getPrecio() + " |" + " \n      Memoria RAM: " + getMemoriaRam() + "\n      Memoria Interna: " + getMemoriaInterna() + "\n      Pulgadas:" +  getPulgadas() +
         " \n      Doble SIM: " + (dobleSim ? "Si" : "No") + " \n      SO: " + getSo() + " \n      Bateria(mAh): " + getBateria() + "\n      Descripcion: " + getDescripcion() + '\n';
     }

@@ -205,7 +205,7 @@ public class Teclado extends Periferico{
     
     @Override
     public String toString() {
-        return "Teclado: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+        return "Teclado: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
           " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Es RGB: " + (rgb ? "Si" : "No") + "\n      Conexion: " + getConexion() + " \n      Porcentaje: " + getPorcentaje() +
           " \n      Mecanico: " + (mecanico ? "Si" : "No") + "\n      Cable Removible: " + (cableRemovible ? "Si" : "No") + "\n      Descripcion: " + getDescripcion() + '\n';
     }

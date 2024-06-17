@@ -3,6 +3,7 @@ package Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
 import App.App;
+import App.Menu;
 import Enumeradores.*;
 import Excepciones.*;
 import Interfaces.Memorias;
@@ -18,6 +19,7 @@ public class Portatil extends Computadora implements Memorias {
         int opcion;
 
         do {
+            Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
             System.out.println(this.toString() + '\n');
             System.out.println("Ingrese campo a modificar");
@@ -217,10 +219,10 @@ public class Portatil extends Computadora implements Memorias {
 
     @Override
     public String toString() {
-        return "Portatil: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          "\n      Procesador: " + getProcesador() + " \n       RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
+        return "Portatil: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Procesador: " + getProcesador() + " \n      RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
             "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
-            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n     Descripcion: " + getDescripcion() + '\n';
+            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
     /// Archivos

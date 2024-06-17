@@ -1,0 +1,19 @@
+[{
+    "descripcion": "1",
+    "pVideo": "1",
+    "tipo": "Portatil",
+    "color": "GRIS",
+    "procesador": "a",
+    "memoriaInterna": 1,
+    "nombre": "a",
+    "marca": "a",
+    "mother": "1",
+    "ethernet": false,
+    "precio": 1,
+    "microfono": false,
+    "bluetooth": true,
+    "pulgadas": 1,
+    "memoriaRam": 1,
+    "id": 15,
+    "stock": 1
+}]
