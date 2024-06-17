@@ -1,7 +1,7 @@
 package App;
+
 import Almacenamiento.Inventario;
 import Producto.*;
-
 
 public class Menu {
     static Inventario<Celular> listaCe = new Inventario<>();
@@ -12,7 +12,6 @@ public class Menu {
     static Inventario<Teclado> listaT = new Inventario<>();
     static Inventario<Mouse> listaM = new Inventario<>();
     static Inventario<Cable> listaCa = new Inventario<>();
-        
 
     @SuppressWarnings("unchecked")
     public static <T extends Producto> void menu() {
@@ -46,21 +45,28 @@ public class Menu {
                     break;
                 case 2:
                     e = (T) Producto.elegirCategoria();
-                    if(e == null) break;
+                    if (e == null)
+                        break;
                     lista = (Inventario<T>) obtenerLista(e);
                     lista.altaProducto(e);
                     clearScreen();
                     break;
                 case 3:
                     e = (T) Producto.elegirCategoria();
-                    if(e == null) break;
+                    if (e == null)
+                        break;
                     lista = (Inventario<T>) obtenerLista(e);
                     lista.modificarProducto(e);
                     clearScreen();
                     break;
                 case 4:
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null)
+                        break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    lista.bajaProducto(e);
                     clearScreen();
-                    
+
                     break;
                 case 5:
                     clearScreen();
@@ -68,7 +74,8 @@ public class Menu {
                     break;
                 case 6:
                     e = (T) Producto.elegirCategoria();
-                    if(e == null) break;
+                    if (e == null)
+                        break;
                     lista = (Inventario<T>) obtenerLista(e);
                     System.out.println(lista);
                     Menu.systemPause();
@@ -90,15 +97,23 @@ public class Menu {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Producto> Inventario<T> obtenerLista(T e){
-        if(e instanceof Celular) return  (Inventario<T>)listaCe;
-        if(e instanceof Auricular) return (Inventario<T>)listaA;
-        if(e instanceof Parlante) return (Inventario<T>)listaPa;
-        if(e instanceof Mouse) return (Inventario<T>)listaM;
-        if(e instanceof Pc) return (Inventario<T>)listaPc;
-        if(e instanceof Portatil) return (Inventario<T>)listaPo;
-        if(e instanceof Teclado) return (Inventario<T>)listaT;
-        if(e instanceof Cable) return (Inventario<T>)listaCa;
+    public static <T extends Producto> Inventario<T> obtenerLista(T e) {
+        if (e instanceof Celular)
+            return (Inventario<T>) listaCe;
+        if (e instanceof Auricular)
+            return (Inventario<T>) listaA;
+        if (e instanceof Parlante)
+            return (Inventario<T>) listaPa;
+        if (e instanceof Mouse)
+            return (Inventario<T>) listaM;
+        if (e instanceof Pc)
+            return (Inventario<T>) listaPc;
+        if (e instanceof Portatil)
+            return (Inventario<T>) listaPo;
+        if (e instanceof Teclado)
+            return (Inventario<T>) listaT;
+        if (e instanceof Cable)
+            return (Inventario<T>) listaCa;
         return null;
     }
 

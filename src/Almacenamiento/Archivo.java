@@ -66,6 +66,30 @@ public abstract class Archivo {
         return false;
     }
 
+    public static boolean eliminarProducto(Producto p){
+        String archivo = obtenerNombreArchivo(p);
+        JSONArray productos = leerArchivoProducto(archivo);
+        JSONObject prod = new JSONObject();
+        Producto aux;
+
+        try{
+            for (int i = 0; i < productos.length(); i++) {
+                prod = productos.getJSONObject(i);
+                aux = fromJSON(prod);
+                if(aux.getId() == p.getId()){
+                    productos.remove(i);
+                    break;
+                }
+            }
+            uploadJSON(productos, archivo);
+            return true;
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static Producto[] leerListaProducto(String archivo){
         JSONArray productos = leerArchivoProducto(archivo);
         Producto[] array = new Producto[productos.length()];

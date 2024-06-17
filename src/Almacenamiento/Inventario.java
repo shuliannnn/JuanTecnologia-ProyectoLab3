@@ -168,6 +168,68 @@ public class Inventario<T extends Producto> implements ABML<T> {
         }
     }
 
+
+    public void bajaProducto(T e) {
+
+        int opcion;
+        int id;
+        boolean flag = false;
+        do {
+            System.out.println("¿Como desea buscar el producto?");
+            System.out.println("1. ID");
+            System.out.println("2. Datos principales");
+            System.out.println("0. Salir");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();/// buffer
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese un id: ");
+                    id = App.sc.nextInt();
+                    App.sc.nextLine();
+                    Menu.clearScreen();
+
+                    e = buscar(id);
+                    if (e == null) {
+                        System.out.println("No se encontro el producto");
+                        Menu.systemPause();
+                        return;
+                    }
+                    opcion = 0;
+                    break;
+                case 2:
+                    System.out.println("Ingrese datos principales");
+                    e.escanearDatosComparables();
+                    for (T t : lista) {
+                        if (t.equals(e)) {
+                            e = t;
+                            flag = true;
+                        }
+                    }
+                    if (!flag) {
+                        System.out.println("No se encotro el producto");
+                        Menu.systemPause();
+                        return;
+                    }
+                    opcion = 0;
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Por favor ingrese una opcion valida");
+                    break;
+            }
+        } while (opcion != 0);
+
+        System.out.println("Producto Encontrado");
+        System.out.println(e);
+        System.out.println("Desea eliminarlo definitivamente del sistema?");
+        if (confirmar("Si", "No", "Producto eliminado correctamente",
+                "No se elimino")) { // Confirmar
+            lista.remove(e);
+            Archivo.eliminarProducto(e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public boolean leerInventario(String archivo) {
 
