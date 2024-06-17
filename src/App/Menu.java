@@ -1,6 +1,5 @@
 package App;
-
-import Almacenamiento.Inventario;
+import Almacenamiento.*;
 import Producto.*;
 
 public class Menu {
@@ -31,11 +30,13 @@ public class Menu {
         do {
             System.out.println("1. Buscar producto");
             System.out.println("2. Cargar producto");
-            System.out.println("3. Modificar producto");
-            System.out.println("4. Modificar Stock");
-            System.out.println("5. Baja de producto");
-            System.out.println("6. Mostrar Lista");
+            System.out.println("3. Modificar Stock No code");
+            System.out.println("4. Filtrar producto");
+            System.out.println("5. Mostrar Productos");/// muestra todo
+            System.out.println("6. Modificar producto");
+            System.out.println("7. Baja de producto");
             System.out.println("0. Salir del programa");
+            System.out.print("-->");
             opcion = App.sc.nextInt();
             App.sc.nextLine();
             switch (opcion) {
@@ -51,34 +52,37 @@ public class Menu {
                     lista.altaProducto(e);
                     clearScreen();
                     break;
+
                 case 3:
-                    e = (T) Producto.elegirCategoria();
-                    if (e == null)
-                        break;
-                    lista = (Inventario<T>) obtenerLista(e);
-                    lista.modificarProducto(e);
-                    clearScreen();
+                    /// modificar stock
                     break;
                 case 4:
-                    e = (T) Producto.elegirCategoria();
-                    if (e == null)
-                        break;
-                    lista = (Inventario<T>) obtenerLista(e);
-                    lista.bajaProducto(e);
+                    menuFiltrado();
+                    systemPause();
                     clearScreen();
-
                     break;
                 case 5:
                     clearScreen();
-
+                    System.out.println("Todos los productos");
+                    System.out.println(unificarListas()); 
+                    systemPause();
+                    clearScreen();
                     break;
                 case 6:
                     e = (T) Producto.elegirCategoria();
                     if (e == null)
                         break;
                     lista = (Inventario<T>) obtenerLista(e);
-                    System.out.println(lista);
-                    Menu.systemPause();
+                    lista.modificarProducto(e);
+                    clearScreen();
+                    clearScreen();
+                    break;
+                case 7:
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null)
+                        break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    lista.bajaProducto(e);
                     clearScreen();
                     break;
                 case 0:
@@ -94,6 +98,42 @@ public class Menu {
             }
         } while (opcion != 0);
 
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Producto> void menuFiltrado(){
+
+        int opcion;
+        T e = null;
+        Inventario<T> lista;
+        do{
+            System.out.println("Donde desea aplicar los filtros: ");
+            System.out.println("1. Categoria");
+            System.out.println("2. Todos");
+            System.out.println("0. Atras");
+            opcion = App.sc.nextInt();
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null)
+                        break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    lista.filtrarYMostrar();
+                    break;
+                case 2:
+                    Inventario<Producto> productos = new Inventario<>();
+                    productos = unificarListas();
+                    productos.filtrarYMostrar();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Por favor ingrese un caracter valido");
+                    break;
+            }
+
+        }while(opcion != 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -115,6 +155,21 @@ public class Menu {
         if (e instanceof Cable)
             return (Inventario<T>) listaCa;
         return null;
+    }
+
+    public static Inventario<Producto> unificarListas() {
+        Inventario<Producto> productos = new Inventario<>();
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Celular()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Auricular()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Parlante()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Teclado()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Mouse()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Pc()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Portatil()));
+        productos.leerInventario(Archivo.obtenerNombreArchivo(new Cable()));
+
+        return productos;
+        
     }
 
     public static void clearScreen() {

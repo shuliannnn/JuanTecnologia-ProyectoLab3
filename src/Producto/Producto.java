@@ -59,7 +59,7 @@ public abstract class Producto {
         stock += input;
     }
 
-    public String escanearNombre() {
+    public static String escanearNombre() {
         String nombre = null;
         boolean validInput;
         do {
@@ -82,7 +82,7 @@ public abstract class Producto {
         return nombre;
     }
 
-    public String escanearMarca() {
+    public static String escanearMarca() {
         String marca = null;
         boolean validInput;
         do {
@@ -105,7 +105,7 @@ public abstract class Producto {
         return marca;
     }
 
-    public ColorP escanearColor() {
+    public static ColorP escanearColor() {
         ColorP colorP = null;
         boolean validInput;
         do {
@@ -125,7 +125,7 @@ public abstract class Producto {
         return colorP;
     }
 
-    protected String escanearDescripcion() {
+    protected static String escanearDescripcion() {
         String descripcion = null;
         boolean validInput;
         do {
@@ -148,7 +148,7 @@ public abstract class Producto {
         return descripcion;
     }
 
-    public int escanearStock() {
+    public static int escanearStock() {
         int stock = -1;
         boolean validInput;
         do {
@@ -172,7 +172,7 @@ public abstract class Producto {
         return stock;
     }
 
-    public double escanearPrecio() {
+    public static double escanearPrecio() {
         double precio = -1;
         boolean validInput;
         do {
@@ -196,7 +196,7 @@ public abstract class Producto {
         return precio;
     }
 
-    protected boolean isValidInput(String cadena) {
+    protected static boolean isValidInput(String cadena) {
         // Permite letras, números, puntos, comas, guiones medios y espacios
         return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
     }

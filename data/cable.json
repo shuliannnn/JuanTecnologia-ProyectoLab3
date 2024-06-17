@@ -1,7 +1,7 @@
 [
     {
         "descripcion": "es un cable muy interasante",
-        "marca": "c",
+        "marca": "Sanson",
         "tipo": "Cable",
         "precio": 100,
         "color": "ROJO",
@@ -20,5 +20,16 @@
         "id": 9,
         "stock": 7,
         "nombre": "Cable usb"
+    },
+    {
+        "descripcion": "das",
+        "marca": "Sanson",
+        "tipo": "Cable",
+        "precio": 123,
+        "color": "NEGRO",
+        "largo": 1,
+        "id": 10,
+        "stock": 2,
+        "nombre": "Cable USB-C"
     }
 ]

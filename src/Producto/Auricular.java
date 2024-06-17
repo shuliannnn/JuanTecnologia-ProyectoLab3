@@ -11,7 +11,7 @@ public class Auricular extends Audio {
     private FormatoAuricular formato;
     private CanalesAudio canal;
     
-    public FormatoAuricular escanearFormato(){
+    public static FormatoAuricular escanearFormato(){
         FormatoAuricular formato= null;
         boolean validInput;
         do {
@@ -40,7 +40,7 @@ public class Auricular extends Audio {
         return formato;
     }
     
-    public CanalesAudio escanearCanal(){
+    public static CanalesAudio escanearCanal(){
         CanalesAudio canal= null;
         boolean validInput;
         do {
@@ -172,9 +172,9 @@ public class Auricular extends Audio {
     }
     @Override
     public String toString() {
-        return "Auricular:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+        return "Auricular: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
          " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono" +  (microfono ? "Si" : "No") +
-        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Formato: " + getFormato() + " \n      Canal: " + getCanal() + "\n     Descripcion" + getDescripcion();
+        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Formato: " + getFormato() + " \n      Canal: " + getCanal() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
     

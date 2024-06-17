@@ -12,8 +12,8 @@ public class Cable extends Producto{
 
     @Override
     public String toString() {
-        return "Cable:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          "\n       Largo: " + getLargo() + "\n       Descripcion: " + getDescripcion();
+        return "Cable: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Largo: " + getLargo() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
     
     @Override
@@ -59,7 +59,7 @@ public class Cable extends Producto{
         precio = escanearPrecio();
     }
 
-    public double escanearLargo(){
+    public static double escanearLargo(){
         double largo = -1;
         boolean validInput;
         do {

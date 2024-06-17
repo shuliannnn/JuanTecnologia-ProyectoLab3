@@ -196,10 +196,10 @@ public class Pc extends Computadora implements Memorias{
 
     @Override
     public String toString() {
-        return "PC:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+        return "PC: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
           "\n      Procesador: " + getProcesador() + " \n       RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
             "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
-            "\n      Tiene Perifericos: " + (perifericos ? "Si" : "No") + "\n      Wifi: " + (wifi ? "Si" : "No") + "\n     Descripcion: " + getDescripcion();
+            "\n      Tiene Perifericos: " + (perifericos ? "Si" : "No") + "\n      Wifi: " + (wifi ? "Si" : "No") + "\n     Descripcion: " + getDescripcion() + '\n';
     }
     
 	@Override

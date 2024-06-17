@@ -15,12 +15,12 @@ public class Mouse extends Periferico{
     
     @Override
     public String toString() {
-        return "Mouse:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Es RGB: " + (rgb ? "Si" : "No") + "\n      Conexion: " + getConexion() + " \n       DPI: " + getDpi() +
-          " \n      Sensor: " + getConexion() + "\n     Descripcion: " + getDescripcion();
+        return "Mouse: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Es RGB: " + (rgb ? "Si" : "No") + "\n      Conexion: " + getConexion() + " \n      DPI: " + getDpi() +
+          " \n      Sensor: " + getConexion() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
     
-    public int escanearDpi(){
+    public static int escanearDpi(){
         int dpi = -1;
         boolean validInput;
         do {
@@ -45,7 +45,7 @@ public class Mouse extends Periferico{
         return dpi;
     }
     
-    public Sensores escanearSensor(){
+    public static Sensores escanearSensor(){
         Sensores sensor= null;
         boolean validInput;
         do {

@@ -18,7 +18,7 @@ public class Celular extends Producto implements Memorias{
     private int bateria;
 
     
-    public SoCelular escanearSo(){
+    public static SoCelular escanearSo(){
         SoCelular soCelular = null;
         boolean validInput;
         do {
@@ -35,7 +35,7 @@ public class Celular extends Producto implements Memorias{
         return soCelular;
     }
     
-    public boolean escanearDobleSim(){
+    public static boolean escanearDobleSim(){
         char valor;
         boolean validInput = false;
         do {
@@ -65,7 +65,7 @@ public class Celular extends Producto implements Memorias{
     }
 
 
-    public int escanearBateria(){
+    public static int escanearBateria(){
         int bateria = -1;
         boolean validInput = false;
         do {
@@ -91,7 +91,7 @@ public class Celular extends Producto implements Memorias{
     }
 
 
-    public double escanearPulgadas(){
+    public static double escanearPulgadas(){
         double pulgadas = -1;
         boolean validInput = false;
         do {
@@ -241,9 +241,9 @@ public class Celular extends Producto implements Memorias{
 
     @Override
     public String toString() {
-        return "Celular:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+        return "Celular: ID: " + getId() + "\n | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
          " | Precio: " + getPrecio() + " |" + " \n      Memoria RAM: " + getMemoriaRam() + "\n      Memoria Interna: " + getMemoriaInterna() + "\n      Pulgadas:" +  getPulgadas() +
-        " \n      Doble SIM: " + (dobleSim ? "Si" : "No") + " \n      SO: " + getSo() + " \n      Bateria()mAh: " + getBateria() + "\n     Descripcion" + getDescripcion();
+        " \n      Doble SIM: " + (dobleSim ? "Si" : "No") + " \n      SO: " + getSo() + " \n      Bateria(mAh): " + getBateria() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
     

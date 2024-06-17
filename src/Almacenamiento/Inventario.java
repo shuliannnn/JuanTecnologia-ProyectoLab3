@@ -1,6 +1,7 @@
 package Almacenamiento;
 
 import java.util.LinkedHashSet;
+
 import Producto.Producto;
 import Interfaces.ABML;
 import App.App;
@@ -10,6 +11,10 @@ public class Inventario<T extends Producto> implements ABML<T> {
     private LinkedHashSet<T> lista = new LinkedHashSet<>();
 
     public Inventario() {
+    }
+
+    public boolean estaVacia() {
+        return lista.isEmpty();
     }
 
     public boolean contiene(T e) {
@@ -50,6 +55,14 @@ public class Inventario<T extends Producto> implements ABML<T> {
 
     public boolean agregar(T e) {
         return lista.add(e);
+    }
+
+    public LinkedHashSet<T> listar(){
+        return lista;
+    }
+
+    public int size(){
+        return lista.size();
     }
 
     public void altaProducto(T e) {
@@ -168,7 +181,6 @@ public class Inventario<T extends Producto> implements ABML<T> {
         }
     }
 
-
     public void bajaProducto(T e) {
 
         int opcion;
@@ -213,7 +225,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     opcion = 0;
                     break;
                 case 0:
-                    break;
+                    return;
                 default:
                     System.out.println("Por favor ingrese una opcion valida");
                     break;
@@ -278,6 +290,54 @@ public class Inventario<T extends Producto> implements ABML<T> {
         return contenido;
     }
 
+    public void filtrarYMostrar() {
+        int opcion;
+        System.out.println("Como desea filtrar: ");
+        System.out.println("1. Marca");
+        System.out.println("2. Stock");
+        System.out.println("0. Atras");
+        System.out.print("-->");
+        opcion = App.sc.nextInt();
+        App.sc.nextLine();
+        switch (opcion) {
+            case 1:
+                filtroMarca(Producto.escanearMarca());
+                Menu.systemPause();
+                Menu.clearScreen();
+                break;
+            case 2:
+                System.out.println("Mostrara los productos que tengan stock menor al valor ingresado.");
+                filtroStock(Producto.escanearStock());
+                Menu.systemPause();
+                Menu.clearScreen();
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("Por favor ingrese un caracter valido.");
+                break;
+        }
+
+    }
+
+    public void filtroMarca(String marca) {
+        System.out.println(marca + ": ");     
+        for (T t : lista) {
+            if (t.getMarca().equalsIgnoreCase(marca)) {
+                System.out.println(t);
+            }
+        }
+    }
+    
+    public void filtroStock(int stock) {
+        System.out.println("Valores con stock menor o igual a " + stock + ":");
+        for (T l : lista) {
+            if (l.getStock() <= stock) {
+                System.out.println(l);
+            }
+        }
+    }
+
     public String toStringCorto() {
         String contenido = "";
         for (T e : lista) {
@@ -311,4 +371,5 @@ public class Inventario<T extends Producto> implements ABML<T> {
 
         return contenido.toString();
     }
+
 }

@@ -217,10 +217,10 @@ public class Portatil extends Computadora implements Memorias {
 
     @Override
     public String toString() {
-        return "Portatil:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+        return "Portatil: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
           "\n      Procesador: " + getProcesador() + " \n       RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
             "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
-            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n     Descripcion: " + getDescripcion();
+            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n     Descripcion: " + getDescripcion() + '\n';
     }
 
     /// Archivos

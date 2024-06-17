@@ -152,9 +152,9 @@ public class Parlante extends Audio {
    
     @Override
     public String toString() {
-        return "Parlante:\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
+        return "Parlante: ID: " + getId() + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
          " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono" +  (microfono ? "Si" : "No") +
-        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Radio: " + getRadio() + " \n      Potencia: " + getPotencia() + "\n     Descripcion" + getDescripcion();
+        " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Radio: " + getRadio() + " \n      Potencia: " + getPotencia() + "\n     Descripcion: " + getDescripcion() + '\n';
     }
 
     @Override
