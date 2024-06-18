@@ -1,28 +1,22 @@
 package Producto;
 
 import java.util.InputMismatchException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import Enumeradores.ColorP;
 import Excepciones.InvalidDoubleException;
-import App.App;
-import App.Menu;
+import App.*;
 
 public class Cable extends Producto{
     private double largo;
 
-    @Override
-    public String toString() {
-        return "Cable: ID: " +(getId()==0?"No asignado":getId())+ "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          "\n      Largo: " + getLargo() + "\n      Descripcion: " + getDescripcion() + '\n';
-    }
+    
+    /// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
     
     @Override
-    public void escanearDatosComparables() {
+    public void escanearDatosComparables(String print) {
         ///en producto
-        System.out.println("Cargando cable: ");
+        System.out.println(print + " cable:");
         marca = escanearMarca();
         nombre = escanearNombre();
         color = escanearColor();
@@ -31,13 +25,11 @@ public class Cable extends Producto{
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        long temp;
-        temp = Double.doubleToLongBits(largo);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
+    public void escanearDatosEspecificos() {
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
     }
 
     @Override
@@ -54,39 +46,6 @@ public class Cable extends Producto{
         return true;
     }
 
-    @Override
-    public void escanearDatosEspecificos() {
-        ///en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
-    }
-
-    public static double escanearLargo(){
-        double largo = -1;
-        boolean validInput;
-        do {
-            try {
-                System.out.print("Largo del cable(metros, Ej: 1,5): ");
-                if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
-                    throw new InvalidDoubleException("El largo debe ser un número.");
-                }
-                largo = App.sc.nextDouble();
-                App.sc.nextLine(); // Consume newline
-                if (largo <= 0) {
-                    throw new InvalidDoubleException("El largo debe ser un número positivo.");
-                }
-                validInput = true;
-            } catch (InvalidDoubleException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-
-         
-        return largo;
-    }
 
     @Override
     public void modificarProducto(){
@@ -153,7 +112,41 @@ public class Cable extends Producto{
     public Cable clone() {
         return new Cable(nombre, marca, precio, descripcion, color, stock, largo);
     }
+
+    @Override
+    public String toString() {
+        return "Cable: ID: " +(getId()==0?"No asignado":getId())+ "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Largo: " + getLargo() + "\n      Descripcion: " + getDescripcion() + '\n';
+    }
     
+    
+    /// Scanners -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static double escanearLargo(){
+        double largo = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Largo del cable(metros, Ej: 1,5): ");
+                if (!App.sc.hasNextDouble()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidDoubleException("El largo debe ser un número.");
+                }
+                largo = App.sc.nextDouble();
+                App.sc.nextLine(); // Consume newline
+                if (largo <= 0) {
+                    throw new InvalidDoubleException("El largo debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidDoubleException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+
+         
+        return largo;
+    }
 
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     

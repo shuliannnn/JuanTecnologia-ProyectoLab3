@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.LinkedHashSet;
 
 import Producto.Producto;
+import Registros.Historial;
 import Interfaces.ABML;
 import App.App;
 import App.Menu;
@@ -13,76 +14,31 @@ public class Inventario<T extends Producto> implements ABML<T> {
 
     public Inventario() {
     }
+    
+    
+    //// Metodos Principales  ---------------------------------------------------------------------------------------------------------------------------------
 
-    public boolean estaVacia() {
-        return lista.isEmpty();
-    }
-
-    public boolean contiene(T e) {
-        if (lista.isEmpty())
-            return false;
-
-        for (T l : lista) {
-            if (l.equals(e))
-                return true;
-        }
-        return false;
-    }
-
-    public T eliminar(T e) {
-        T eliminado = null;
-        for (T l : lista) {
-            if (l.equals(e))
-                eliminado = e;
-        }
-        return lista.remove(eliminado) ? eliminado : null;
-    }
-
-    public T buscar(String nombre) {
-        for (T t : lista) {
-            if (t.getNombre().equals(nombre))
-                return t;
-        }
-        return null;
-    }
-
-    public T buscar(int id) {
-        for (T t : lista) {
-            if (t.getId() == id)
-                return t;
-        }
-        return null;
-    }
-
-    public boolean agregar(T e) {
-        return lista.add(e);
-    }
-
-    public LinkedHashSet<T> listar() {
-        return lista;
-    }
-
-    public int size() {
-        return lista.size();
-    }
-
+    /// Alta
+    
     public void altaProducto(T e) {
-        e.escanearDatosComparables();
+        e.escanearDatosComparables("Cargando");
         if (contiene(e)) {
 
             /// vamos al objeto
             for (T t : lista) {
                 if (t.equals(e)) {
+                    Menu.clearScreen();
                     System.out.println("El producto ya se encontraba en el sistema");
                     System.out.println("Desea modificar el stock?");
-                    Menu.clearScreen();
                     System.out.println(t);
                     if (!confirmar("Si", "No", "", "Saliendo..."))
                         return;
+                    int stockViejo = t.getStock();
                     t.modificarStock();
                     Archivo.modificarProducto(t);
                     System.out.println("Modificado correctamente.");
                     System.out.println("Stock actual: " + t.getStock());
+                    Historial.agregarRegistroModificacionStock(t, stockViejo);
                     Menu.systemPause();
                     return;
                 }
@@ -99,10 +55,13 @@ public class Inventario<T extends Producto> implements ABML<T> {
                 e.setId(e.asignarId());
                 agregar(e);
                 Archivo.subirProducto(e);
+                Historial.agregarRegistroAlta(e);
             }
             Menu.systemPause();
         }
     }
+
+    /// Modificar
 
     @SuppressWarnings("unchecked")
     public void modificarProducto(T e) {
@@ -141,7 +100,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     break;
                 case 2:
                     System.out.println("Ingrese datos principales");
-                    e.escanearDatosComparables();
+                    e.escanearDatosComparables("Buscando");
                     for (T t : lista) {
                         if (t.equals(e)) {
                             e = t;
@@ -186,9 +145,12 @@ public class Inventario<T extends Producto> implements ABML<T> {
             lista.remove(e);
             lista.add(eCopia);
             Archivo.modificarProducto(eCopia);
+            Historial.agregarRegistroModificacion(e, eCopia);
         }
         Menu.systemPause();
     }
+
+    //// BAJA
 
     public void bajaProducto(T e) {
 
@@ -229,7 +191,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     break;
                 case 2:
                     System.out.println("Ingrese datos principales");
-                    e.escanearDatosComparables();
+                    e.escanearDatosComparables("Buscando");
                     for (T t : lista) {
                         if (t.equals(e)) {
                             e = t;
@@ -259,10 +221,14 @@ public class Inventario<T extends Producto> implements ABML<T> {
                 "No se elimino")) { // Confirmar
             lista.remove(e);
             Archivo.eliminarProducto(e);
+            Historial.agregarRegistroBaja(e);
         }
         Menu.systemPause();
     }
 
+    
+    /// Modificar Solo Stock
+    
     public void modificarStock(T e) {
 
         int opcion;
@@ -300,7 +266,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     break;
                 case 2:
                     System.out.println("Ingrese datos principales");
-                    e.escanearDatosComparables();
+                    e.escanearDatosComparables("Buscando");
                     if (!contiene(e)) {
                         System.out.println("No se encontro el producto");
                         Menu.systemPause();
@@ -331,16 +297,20 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     Menu.clearScreen();
                     return;
                 }
+                int stockViejo = t.getStock();
                 t.modificarStock();
                 Archivo.modificarProducto(t);
                 System.out.println("Modificado correctamente.");
                 System.out.println("Stock actual: " + t.getStock());
+                Historial.agregarRegistroModificacionStock(e, stockViejo);
                 Menu.systemPause();
                 Menu.clearScreen();
                 return;
             }
         }
     }
+
+    /// Buscar ID o comps
 
     public void buscarProducto(T e) {
         int opcion;
@@ -376,7 +346,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     return;
                 case 2:
                     System.out.println("Ingrese datos principales");
-                    e.escanearDatosComparables();
+                    e.escanearDatosComparables("Buscando");
                     for (T t : lista) {
                         if (t.equals(e)) {
                             System.out.println(t);
@@ -399,6 +369,62 @@ public class Inventario<T extends Producto> implements ABML<T> {
         } while (opcion != 0);
     }
 
+    /// ABML  ---------------------------------------------------------------------------------------------------------
+
+    public boolean agregar(T e) {
+        return lista.add(e);
+    }
+
+    public T buscar(String nombre) {
+        for (T t : lista) {
+            if (t.getNombre().equals(nombre))
+                return t;
+        }
+        return null;
+    }
+
+    public T buscar(int id) {
+        for (T t : lista) {
+            if (t.getId() == id)
+                return t;
+        }
+        return null;
+    }
+
+    public T eliminar(T e) {
+        T eliminado = null;
+        for (T l : lista) {
+            if (l.equals(e))
+                eliminado = e;
+        }
+        return lista.remove(eliminado) ? eliminado : null;
+    }
+
+    public LinkedHashSet<T> listar() {
+        return lista;
+    }
+
+/// Metodos Varios de Inventario
+    
+    public boolean estaVacia() {
+        return lista.isEmpty();
+    }
+
+    public boolean contiene(T e) {
+        if (lista.isEmpty())
+            return false;
+
+        for (T l : lista) {
+            if (l.equals(e))
+                return true;
+        }
+        return false;
+    }
+
+    public int size() {
+        return lista.size();
+    }
+
     @SuppressWarnings("unchecked")
     public boolean leerInventario(String archivo) {
 
@@ -416,6 +442,17 @@ public class Inventario<T extends Producto> implements ABML<T> {
         return true;
     }
 
+    @Override
+    public String toString() {
+        String contenido = "";
+        for (T e : lista) {
+            contenido += e.toString();
+        }
+        return contenido;
+    }
+
+
+    /// para mi deberia ir en menu(? rulo
     private boolean confirmar(String entradaT, String entradaF, String resT, String resF) {
         int opcion;
         do {
@@ -443,14 +480,8 @@ public class Inventario<T extends Producto> implements ABML<T> {
         return false;
     }
 
-    @Override
-    public String toString() {
-        String contenido = "";
-        for (T e : lista) {
-            contenido += e.toString();
-        }
-        return contenido;
-    }
+
+/// Metodos de Filtrado ------------------------------------------------------------------------------------------------------------------
 
     public void filtrarYMostrar() {
         int opcion;
@@ -511,38 +542,5 @@ public class Inventario<T extends Producto> implements ABML<T> {
         }
     }
 
-    public String toStringCorto() {
-        String contenido = "";
-        for (T e : lista) {
-            contenido += e.getId() + "  |  " + e.getMarca() + "  |  " + e.getNombre() + "  |  " + e.getColor() + "\n";
-        }
-        return contenido;
-    }
-
-    public String toStringSuperFachero() {
-        // Anchos fijos para cada columna
-        int col1Width = 5;
-        int col2Width = 15;
-        int col3Width = 20;
-        int col4Width = 10;
-
-        StringBuilder contenido = new StringBuilder();
-
-        // Encabezados
-        contenido.append(String.format(
-                "%-" + col1Width + "s | %-" + col2Width + "s | %-" + col3Width + "s | %-" + col4Width + "s%n",
-                "ID", "Marca", "Nombre", "Color"));
-        contenido.append(new String(new char[col1Width + col2Width + col3Width + col4Width + 12]).replace('\0', '-'))
-                .append("\n");
-
-        // Datos
-        for (T e : lista) {
-            contenido.append(String.format(
-                    "%-" + col1Width + "s | %-" + col2Width + "s | %-" + col3Width + "s | %-" + col4Width + "s%n",
-                    e.getId(), e.getMarca(), e.getNombre(), e.getColor()));
-        }
-
-        return contenido.toString();
-    }
 
 }

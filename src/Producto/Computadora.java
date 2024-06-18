@@ -14,20 +14,7 @@ public abstract class Computadora extends Producto{
     protected boolean bluetooth;
     protected String mother;
     
-
-    @Override
-    public String toString() {
-        return "Computadora [procesador=" + procesador + ", memoriaRam=" + memoriaRam + ", memoriaInterna="
-                + memoriaInterna + ", pVideo=" + pVideo + ", bluetooth=" + bluetooth + ", mother=" + mother + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + memoriaInterna;
-        return result;
-    }
+ /// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public boolean equals(Object obj) {
@@ -42,6 +29,8 @@ public abstract class Computadora extends Producto{
             return false;
         return true;
     }
+
+/// Scanners -----------------------------------------------------------------------------------------------------------------
 
     public String escanearProcesador(){
         String procesador = null;

@@ -4,8 +4,13 @@ import java.util.InputMismatchException;
 
 import Almacenamiento.*;
 import Producto.*;
+import Registros.Historial;
 
 public class Menu {
+    
+
+/// Listas de productos ------------------------------------------------------------------------------------------------------------------------------------------------
+
     static Inventario<Celular> listaCe = new Inventario<>();
     static Inventario<Parlante> listaPa = new Inventario<>();
     static Inventario<Pc> listaPc = new Inventario<>();
@@ -14,7 +19,9 @@ public class Menu {
     static Inventario<Teclado> listaT = new Inventario<>();
     static Inventario<Mouse> listaM = new Inventario<>();
     static Inventario<Cable> listaCa = new Inventario<>();
-
+    
+/// Menu Principal ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     @SuppressWarnings("unchecked")
     public static <T extends Producto> void menu() {
         listaCe.leerInventario("celular.json");
@@ -25,6 +32,7 @@ public class Menu {
         listaM.leerInventario("mouse.json");
         listaT.leerInventario("teclado.json");
         listaCa.leerInventario("cable.json");
+        Historial.leerArchivo();
 
         int opcion;
         T e;
@@ -38,6 +46,7 @@ public class Menu {
             System.out.println("5. Mostrar Productos");/// muestra todo
             System.out.println("6. Modificar producto");
             System.out.println("7. Baja de producto");
+            System.out.println("8. Mostral el historial de cambios");
             System.out.println("0. Salir del programa");
             System.out.print("-->");
             try {
@@ -97,6 +106,12 @@ public class Menu {
                     lista.bajaProducto(e);
                     clearScreen();
                     break;
+                case 8:
+                    System.out.println("Historial de todos los movimientos en el sistema");
+                    Historial.mostrarInvertido();
+                    systemPause();
+                    clearScreen();
+                    break;
                 case 0:
                     System.out.println("Saliendo....");
                     systemPause();
@@ -112,6 +127,9 @@ public class Menu {
 
     }
 
+    
+/// Menu filtrado Marca y Stock ----------------------------------------------------------------------------------------------------------------------------------
+    
     @SuppressWarnings("unchecked")
     public static <T extends Producto> void menuFiltrado() {
 
@@ -158,6 +176,8 @@ public class Menu {
         } while (opcion != 0);
     }
 
+/// Manipulacion de listas ----------------------------------------------------------------------------------------------------------------------------------------
+   
     @SuppressWarnings("unchecked")
     public static <T extends Producto> Inventario<T> obtenerLista(T e) {
         if (e instanceof Celular)
@@ -194,6 +214,10 @@ public class Menu {
 
     }
 
+    
+    
+//// Comandos de Consola ----------------------------------------------------------------------------------------------------------------------
+    
     public static void clearScreen() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();

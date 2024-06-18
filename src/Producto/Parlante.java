@@ -1,81 +1,35 @@
 package Producto;
 import java.util.InputMismatchException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import Excepciones.InvalidIntegerException;
-import App.App;
-import App.Menu;
+import App.*;
 
 public class Parlante extends Audio { 
     private Radios radio;
     private short potencia;
 
-    public Radios escanearRadio(){
-        Radios radio= null;
-        boolean validInput;
-        do {
-            try {
-                System.out.println("Radios disponibles: ");
-                for (Radios s : Radios.values()) {
-                    System.out.print(s+", ");
-                }
-                
-                System.out.print("Radio: ");
-                String input = App.sc.nextLine().trim().toUpperCase();
-                
-                try {
-                    radio = Radios.valueOf(input);
-                    validInput = true;
-                } catch (IllegalArgumentException e) {
-                    throw new InvalidEnumException("Radio inválida. Por favor, ingrese un valor válido.");
-                }
-            } catch (InvalidEnumException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-        
-         
-        return radio;
+    ///  Implementaciones Metodos Abstractos -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void escanearDatosEspecificos() {
+        ///en audio
+        resistencia = escanearResistencia();
+        microfono = escanearMicrofono();
+        /// auricular
+        potencia = escanearPotencia();
+        radio = escanearRadio();
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
     }
-
-    public short escanearPotencia(){
-        short potencia = -1;
-        boolean validInput;
-        do {
-            try {
-                System.out.print("Potencia (W): ");
-                if (!App.sc.hasNextShort()) {
-                    App.sc.next(); // Clear invalid input
-                    throw new InvalidIntegerException("La potencia debe ser un número entero.");
-                }
-                potencia = App.sc.nextShort();
-                App.sc.nextLine(); // Consume newline
-                if (potencia <= 0) {
-                    throw new InvalidIntegerException("La potencia debe ser un número positivo.");
-                }
-                validInput = true;
-            } catch (InvalidIntegerException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-
-         
-        return potencia;
-    }
-   
-   ///equals de audio
-
-   ///datos comparables de audio
 
    @Override
-    public void escanearDatosComparables() {
-        System.out.println("Cargando Parlante: ");
+    public void escanearDatosComparables(String print) {
+        System.out.println(print + " parlante: ");
         super.escanearDatosComparables();
     }
 
@@ -160,30 +114,73 @@ public class Parlante extends Audio {
     }
    
     @Override
+    public Parlante clone() {
+        return new Parlante(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico, radio, potencia);
+    }
+
+    @Override
     public String toString() {
         return "Parlante: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
          " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono: " +  (microfono ? "Si" : "No") +
         " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Radio: " + getRadio() + " \n      Potencia: " + getPotencia() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
-    @Override
-    public Parlante clone() {
-        return new Parlante(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico, radio, potencia);
-    }
-    @Override
-    public void escanearDatosEspecificos() {
-        ///en audio
-        resistencia = escanearResistencia();
-        microfono = escanearMicrofono();
-        /// auricular
-        potencia = escanearPotencia();
-        radio = escanearRadio();
-        ///en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
+    /// Scanners -------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public Radios escanearRadio(){
+        Radios radio= null;
+        boolean validInput;
+        do {
+            try {
+                System.out.println("Radios disponibles: ");
+                for (Radios s : Radios.values()) {
+                    System.out.print(s+", ");
+                }
+                
+                System.out.print("Radio: ");
+                String input = App.sc.nextLine().trim().toUpperCase();
+                
+                try {
+                    radio = Radios.valueOf(input);
+                    validInput = true;
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidEnumException("Radio inválida. Por favor, ingrese un valor válido.");
+                }
+            } catch (InvalidEnumException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        
+         
+        return radio;
     }
 
+    public short escanearPotencia(){
+        short potencia = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Potencia (W): ");
+                if (!App.sc.hasNextShort()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidIntegerException("La potencia debe ser un número entero.");
+                }
+                potencia = App.sc.nextShort();
+                App.sc.nextLine(); // Consume newline
+                if (potencia <= 0) {
+                    throw new InvalidIntegerException("La potencia debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidIntegerException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+
+         
+        return potencia;
+    }
 
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     

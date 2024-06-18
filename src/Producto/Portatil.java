@@ -1,11 +1,9 @@
 package Producto;
 
 import java.util.InputMismatchException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import App.App;
-import App.Menu;
+import App.*;
 import Enumeradores.*;
 import Excepciones.*;
 import Interfaces.Memorias;
@@ -16,6 +14,38 @@ public class Portatil extends Computadora implements Memorias {
     private boolean ethernet;
     private boolean microfono;
 
+    /// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void escanearDatosComparables(String print) {
+        System.out.println(print + " portatil: ");
+        /// en producto
+        marca = escanearMarca();
+        nombre = escanearNombre();
+        color = escanearColor();
+        /// computadora
+        memoriaInterna = escanearMemoriaInterna();
+    }
+
+    @Override
+    public void escanearDatosEspecificos() {
+
+        /// en computadora
+        procesador = escanearProcesador();
+        memoriaRam = escanearMemoriaRAM();
+        pVideo = escanearPlacaVideo();
+        bluetooth = escanearBluetooth();
+        mother = escanearMother();
+        /// en portatil
+        pulgadas = escanearPulgadas();
+        ethernet = escanearEthernet();
+        /// microfono =
+        /// en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+    }
+    
     @Override
     public void modificarProducto() {
         int opcion;
@@ -31,7 +61,7 @@ public class Portatil extends Computadora implements Memorias {
             System.out.println("4. Descripcion");
             System.out.println("5. Color");
             System.out.println("6. Stock");
-            System.out.println("7.Procesador");
+            System.out.println("7. Procesador");
             System.out.println("8. RAM");
             System.out.println("9. Almacenamiento");
             System.out.println("10. Placa de Video");
@@ -107,36 +137,22 @@ public class Portatil extends Computadora implements Memorias {
     }
 
     @Override
-    public void escanearDatosComparables() {
-        System.out.println("Cargando Portatil");
-        /// en producto
-        marca = escanearMarca();
-        nombre = escanearNombre();
-        color = escanearColor();
-        /// computadora
-        memoriaInterna = escanearMemoriaInterna();
+    public Portatil clone() {
+        return new Portatil(nombre, marca, precio, descripcion, color, stock, procesador, memoriaInterna,
+                memoriaInterna, pVideo, bluetooth, mother, pulgadas, ethernet, microfono);
     }
 
     @Override
-    public void escanearDatosEspecificos() {
-
-        /// en computadora
-        procesador = escanearProcesador();
-        memoriaRam = escanearMemoriaRAM();
-        pVideo = escanearPlacaVideo();
-        bluetooth = escanearBluetooth();
-        mother = escanearMother();
-        /// en portatil
-        pulgadas = escanearPulgadas();
-        ethernet = escanearEthernet();
-        /// microfono =
-        /// en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
+    public String toString() {
+        return "Portatil: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          "\n      Procesador: " + getProcesador() + " \n      RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
+            "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
+            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
-    public double escanearPulgadas() {
+/// Scanners  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+public double escanearPulgadas() {
         double pulgadas = -1;
         boolean validInput = false;
         do {
@@ -218,22 +234,7 @@ public class Portatil extends Computadora implements Memorias {
         return false;
     }
 
-    @Override
-    public Portatil clone() {
-        return new Portatil(nombre, marca, precio, descripcion, color, stock, procesador, memoriaInterna,
-                memoriaInterna, pVideo, bluetooth, mother, pulgadas, ethernet, microfono);
-    }
-
-    @Override
-    public String toString() {
-        return "Portatil: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          "\n      Procesador: " + getProcesador() + " \n      RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
-            "\n      Placa de Video: " + getpVideo() + "\n      Bluetooth: " + (bluetooth ? "Si" : "No") + "\n      Mother: " + getMother() +
-            "\n      Pulgadas: " + getPulgadas() + "\n      Entrada Ethernet: " + (ethernet ? "Si" : "No") + "\n      Microfono: " + (microfono ? "Si" : "No") + "\n      Descripcion: " + getDescripcion() + '\n';
-    }
-
-    /// Archivos
-    /// -------------------------------------------------------------------------------------------------------------------------------------------------------
+    ///Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public JSONObject toJSON() {

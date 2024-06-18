@@ -12,14 +12,41 @@ public abstract class Audio extends Producto implements Conectividad {
     protected boolean microfono;
     protected boolean inalambrico;
 
+    /// Implementaciones Metodos Abstractos ------------------------------------------------------------------------------------------
+    
     @Override
     public String toString() {
         return "Audio [resistencia=" + resistencia + ", conexion=" + conexion + ", microfono=" + microfono
                 + ", inalambrico=" + inalambrico + "]";
     }
 
-    ///conexiones e inalambrico en la interfaz
+    public void escanearDatosComparables() {
+        /// en producto
+        marca = escanearMarca();
+        nombre = escanearNombre();
+        color = escanearColor();
+        /// en audio
+        conexion = escanearConexion();
+        inalambrico = escanearInalambrico();
+    }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Audio other = (Audio) obj;
+        if (conexion != other.conexion)
+            return false;
+        if (inalambrico != other.inalambrico)
+            return false;
+        return true;
+    }
+
+    ///Scanners -------------------------------------------------------------------------------------------------------------------------
     
     public ResistenciasP escanearResistencia() {
         ResistenciasP res = null;
@@ -78,41 +105,6 @@ public abstract class Audio extends Producto implements Conectividad {
         } while (!validInput);
          
         return false;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((conexion == null) ? 0 : conexion.hashCode());
-        result = prime * result + (inalambrico ? 1231 : 1237);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Audio other = (Audio) obj;
-        if (conexion != other.conexion)
-            return false;
-        if (inalambrico != other.inalambrico)
-            return false;
-        return true;
-    }
-
-    public void escanearDatosComparables() {
-        /// en producto
-        marca = escanearMarca();
-        nombre = escanearNombre();
-        color = escanearColor();
-        /// en audio
-        conexion = escanearConexion();
-        inalambrico = escanearInalambrico();
     }
 
     /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------

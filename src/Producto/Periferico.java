@@ -10,11 +10,41 @@ public abstract class Periferico extends Producto implements Conectividad{
     protected boolean rgb;
     protected Conexiones conexion;
     
+/// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
+    
+    public void escanearDatosComparables() {
+        ///en producto
+        marca = escanearMarca();
+        nombre = escanearNombre();
+        color = escanearColor();
+        ///en periferico
+        rgb = escanearRgb();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + (rgb ? 1231 : 1237);
+        return result;
+    }
 
     @Override
-    public String toString() {
-        return "Periferico [inalambrico=" + inalambrico + ", rgb=" + rgb + ", conexion=" + conexion + "]";
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Periferico other = (Periferico) obj;
+        if (rgb != other.rgb)
+            return false;
+        return true;
     }
+
+
+/// Scanners ------------------------------------------------------------------------------------------------------------------------------------
 
     public boolean escanearRgb(){
         char valor;
@@ -43,39 +73,6 @@ public abstract class Periferico extends Producto implements Conectividad{
         } while (!validInput);
          
         return false;
-    }
-
-    
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + (rgb ? 1231 : 1237);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Periferico other = (Periferico) obj;
-        if (rgb != other.rgb)
-            return false;
-        return true;
-    }
-
-    @Override
-    public void escanearDatosComparables() {
-        ///en producto
-        marca = escanearMarca();
-        nombre = escanearNombre();
-        color = escanearColor();
-        ///en periferico
-        rgb = escanearRgb();
     }
 
     /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
