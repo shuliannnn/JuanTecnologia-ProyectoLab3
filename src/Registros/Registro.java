@@ -32,7 +32,7 @@ public class Registro {
 
     @Override
     public String toString() {
-        return "|Registro            |           Fecha: " + fecha.format(formatter) + 
+        return "| Registro            | Fecha: " + fecha.format(formatter) + 
         " |\n| Accion: " + cambio + " |";
     }
 
