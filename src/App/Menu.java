@@ -30,10 +30,10 @@ public class Menu {
         T e;
         Inventario<T> lista;
         do {
-            System.out.println("Bienvenido al Sistema de Stock Juan Tecnologias");
+            System.out.println("Bienvenido al Sistema de Stock Juan Tecnologia");
             System.out.println("1. Buscar producto");
             System.out.println("2. Cargar producto");
-            System.out.println("3. Modificar Stock No code");
+            System.out.println("3. Modificar Stock");
             System.out.println("4. Filtrar producto");
             System.out.println("5. Mostrar Productos");/// muestra todo
             System.out.println("6. Modificar producto");
@@ -50,20 +50,25 @@ public class Menu {
 
             switch (opcion) {
                 case 1:
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null) break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    lista.buscarProducto(e);
                     clearScreen();
-
                     break;
                 case 2:
                     e = (T) Producto.elegirCategoria();
-                    if (e == null)
-                        break;
+                    if (e == null) break;
                     lista = (Inventario<T>) obtenerLista(e);
                     lista.altaProducto(e);
                     clearScreen();
                     break;
-
                 case 3:
-                    /// modificar stock
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null)
+                        break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    lista.modificarStock(e);
                     break;
                 case 4:
                     menuFiltrado();

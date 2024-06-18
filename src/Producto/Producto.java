@@ -114,7 +114,7 @@ public abstract class Producto {
             try {
                 System.out.print("Color ( ");
                 for (ColorP s : ColorP.values()) {
-                    System.out.print(s+", ");
+                    System.out.print(s + ", ");
                 }
                 System.out.print("): ");
                 colorP = ColorP.valueOf(App.sc.nextLine().toUpperCase());
@@ -148,6 +148,23 @@ public abstract class Producto {
             }
         } while (!validInput);
         return descripcion;
+    }
+
+    public static int escanearId() {
+        int id;
+        System.out.println("Ingrese un id: ");
+        try {
+            id = App.sc.nextInt();
+            if (id < 1) {
+                throw new InvalidIntegerException();
+            }
+        } catch (InputMismatchException | InvalidIntegerException ex) {
+            App.sc.nextLine();
+            System.out.println("Id no valido");
+            Menu.systemPause();
+            return -1;
+        }
+        return id;
     }
 
     public static int escanearStock() {

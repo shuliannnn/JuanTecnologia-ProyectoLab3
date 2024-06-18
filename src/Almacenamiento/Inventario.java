@@ -58,28 +58,27 @@ public class Inventario<T extends Producto> implements ABML<T> {
         return lista.add(e);
     }
 
-    public LinkedHashSet<T> listar(){
+    public LinkedHashSet<T> listar() {
         return lista;
     }
 
-    public int size(){
+    public int size() {
         return lista.size();
     }
 
     public void altaProducto(T e) {
         e.escanearDatosComparables();
         if (contiene(e)) {
-            System.out.println("El producto ya se encontraba en el sistema");
-            System.out.println("Desea modificar el stock?");
-            
-            if (!confirmar("Si", "No", "", "Saliendo..."))
-                return;
 
             /// vamos al objeto
             for (T t : lista) {
                 if (t.equals(e)) {
+                    System.out.println("El producto ya se encontraba en el sistema");
+                    System.out.println("Desea modificar el stock?");
                     Menu.clearScreen();
-                    System.out.println("Stock actual: " + t.getStock());
+                    System.out.println(t);
+                    if (!confirmar("Si", "No", "", "Saliendo..."))
+                        return;
                     t.modificarStock();
                     Archivo.modificarProducto(t);
                     System.out.println("Modificado correctamente.");
@@ -94,7 +93,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
             Menu.clearScreen();
             System.out.println(e);
             System.out.println("El producto quedaria cargado asi desea añadirlo al sistema?");
-            
+
             if (confirmar("Añadir", "Borrar", "Se añadió al sistema correctamente",
                     "No se añadio al sistema")) {
                 e.setId(e.asignarId());
@@ -127,11 +126,11 @@ public class Inventario<T extends Producto> implements ABML<T> {
             App.sc.nextLine();
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese un id: ");
-                    id = App.sc.nextInt();
-                    App.sc.nextLine();
-                    Menu.clearScreen();
+                    id = Producto.escanearId();
+                    if (id == -1)
+                        break;
 
+                    Menu.clearScreen();
                     e = buscar(id);
                     if (e == null) {
                         System.out.println("No se encontro el producto");
@@ -188,7 +187,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
             lista.add(eCopia);
             Archivo.modificarProducto(eCopia);
         }
-            Menu.systemPause();
+        Menu.systemPause();
     }
 
     public void bajaProducto(T e) {
@@ -211,9 +210,13 @@ public class Inventario<T extends Producto> implements ABML<T> {
             App.sc.nextLine();
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese un id: ");
-                    id = App.sc.nextInt();
-                    App.sc.nextLine();
+                    id = Producto.escanearId();
+                    if (id == -1) {
+                        System.out.println("Id no valido");
+                        Menu.systemPause();
+                        Menu.clearScreen();
+                        break;
+                    }
                     Menu.clearScreen();
 
                     e = buscar(id);
@@ -257,7 +260,143 @@ public class Inventario<T extends Producto> implements ABML<T> {
             lista.remove(e);
             Archivo.eliminarProducto(e);
         }
-            Menu.systemPause();
+        Menu.systemPause();
+    }
+
+    public void modificarStock(T e) {
+
+        int opcion;
+        int id;
+        do {
+            Menu.clearScreen();
+            System.out.println("¿Como desea buscar el producto?");
+            System.out.println("1. ID");
+            System.out.println("2. Datos principales");
+            System.out.println("0. Salir");
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    id = Producto.escanearId();
+                    if (id == -1) {
+                        System.out.println("Id no valido");
+                        Menu.systemPause();
+                        Menu.clearScreen();
+                        break;
+                    }
+                    e = buscar(id);
+                    if (e == null) {
+                        System.out.println("No se encontro el producto");
+                        Menu.systemPause();
+                        Menu.clearScreen();
+                        return;
+                    }
+                    opcion = 0;
+                    break;
+                case 2:
+                    System.out.println("Ingrese datos principales");
+                    e.escanearDatosComparables();
+                    if (!contiene(e)) {
+                        System.out.println("No se encontro el producto");
+                        Menu.systemPause();
+                        Menu.clearScreen();
+                        return;
+                    }
+                    opcion = 0;
+                    break;
+                case 0:
+                    Menu.clearScreen();
+                    return;
+                default:
+                    System.out.println("Por favor ingrese una opcion valida");
+                    Menu.systemPause();
+                    Menu.clearScreen();
+                    break;
+            }
+        } while (opcion != 0);
+
+        for (T t : lista) {
+            if (t.equals(e)) {
+                Menu.clearScreen();
+                System.out.println("Se encontró el producto en el sistema");
+                System.out.println(t);
+                System.out.println("Desea modificar el stock?");
+                if (!confirmar("Si", "No", "", "Saliendo...")) {
+                    Menu.systemPause();
+                    Menu.clearScreen();
+                    return;
+                }
+                t.modificarStock();
+                Archivo.modificarProducto(t);
+                System.out.println("Modificado correctamente.");
+                System.out.println("Stock actual: " + t.getStock());
+                Menu.systemPause();
+                Menu.clearScreen();
+                return;
+            }
+        }
+    }
+
+    public void buscarProducto(T e) {
+        int opcion;
+        int id;
+        do {
+            Menu.clearScreen();
+            System.out.println("¿Como desea buscar el producto?");
+            System.out.println("1. ID");
+            System.out.println("2. Datos principales");
+            System.out.println("0. Salir");
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    id = Producto.escanearId();
+                    if (id == -1)
+                        break;
+
+                    e = buscar(id);
+                    if (e == null) {
+                        System.out.println("No se encontro el producto");
+                        Menu.systemPause();
+                        return;
+                    }
+                    System.out.println("Se encontro el producto");
+                    System.out.println(e);
+                    Menu.systemPause();
+                    return;
+                case 2:
+                    System.out.println("Ingrese datos principales");
+                    e.escanearDatosComparables();
+                    for (T t : lista) {
+                        if (t.equals(e)) {
+                            System.out.println(t);
+                            Menu.systemPause();
+                            return;
+                        }
+                    }
+
+                    System.out.println("No se encontro el producto");
+                    Menu.systemPause();
+                    return;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Por favor ingrese una opcion valida");
+                    Menu.systemPause();
+                    Menu.clearScreen();
+                    break;
+            }
+        } while (opcion != 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -316,7 +455,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
     public void filtrarYMostrar() {
         int opcion;
         Menu.clearScreen();
-        do{
+        do {
             System.out.println("Como desea filtrar: ");
             System.out.println("1. Marca");
             System.out.println("2. Stock");
@@ -350,20 +489,19 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     Menu.clearScreen();
                     break;
             }
-        }while(opcion != 0);
-        
+        } while (opcion != 0);
 
     }
 
     public void filtroMarca(String marca) {
-        System.out.println(marca + ": ");     
+        System.out.println(marca + ": ");
         for (T t : lista) {
             if (t.getMarca().equalsIgnoreCase(marca)) {
                 System.out.println(t);
             }
         }
     }
-    
+
     public void filtroStock(int stock) {
         System.out.println("Valores con stock menor o igual a " + stock + ":");
         for (T l : lista) {
