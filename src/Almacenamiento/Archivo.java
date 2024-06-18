@@ -187,7 +187,7 @@ public abstract class Archivo {
                 JSONObject jo = new JSONObject();
                 jo.put(CONT_ID_KEY, 1);
                 uploadJSON(jo, ARCHIVO_ID);
-                return 0;
+                return 1;
             }
             String res = downloadJSON(ARCHIVO_ID);
             JSONObject json = new JSONObject(res);
