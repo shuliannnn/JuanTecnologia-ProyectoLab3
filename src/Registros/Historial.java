@@ -1,14 +1,128 @@
 package Registros;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 
 import Almacenamiento.Archivo;
 import Producto.Producto;
+import App.App;
+import App.Menu;
 
 public class Historial {
     
+    public static LinkedList<Registro> lista = new LinkedList<>();
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+/// Menu ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static void menuPrincipal(){
+        int opcion;
+        do {
+            Menu.clearScreen();
+            System.out.println("Historial de cambios");
+            System.out.println("    1. Mostrar todos");
+            System.out.println("    2. Mostrar por fecha");
+            System.out.println("    3. Filtrar por fechas");
+            System.out.println("    0. Atras");
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            Menu.clearScreen();
+            switch (opcion) {
+                case 1:
+                    System.out.println("Historial de todos los movimientos en el sistema");
+                    mostrarInvertido();
+                    return;
+                case 2:
+                    menuMostrarPorFecha();
+                    return;
+                case 3: 
+                    menuFiltrarPorFechas();
+                    return;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Por favor ingrese un caracter valido");
+                    Menu.systemPause();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    public static void menuMostrarPorFecha(){
+        String fechaString;
+        int opcion = -1; 
+        do {
+            try {
+                System.out.println("Mostrar por fecha");
+                Menu.clearScreen();
+
+                System.out.println("Ingrese fecha(dd/mm/yyyy)");
+                System.out.print("-->");
+                fechaString = App.sc.nextLine();
+                LocalDate fecha = LocalDate.parse(fechaString, formatter);
+
+
+                LinkedList<Registro> filtrado = mostrarPorFecha(fecha);
+                System.out.println();
+                System.out.println("Registros del dia " + fecha.format(formatter));
+                for(Registro r: filtrado){
+                    System.out.println(r);
+                }
+
+                opcion = 0;
+            } catch (DateTimeParseException ex) {
+                System.out.println("Formato de fecha incorrecto");
+                Menu.systemPause();
+            }
+            
+        } while (opcion != 0);
+    }
+    public static void menuFiltrarPorFechas(){
+        String fechaDString;
+        String fechaHString;
+        int opcion = -1; 
+        do {
+            try {
+                Menu.clearScreen();
+                System.out.println("Filtrado por fechas");
+
+                System.out.println("Ingrese fecha desde(dd/mm/yyyy)");
+                System.out.print("-->");
+                fechaDString = App.sc.nextLine();
+                LocalDate fechaDesde = LocalDate.parse(fechaDString, formatter);
+
+                System.out.println("Ingrese fecha hasta(dd/mm/yyyy)");
+                System.out.print("-->");
+                fechaHString = App.sc.nextLine();
+                LocalDate fechaHasta = LocalDate.parse(fechaHString, formatter);
+
+                LinkedList<Registro> filtrado = filtrarPorFechas(fechaDesde, fechaHasta);
+                System.out.println();
+                System.out.println("Registros filtrados desde " + fechaDesde.format(formatter) + " hasta " + fechaHasta.format(formatter));
+                for(Registro r: filtrado){
+                    System.out.println(r);
+                }
+
+                opcion = 0;
+            } catch (DateTimeParseException ex) {
+                System.out.println("Formato de fecha incorrecto");
+                Menu.systemPause();
+            }
+            
+        } while (opcion != 0);
+    }
 
 /// Mostrar ------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -24,6 +138,31 @@ public class Historial {
         }
     }
 
+/// Filtros ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    private static LinkedList<Registro> filtrarPorFechas(LocalDate fechaD, LocalDate fechaH){
+        LinkedList<Registro> filtrado = new LinkedList<>();
+        for (Registro registro : lista) {
+            LocalDate fechaRegistro = registro.getFecha().toLocalDate();
+            if(!fechaRegistro.isBefore(fechaD) && !fechaRegistro.isAfter(fechaH)){ //se niega la condicion contraria para que se incluya la fecha(>= <=)
+                filtrado.add(registro);
+            }
+        }
+        Collections.reverse(filtrado);
+        return filtrado;
+    }
+
+       private static LinkedList<Registro> mostrarPorFecha(LocalDate fecha){
+        LinkedList<Registro> filtrado = new LinkedList<>();
+        for (Registro registro : lista) {
+            LocalDate fechaRegistro = registro.getFecha().toLocalDate();
+            if(fechaRegistro.isEqual(fecha)){ 
+                filtrado.add(registro);
+            }
+        }
+        Collections.reverse(filtrado);
+        return filtrado;
+    }
 
 /// Agregar ------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -64,7 +203,6 @@ public class Historial {
     /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
    
 
-    public static LinkedList<Registro> lista = new LinkedList<>();
 
     public static void leerArchivo(){
         lista = new LinkedList<>(Arrays.asList(Archivo.leerHistorial()));

@@ -277,7 +277,6 @@ public abstract class Producto {
                             opcionC = -1;
                         }
                         App.sc.nextLine();
-                        App.sc.nextLine();
                         Menu.clearScreen();
                         switch (opcionC) {
                             case 1:

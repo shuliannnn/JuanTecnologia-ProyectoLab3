@@ -46,7 +46,7 @@ public class Menu {
             System.out.println("5. Mostrar Productos");/// muestra todo
             System.out.println("6. Modificar producto");
             System.out.println("7. Baja de producto");
-            System.out.println("8. Mostral el historial de cambios");
+            System.out.println("8. Ver historial de cambios");
             System.out.println("0. Salir del programa");
             System.out.print("-->");
             try {
@@ -107,8 +107,7 @@ public class Menu {
                     clearScreen();
                     break;
                 case 8:
-                    System.out.println("Historial de todos los movimientos en el sistema");
-                    Historial.mostrarInvertido();
+                    Historial.menuPrincipal();
                     systemPause();
                     clearScreen();
                     break;
