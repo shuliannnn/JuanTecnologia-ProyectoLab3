@@ -1,80 +1,41 @@
 package Producto;
 
 import java.util.InputMismatchException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import Enumeradores.*;
 import Excepciones.InvalidEnumException;
-import App.App;
-import App.Menu;
+import App.*;
 
 public class Auricular extends Audio {
     private FormatoAuricular formato;
     private CanalesAudio canal;
     
-    public static FormatoAuricular escanearFormato(){
-        FormatoAuricular formato= null;
-        boolean validInput;
-        do {
-            try {
-                System.out.println("Formatos disponibles: ");
-                for (FormatoAuricular s : FormatoAuricular.values()) {
-                    System.out.print(s+", ");
-                }
-                
-                System.out.print("FormatoAuricular: ");
-                String input = App.sc.nextLine().trim().toUpperCase();
-                
-                try {
-                    formato = FormatoAuricular.valueOf(input);
-                    validInput = true;
-                } catch (IllegalArgumentException e) {
-                    throw new InvalidEnumException("Formato inválido. Por favor, ingrese un valor válido.");
-                }
-            } catch (InvalidEnumException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-        
-         
-        return formato;
+    
+    /// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
+    
+    @Override
+    public void escanearDatosComparables(String print) {
+        System.out.println(print + " auricular:");
+        super.escanearDatosComparables();
+    }
+
+    @Override
+    public void escanearDatosEspecificos() {
+        ///en audio
+        resistencia = escanearResistencia();
+        microfono = escanearMicrofono();
+        /// auricular
+        formato = escanearFormato();
+        canal = escanearCanal();
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
     }
     
-    public static CanalesAudio escanearCanal(){
-        CanalesAudio canal= null;
-        boolean validInput;
-        do {
-            try {
-                System.out.println("Canales disponibles: ");
-                for (CanalesAudio s : CanalesAudio.values()) {
-                    System.out.print(s+", ");
-                }
-                
-                System.out.print("Canal: ");
-                String input = App.sc.nextLine().trim().toUpperCase();
-                
-                try {
-                    canal = CanalesAudio.valueOf(input);
-                    validInput = true;
-                } catch (IllegalArgumentException e) {
-                    throw new InvalidEnumException("Canal inválido. Por favor, ingrese un valor válido.");
-                }
-            } catch (InvalidEnumException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-        
-         
-        return canal;
-    }
-
     public void modificarProducto(){
         int opcion;
-
         do {
             Menu.clearScreen();
             System.out.println("Producto con modificaciones actuales: ");
@@ -152,41 +113,79 @@ public class Auricular extends Audio {
 
     }
     
-    ///datos comparables en audio
-
-    ///equals en audio
-    
-    @Override
-    public void escanearDatosEspecificos() {
-        ///en audio
-        resistencia = escanearResistencia();
-        microfono = escanearMicrofono();
-        /// auricular
-        formato = escanearFormato();
-        canal = escanearCanal();
-        ///en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
-    }
-
-    @Override
-    public void escanearDatosComparables() {
-        System.out.println("Cargando Auricular: ");
-        super.escanearDatosComparables();
-    }
-
     @Override
     public Auricular clone(){
         return new Auricular(nombre, marca, precio, descripcion, color, stock, resistencia, conexion, microfono, inalambrico, formato, canal);
     }
+
     @Override
     public String toString() {
         return "Auricular: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() +
-         " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono: " +  (microfono ? "Si" : "No") +
+        " | Precio: " + getPrecio() + " |" + " \n      Resistencia: " + getResistencia() + "\n      Conexion: " + getConexion() + "\n      Microfono: " +  (microfono ? "Si" : "No") +
         " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Formato: " + getFormato() + " \n      Canal: " + getCanal() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
+    
+    /// Scanners -------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    
 
+    public static FormatoAuricular escanearFormato(){
+        FormatoAuricular formato= null;
+        boolean validInput;
+        do {
+            try {
+                System.out.println("Formatos disponibles: ");
+                for (FormatoAuricular s : FormatoAuricular.values()) {
+                    System.out.print(s+", ");
+                }
+                
+                System.out.print("FormatoAuricular: ");
+                String input = App.sc.nextLine().trim().toUpperCase();
+                
+                try {
+                    formato = FormatoAuricular.valueOf(input);
+                    validInput = true;
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidEnumException("Formato inválido. Por favor, ingrese un valor válido.");
+                }
+            } catch (InvalidEnumException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        
+         
+        return formato;
+    }
+    
+    public static CanalesAudio escanearCanal(){
+        CanalesAudio canal= null;
+        boolean validInput;
+        do {
+            try {
+                System.out.println("Canales disponibles: ");
+                for (CanalesAudio s : CanalesAudio.values()) {
+                    System.out.print(s+", ");
+                }
+                
+                System.out.print("Canal: ");
+                String input = App.sc.nextLine().trim().toUpperCase();
+                
+                try {
+                    canal = CanalesAudio.valueOf(input);
+                    validInput = true;
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidEnumException("Canal inválido. Por favor, ingrese un valor válido.");
+                }
+            } catch (InvalidEnumException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        
+         
+        return canal;
+    }
     
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     

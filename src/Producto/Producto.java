@@ -21,22 +21,18 @@ public abstract class Producto {
     protected ColorP color;
     protected int stock;
 
-    public int asignarId() {
-        int nuevoId = Archivo.leerContadorId();
-        Archivo.subirContadorId();
-        return nuevoId;
-    }
-
-    public abstract void escanearDatosComparables();
-
+    
+    /// Metodos Abstractos --------------------------------------------------------------------------------------------------------------------------
+    
+    public abstract void escanearDatosComparables(String print);
     public abstract void escanearDatosEspecificos();
-
     public abstract void modificarProducto();
-
     public abstract Producto clone();
-
     public abstract JSONObject toJSON();
 
+    
+    /// Metodo de variacion de stock acepta positivos y negativos
+    
     public void modificarStock() {
         int input = 0;
         boolean validInput;
@@ -52,7 +48,7 @@ public abstract class Producto {
                 if (input < 0 && Math.abs(input) > stock)
                     throw new InvalidIntegerException("El stock no puede quedar negativo.");
 
-                validInput = true;
+                    validInput = true;
             } catch (InvalidIntegerException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
@@ -61,6 +57,35 @@ public abstract class Producto {
         stock += input;
     }
 
+    
+/// Equals -------------------------------------------
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+        return true;
+        if (obj == null)
+        return false;
+        if (getClass() != obj.getClass())
+        return false;
+        Producto other = (Producto) obj;
+        if (nombre == null) {
+            if (other.nombre != null)
+            return false;
+        } else if (!nombre.equalsIgnoreCase(other.nombre))
+            return false;
+            if (marca == null) {
+            if (other.marca != null)
+            return false;
+        } else if (!marca.equalsIgnoreCase(other.marca))
+        return false;
+        if (color != other.color)
+            return false;
+        return true;
+    }
+    
+    /// Scanners ----------------------------------------------------------------------------------------------------------------------------------------------------
+    
     public static String escanearNombre() {
         String nombre = null;
         boolean validInput;
@@ -83,7 +108,7 @@ public abstract class Producto {
         } while (!validInput);
         return nombre;
     }
-
+    
     public static String escanearMarca() {
         String marca = null;
         boolean validInput;
@@ -94,19 +119,19 @@ public abstract class Producto {
                 if (!isValidInput(marca)) {
                     throw new InvalidInputException(
                             "La marca contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
-                }
-                if (marca.length() > 20) {
-                    throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
-                }
-                validInput = true;
-            } catch (InvalidInputException e) {
+                        }
+                        if (marca.length() > 20) {
+                            throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
+                        }
+                        validInput = true;
+                    } catch (InvalidInputException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
             }
         } while (!validInput);
         return marca;
     }
-
+    
     public static ColorP escanearColor() {
         ColorP colorP = null;
         boolean validInput;
@@ -126,7 +151,7 @@ public abstract class Producto {
         } while (!validInput);
         return colorP;
     }
-
+    
     protected static String escanearDescripcion() {
         String descripcion = null;
         boolean validInput;
@@ -149,7 +174,7 @@ public abstract class Producto {
         } while (!validInput);
         return descripcion;
     }
-
+    
     public static int escanearId() {
         int id;
         System.out.println("Ingrese un id: ");
@@ -190,7 +215,7 @@ public abstract class Producto {
         } while (!validInput);
         return stock;
     }
-
+    
     public static double escanearPrecio() {
         double precio = -1;
         boolean validInput;
@@ -214,123 +239,8 @@ public abstract class Producto {
         } while (!validInput);
         return precio;
     }
-
-    protected static boolean isValidInput(String cadena) {
-        // Permite letras, números, puntos, comas, guiones medios y espacios
-        return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
-    }
-
-    @Override
-    public String toString() {
-        return "Producto [nombre=" + nombre + ", marca=" + marca + ", precio=" + precio + ", descripcion=" + descripcion
-                + ", id=" + id + ", color=" + color + ", stock=" + stock + "]";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Producto other = (Producto) obj;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equalsIgnoreCase(other.nombre))
-            return false;
-        if (marca == null) {
-            if (other.marca != null)
-                return false;
-        } else if (!marca.equalsIgnoreCase(other.marca))
-            return false;
-        if (color != other.color)
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((marca == null) ? 0 : marca.hashCode());
-        result = prime * result + ((color == null) ? 0 : color.hashCode());
-        return result;
-    }
-
-    /// Constructores getters y setters
-    /// ------------------------------------------------------------------------------------------------------------------------------------------------
-
-    public Producto() {
-    }
-
-    public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
-        this.nombre = nombre;
-        this.marca = marca;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.color = color;
-        this.stock = stock;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public ColorP getColor() {
-        return color;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setColor(ColorP color) {
-        this.color = color;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
+    
+    /// Eleccion de categoria
     public static Producto elegirCategoria() {
         int opcion, opcionC, opcionA, opcionP;
         Menu.clearScreen();
@@ -465,4 +375,85 @@ public abstract class Producto {
         return null;
     }
 
+    protected static boolean isValidInput(String cadena) {
+        // Permite letras, números, puntos, comas, guiones medios y espacios
+        return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
+    }
+
+    /// Constructores getters y setters  ------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public Producto() {
+    }
+    
+    public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
+        this.nombre = nombre;
+        this.marca = marca;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.color = color;
+        this.stock = stock;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public String getMarca() {
+        return marca;
+    }
+    
+    public double getPrecio() {
+        return precio;
+    }
+    
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public ColorP getColor() {
+        return color;
+    }
+    
+    public int getStock() {
+        return stock;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void setColor(ColorP color) {
+        this.color = color;
+    }
+    
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    
+    public int asignarId() {
+        int nuevoId = Archivo.leerContadorId();
+        Archivo.subirContadorId();
+        return nuevoId;
+    }
+    
 }

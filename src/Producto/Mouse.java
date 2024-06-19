@@ -16,75 +16,27 @@ public class Mouse extends Periferico{
     private Sensores sensor;
     
     
-    @Override
-    public String toString() {
-        return "Mouse: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
-          " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Es RGB: " + (rgb ? "Si" : "No") + "\n      Conexion: " + getConexion() + " \n      DPI: " + getDpi() +
-          " \n      Sensor: " + getConexion() + "\n      Descripcion: " + getDescripcion() + '\n';
-    }
-    
-    public static int escanearDpi(){
-        int dpi = -1;
-        boolean validInput;
-        do {
-            try {
-                System.out.print("Dpi (máximo): ");
-                if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
-                    throw new InvalidIntegerException("El dpi debe ser un número entero.");
-                }
-                dpi = App.sc.nextInt();
-                App.sc.nextLine(); // Consume newline
-                if (dpi <= 0) {
-                    throw new InvalidIntegerException("El dpi debe ser un número positivo.");
-                }
-                validInput = true;
-            } catch (InvalidIntegerException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-         
-        return dpi;
-    }
-    
-    public static Sensores escanearSensor(){
-        Sensores sensor= null;
-        boolean validInput;
-        do {
-            try {
-                System.out.println("Sensores disponibles: ");
-                for (Sensores s : Sensores.values()) {
-                    System.out.print(s+", ");
-                }
-                
-                System.out.print("Sensor: ");
-                String input = App.sc.nextLine().trim().toUpperCase();
-                
-                try {
-                    sensor = Sensores.valueOf(input);
-                    validInput = true;
-                } catch (IllegalArgumentException e) {
-                    throw new InvalidEnumException("Sensor inválido. Por favor, ingrese un valor válido.");
-                }
-                
-            } catch (InvalidEnumException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        } while (!validInput);
-        
-         
-        return sensor;
-    }
+    /// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
 
     @Override
-    public void escanearDatosComparables() {
-        System.out.println("Cargando Mouse: ");
+    public void escanearDatosComparables(String print) {
+        System.out.println(print + " mouse: ");
         super.escanearDatosComparables();
     }
 
-///equals en periferico
+    @Override
+    public void escanearDatosEspecificos() {
+        ///en periferico
+        conexion = escanearConexion();
+        inalambrico = escanearInalambrico();
+        ///en mouse
+        dpi = escanearDpi();
+        sensor = escanearSensor();
+        ///en producto
+        descripcion = escanearDescripcion();
+        stock = escanearStock();
+        precio = escanearPrecio();
+    }
 
     @Override
     public void modificarProducto(){
@@ -168,18 +120,70 @@ public class Mouse extends Periferico{
     }
 
     @Override
-    public void escanearDatosEspecificos() {
-        ///en periferico
-        conexion = escanearConexion();
-        inalambrico = escanearInalambrico();
-        ///en mouse
-        dpi = escanearDpi();
-        sensor = escanearSensor();
-        ///en producto
-        descripcion = escanearDescripcion();
-        stock = escanearStock();
-        precio = escanearPrecio();
+    public String toString() {
+        return "Mouse: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
+          " \n      Es inalambrico: " + (inalambrico ? "Si" : "No") + " \n      Es RGB: " + (rgb ? "Si" : "No") + "\n      Conexion: " + getConexion() + " \n      DPI: " + getDpi() +
+          " \n      Sensor: " + getConexion() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
+    
+    /// Scanners --------------------------------------------------------------------------------------------------------------------------------
+
+    public static int escanearDpi(){
+        int dpi = -1;
+        boolean validInput;
+        do {
+            try {
+                System.out.print("Dpi (máximo): ");
+                if (!App.sc.hasNextInt()) {
+                    App.sc.next(); // Clear invalid input
+                    throw new InvalidIntegerException("El dpi debe ser un número entero.");
+                }
+                dpi = App.sc.nextInt();
+                App.sc.nextLine(); // Consume newline
+                if (dpi <= 0) {
+                    throw new InvalidIntegerException("El dpi debe ser un número positivo.");
+                }
+                validInput = true;
+            } catch (InvalidIntegerException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+         
+        return dpi;
+    }
+    
+    public static Sensores escanearSensor(){
+        Sensores sensor= null;
+        boolean validInput;
+        do {
+            try {
+                System.out.println("Sensores disponibles: ");
+                for (Sensores s : Sensores.values()) {
+                    System.out.print(s+", ");
+                }
+                
+                System.out.print("Sensor: ");
+                String input = App.sc.nextLine().trim().toUpperCase();
+                
+                try {
+                    sensor = Sensores.valueOf(input);
+                    validInput = true;
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidEnumException("Sensor inválido. Por favor, ingrese un valor válido.");
+                }
+                
+            } catch (InvalidEnumException e) {
+                System.out.println(e.getMessage());
+                validInput = false;
+            }
+        } while (!validInput);
+        
+         
+        return sensor;
+    }
+
+    
     
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
 

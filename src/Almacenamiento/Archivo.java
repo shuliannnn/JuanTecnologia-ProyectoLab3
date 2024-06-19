@@ -5,19 +5,57 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import Producto.*;
+import Registros.Registro;
 
 public abstract class Archivo {
 
+/// Constantes -----------------------------------------------------------------------------------------------------------------------------
+    
     public static final String ARCHIVO_ID = "id.json";
     public static final String CONT_ID_KEY = "contador";
+    public static final String ARCHIVO_REGISTRO = "registro.json";
 
+/// Metodos de Registro ------------------------------------------------------------------------------------------------------------------------
+    
+    public static void subirRegistro(Registro registro){
+        JSONArray registros = leerArchivoProducto(ARCHIVO_REGISTRO);
+        registros.put(registro.toJSON());
+        uploadJSON(registros, ARCHIVO_REGISTRO);
+    }
 
+    public static Registro[] leerHistorial(){
+        JSONArray registros = leerArchivoRegistro();
+        Registro[] array = new Registro[registros.length()];
+        try{
+            for (int i = 0; i < array.length; i++) {
+                array[i] = Registro.fromJSON(registros.getJSONObject(i));
+            }
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return array;
+    }
+
+    private static JSONArray leerArchivoRegistro(){
+        JSONArray registros = new JSONArray();
+        
+        String contenido = downloadJSON(ARCHIVO_REGISTRO);
+        if (!contenido.isEmpty()) {
+            try{
+                registros = new JSONArray(contenido);
+            } catch(JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return registros;
+    }
+ 
+//// Metodos de Producto -----------------------------------------------------------------------------------------------------------------------------------
+    
     private static JSONArray leerArchivoProducto(String archivo) {
         JSONArray productos = new JSONArray();
         
@@ -50,7 +88,7 @@ public abstract class Archivo {
         try{
             for (int i = 0; i < productos.length(); i++) {
                 prod = productos.getJSONObject(i);
-                aux = fromJSON(prod);
+                aux = ProductoFromJSON(prod);
                 if(aux.getId() == p.getId()){
                     prod = p.toJSON();
                     productos.put(i, prod);
@@ -75,7 +113,7 @@ public abstract class Archivo {
         try{
             for (int i = 0; i < productos.length(); i++) {
                 prod = productos.getJSONObject(i);
-                aux = fromJSON(prod);
+                aux = ProductoFromJSON(prod);
                 if(aux.getId() == p.getId()){
                     productos.remove(i);
                     break;
@@ -95,7 +133,7 @@ public abstract class Archivo {
         Producto[] array = new Producto[productos.length()];
         try{
             for (int i = 0; i < array.length; i++) {
-                array[i] = fromJSON(productos.getJSONObject(i));
+                array[i] = ProductoFromJSON(productos.getJSONObject(i));
             }
         }catch(JSONException e){
             e.printStackTrace();
@@ -103,7 +141,7 @@ public abstract class Archivo {
         return array;
     }
 
-    public static Producto fromJSON(JSONObject json) throws JSONException{
+    public static Producto ProductoFromJSON(JSONObject json) throws JSONException{
         String tipo = "";
         try{
             tipo = json.getString("tipo");
@@ -124,6 +162,13 @@ public abstract class Archivo {
             default: throw new JSONException("No se encontro papi");
         }
     }
+
+    public static String obtenerNombreArchivo(Producto p) {
+        return p.getClass().getSimpleName().toLowerCase() + ".json";
+    }
+
+
+/// Metodos Id ---------------------------------------------------------------------------------------------------------------------------
 
     public static void subirContadorId(){
         JSONObject json = new JSONObject();
@@ -154,10 +199,7 @@ public abstract class Archivo {
         }
     }
 
-    public static String obtenerNombreArchivo(Producto p) {
-        return p.getClass().getSimpleName().toLowerCase() + ".json";
-    }
-
+/// Metodos Generales  --------------------------------------------------------------------------------------------------------------------
 
     private static void uploadJSON(JSONArray jsonArray, String archivo) {
         try {

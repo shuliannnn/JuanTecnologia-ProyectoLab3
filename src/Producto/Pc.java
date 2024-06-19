@@ -1,23 +1,24 @@
 package Producto;
-import java.util.InputMismatchException;
 
+import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Interfaces.Memorias;
-import App.App;
-import App.Menu;
+import App.*;
 
 public class Pc extends Computadora implements Memorias{
 
     private boolean perifericos;
     private boolean wifi;
 
+
+ /// Implementaciones Metodos Abstractos ----------------------------------------------------------------------------------------------------------------------------
+
     @Override
-    public void escanearDatosComparables() {
-        System.out.println("Cargando Pc");
+    public void escanearDatosComparables(String print) {
+        System.out.println(print + " pc: ");
         ///en producto
         marca = escanearMarca();
         nombre = escanearNombre();
@@ -26,28 +27,6 @@ public class Pc extends Computadora implements Memorias{
         memoriaInterna = escanearMemoriaInterna();
         /// en pc 
         perifericos = escanearPerifericos();
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + (perifericos ? 1231 : 1237);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Pc other = (Pc) obj;
-        if (perifericos != other.perifericos)
-            return false;
-        return true;
     }
 
     @Override
@@ -66,53 +45,18 @@ public class Pc extends Computadora implements Memorias{
         precio = escanearPrecio();
     }
 
-    public boolean escanearPerifericos(){
-        char valor;
-        boolean validInput = false;
-        do {
-            try {
-                System.out.print("Incluye perifericos (t/f): ");
-                String input = App.sc.nextLine();
-                if (input.length() != 1) {
-                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
-                }
-                valor = input.charAt(0);
-                if (valor == 't' || valor == 'f') {
-                     
-                    return valor == 't';
-                } else {
-                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
-                }
-            } catch (InvalidCharacterException e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!validInput);
-         
-        return false;
-    }
-
-    public boolean escanearWifi(){
-        char valor;
-        boolean validInput = false;
-        do {
-            try {
-                System.out.print("Tiene Placa Wifi (t/f): ");
-                String input = App.sc.nextLine();
-                if (input.length() != 1) {
-                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
-                }
-                valor = input.charAt(0);
-                if (valor == 't' || valor == 'f') {
-                    return valor == 't';
-                } else {
-                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
-                }
-            } catch (InvalidCharacterException e) {
-                System.out.println(e.getMessage());
-            }
-        } while (!validInput);
-         
-        return false;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pc other = (Pc) obj;
+        if (perifericos != other.perifericos)
+            return false;
+        return true;
     }
 
     @Override
@@ -204,6 +148,11 @@ public class Pc extends Computadora implements Memorias{
     }
 
     @Override
+	public Pc clone() {
+        return new Pc(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam, memoriaInterna, pVideo, bluetooth, mother, perifericos, wifi);
+	}
+
+    @Override
     public String toString() {
         return "PC: ID: " + (getId()==0?"No asignado":getId()) + "\n  | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n  | Stock: " + getStock() + " | Precio: " + getPrecio() + " |" +
           "\n      Procesador: " + getProcesador() + " \n      RAM: " + getMemoriaRam() + "\n      Almacenamiento: " + getMemoriaInterna() +
@@ -211,11 +160,58 @@ public class Pc extends Computadora implements Memorias{
             "\n      Tiene Perifericos: " + (perifericos ? "Si" : "No") + "\n      Wifi: " + (wifi ? "Si" : "No") + "\n      Descripcion: " + getDescripcion() + '\n';
     }
     
-	@Override
-	public Pc clone() {
-		return new Pc(nombre, marca, precio, descripcion, color, stock, procesador, memoriaRam, memoriaInterna, pVideo, bluetooth, mother, perifericos, wifi);
-	}
-    
+/// Scanners ----------------------------------------------------------------------------------------------------------------------------------------------
+
+    public boolean escanearPerifericos(){
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Incluye perifericos (t/f): ");
+                String input = App.sc.nextLine();
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                valor = input.charAt(0);
+                if (valor == 't' || valor == 'f') {
+                     
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+         
+        return false;
+    }
+
+    public boolean escanearWifi(){
+        char valor;
+        boolean validInput = false;
+        do {
+            try {
+                System.out.print("Tiene Placa Wifi (t/f): ");
+                String input = App.sc.nextLine();
+                if (input.length() != 1) {
+                    throw new InvalidCharacterException("Debe ingresar solo un carácter ('t' o 'f').");
+                }
+                valor = input.charAt(0);
+                if (valor == 't' || valor == 'f') {
+                    return valor == 't';
+                } else {
+                    throw new InvalidCharacterException("Carácter inválido. Debe ingresar 't' o 'f'.");
+                }
+            } catch (InvalidCharacterException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
+         
+        return false;
+    }
+
+
     /// Archivos -------------------------------------------------------------------------------------------------------------------------------------------------------
     
     @Override
