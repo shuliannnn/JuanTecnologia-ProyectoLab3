@@ -1,4 +1,4 @@
-package Registros;
+package Almacenamiento.Registros;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class Registro {
 
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy | HH:mm:ss");
     private LocalDateTime fecha;
     private String cambio;
     
@@ -20,7 +20,7 @@ public class Registro {
         
         // Header
         sb.append("-----------------------------------------------------\n");
-        sb.append(String.format("%-20s | %s\n", "Fecha", fecha.format(formatter)));
+        sb.append(String.format("%-20s | %s\n", "Fecha", fecha.format(FORMATTER)));
         sb.append(String.format("%-20s | %s\n", "--------------------", "------------------------------"));
 
         // Cambio section

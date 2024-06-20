@@ -6,9 +6,8 @@ import org.json.JSONObject;
 import App.*;
 import Enumeradores.*;
 import Excepciones.*;
-import Interfaces.Memorias;
 
-public class Portatil extends Computadora implements Memorias {
+public class Portatil extends Computadora {
 
     private double pulgadas;
     private boolean ethernet;
@@ -152,7 +151,7 @@ public class Portatil extends Computadora implements Memorias {
 
 /// Scanners  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-public double escanearPulgadas() {
+    public double escanearPulgadas() {
         double pulgadas = -1;
         boolean validInput = false;
         do {

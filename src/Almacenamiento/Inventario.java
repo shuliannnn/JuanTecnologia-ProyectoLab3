@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.LinkedHashSet;
 
 import Producto.Producto;
-import Registros.Historial;
+import Almacenamiento.Registros.Historial;
 import Interfaces.ABML;
 import App.App;
 import App.Menu;
@@ -31,7 +31,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                     System.out.println("El producto ya se encontraba en el sistema");
                     System.out.println("Desea modificar el stock?");
                     System.out.println(t);
-                    if (!confirmar("Si", "No", "", "Saliendo..."))
+                    if (!Menu.confirmar("Si", "No", "", "Saliendo..."))
                         return;
                     int stockViejo = t.getStock();
                     t.modificarStock();
@@ -50,7 +50,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
             System.out.println(e);
             System.out.println("El producto quedaria cargado asi desea añadirlo al sistema?");
 
-            if (confirmar("Añadir", "Borrar", "Se añadió al sistema correctamente",
+            if (Menu.confirmar("Añadir", "Borrar", "Se añadió al sistema correctamente",
                     "No se añadio al sistema")) {
                 e.setId(e.asignarId());
                 agregar(e);
@@ -141,7 +141,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
         System.out.println("Producto modificado: ");
         System.out.println(eCopia);
         System.out.println("Desea realizar estos cambios?");
-        if (confirmar("Si", "No", "Producto modificado correctamente",
+        if (Menu.confirmar("Si", "No", "Producto modificado correctamente",
                 "Se deshicieron las modificaciones")) { // Confirmar
             lista.remove(e);
             lista.add(eCopia);
@@ -218,7 +218,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
         System.out.println("Producto Encontrado");
         System.out.println(e);
         System.out.println("Desea eliminarlo definitivamente del sistema?");
-        if (confirmar("Si", "No", "Producto eliminado correctamente",
+        if (Menu.confirmar("Si", "No", "Producto eliminado correctamente",
                 "No se elimino")) { // Confirmar
             lista.remove(e);
             Archivo.eliminarProducto(e);
@@ -293,7 +293,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                 System.out.println("Se encontró el producto en el sistema");
                 System.out.println(t);
                 System.out.println("Desea modificar el stock?");
-                if (!confirmar("Si", "No", "", "Saliendo...")) {
+                if (!Menu.confirmar("Si", "No", "", "Saliendo...")) {
                     Menu.systemPause();
                     Menu.clearScreen();
                     return;
@@ -401,10 +401,6 @@ public class Inventario<T extends Producto> implements ABML<T> {
         return lista.remove(eliminado) ? eliminado : null;
     }
 
-    public LinkedHashSet<T> listar() {
-        return lista;
-    }
-
 /// Metodos Varios de Inventario
     
     public boolean estaVacia() {
@@ -450,35 +446,6 @@ public class Inventario<T extends Producto> implements ABML<T> {
             contenido += e.toString();
         }
         return contenido;
-    }
-
-
-    /// para mi deberia ir en menu(? rulo
-    private boolean confirmar(String entradaT, String entradaF, String resT, String resF) {
-        int opcion;
-        do {
-            System.out.println("1." + entradaT);
-            System.out.println("2." + entradaF);
-            System.out.print("-->");
-            try {
-                opcion = App.sc.nextInt();
-            } catch (InputMismatchException ex) {
-                opcion = -1;
-            }
-            App.sc.nextLine();
-            switch (opcion) {
-                case 1:
-                    System.out.println(resT);
-                    return true;
-                case 2:
-                    System.out.println(resF);
-                    return false;
-                default:
-                    System.out.println("Por favor ingrese una opcion valida");
-                    break;
-            }
-        } while (opcion != 1 && opcion != 2);
-        return false;
     }
 
 

@@ -1,4 +1,4 @@
-package Registros;
+package Almacenamiento.Registros;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,10 +14,10 @@ import Producto.Producto;
 import App.App;
 import App.Menu;
 
-public class Historial {
+public abstract class Historial {
     
     public static LinkedList<Registro> lista = new LinkedList<>();
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 /// Menu ------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ public class Historial {
         } while (opcion != 0);
     }
 
-    public static void menuMostrarPorFecha(){
+    private static void menuMostrarPorFecha(){
         String fechaString;
         int opcion = -1; 
         do {
@@ -71,12 +71,12 @@ public class Historial {
                 System.out.println("Ingrese fecha(dd/mm/yyyy)");
                 System.out.print("-->");
                 fechaString = App.sc.nextLine();
-                LocalDate fecha = LocalDate.parse(fechaString, formatter);
+                LocalDate fecha = LocalDate.parse(fechaString, FORMATTER);
 
 
                 LinkedList<Registro> filtrado = mostrarPorFecha(fecha);
                 System.out.println();
-                System.out.println("Registros del dia " + fecha.format(formatter));
+                System.out.println("Registros del dia " + fecha.format(FORMATTER));
                 for(Registro r: filtrado){
                     System.out.println(r);
                 }
@@ -89,7 +89,7 @@ public class Historial {
             
         } while (opcion != 0);
     }
-    public static void menuFiltrarPorFechas(){
+    private static void menuFiltrarPorFechas(){
         String fechaDString;
         String fechaHString;
         int opcion = -1; 
@@ -101,16 +101,16 @@ public class Historial {
                 System.out.println("Ingrese fecha desde(dd/mm/yyyy)");
                 System.out.print("-->");
                 fechaDString = App.sc.nextLine();
-                LocalDate fechaDesde = LocalDate.parse(fechaDString, formatter);
+                LocalDate fechaDesde = LocalDate.parse(fechaDString, FORMATTER);
 
                 System.out.println("Ingrese fecha hasta(dd/mm/yyyy)");
                 System.out.print("-->");
                 fechaHString = App.sc.nextLine();
-                LocalDate fechaHasta = LocalDate.parse(fechaHString, formatter);
+                LocalDate fechaHasta = LocalDate.parse(fechaHString, FORMATTER);
 
                 LinkedList<Registro> filtrado = filtrarPorFechas(fechaDesde, fechaHasta);
                 System.out.println();
-                System.out.println("Registros filtrados desde " + fechaDesde.format(formatter) + " hasta " + fechaHasta.format(formatter));
+                System.out.println("Registros filtrados desde " + fechaDesde.format(FORMATTER) + " hasta " + fechaHasta.format(FORMATTER));
                 for(Registro r: filtrado){
                     System.out.println(r);
                 }
@@ -125,14 +125,8 @@ public class Historial {
     }
 
 /// Mostrar ------------------------------------------------------------------------------------------------------------------------------------------------
-
-    public static void mostrar(){
-        for (Registro registro : lista) {
-            System.out.println(registro);
-        }
-    }
     
-    public static void mostrarInvertido(){
+    private static void mostrarInvertido(){
         for (int i = lista.size() - 1; i >= 0; i--) {
             System.out.println(lista.get(i));
         }
@@ -152,7 +146,7 @@ public class Historial {
         return filtrado;
     }
 
-       private static LinkedList<Registro> mostrarPorFecha(LocalDate fecha){
+    private static LinkedList<Registro> mostrarPorFecha(LocalDate fecha){
         LinkedList<Registro> filtrado = new LinkedList<>();
         for (Registro registro : lista) {
             LocalDate fechaRegistro = registro.getFecha().toLocalDate();
@@ -165,10 +159,6 @@ public class Historial {
     }
 
 /// Agregar ------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    public static void agregar(Registro r) {
-        lista.add(r);
-    }
 
     public static void agregarRegistroBaja(Producto borrado) {
         Registro registro = new Registro(LocalDateTime.now(), "El usuario dio de baja el producto: " + borrado);
@@ -201,8 +191,6 @@ public class Historial {
     }
     
     /// Constructores getters y setters ------------------------------------------------------------------------------------------------------------------------------------------------
-   
-
 
     public static void leerArchivo(){
         lista = new LinkedList<>(Arrays.asList(Archivo.leerHistorial()));
