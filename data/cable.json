@@ -1,0 +1,11 @@
+[{
+    "descripcion": "Ambas terminales macho",
+    "marca": "Generico",
+    "tipo": "Cable",
+    "precio": 3000,
+    "color": "GRIS",
+    "largo": 1,
+    "id": 6,
+    "stock": 100,
+    "nombre": "Vga a Hdmi"
+}]

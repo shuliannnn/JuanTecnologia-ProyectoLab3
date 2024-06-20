@@ -163,7 +163,7 @@ public class Parlante extends Audio {
             try {
                 System.out.print("Potencia (W): ");
                 if (!App.sc.hasNextShort()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("La potencia debe ser un número entero.");
                 }
                 potencia = App.sc.nextShort();

@@ -137,7 +137,7 @@ public class Teclado extends Periferico{
             try {
                 System.out.print("Porcentaje (%): ");
                 if (!App.sc.hasNextShort()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("El porcentaje debe ser un número entero.");
                 }
                 porcentaje = App.sc.nextShort();
@@ -155,6 +155,7 @@ public class Teclado extends Periferico{
          
         return porcentaje;
     }
+
 
     public boolean escanearMecanico(){
         char valor;

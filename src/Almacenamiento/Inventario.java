@@ -55,6 +55,7 @@ public class Inventario<T extends Producto> implements ABML<T> {
                 e.setId(e.asignarId());
                 agregar(e);
                 Archivo.subirProducto(e);
+                System.out.println("Se le asigno el Id: " + e.getId());
                 Historial.agregarRegistroAlta(e);
             }
             Menu.systemPause();

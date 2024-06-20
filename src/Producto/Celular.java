@@ -147,7 +147,7 @@ public class Celular extends Producto implements Memorias{
     @Override
     public String toString() {
         return "Celular: ID: " + (getId()==0?"No asignado":getId()) + "\n | Marca: " + getMarca() + " | Nombre: " + getNombre() + " | Color: " + getColor() + " |" + "\n | Stock: " + getStock() +
-         " | Precio: " + getPrecio() + " |" + " \n      Memoria RAM: " + getMemoriaRam() + "\n      Memoria Interna: " + getMemoriaInterna() + "\n      Pulgadas:" +  getPulgadas() +
+         " | Precio: " + getPrecio() + " |" + " \n      Memoria RAM: " + getMemoriaRam() + "\n      Memoria Interna: " + getMemoriaInterna() + "\n      Pulgadas: " +  getPulgadas() +
         " \n      Doble SIM: " + (dobleSim ? "Si" : "No") + " \n      SO: " + getSo() + " \n      Bateria(mAh): " + getBateria() + "\n      Descripcion: " + getDescripcion() + '\n';
     }
 
@@ -211,7 +211,7 @@ public class Celular extends Producto implements Memorias{
             try {
                 System.out.print("Bateria (mAh): ");
                 if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("La bateria debe ser un número entero.");
                 }
                 bateria = App.sc.nextInt();
@@ -235,9 +235,9 @@ public class Celular extends Producto implements Memorias{
         boolean validInput = false;
         do {
             try {
-                System.out.print("Tamaño Pantalla(pulgadas): ");
+                System.out.print("Tamaño Pantalla (pulgadas): ");
                 if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidDoubleException("La pulgadas debe ser un número.");
                 }
                 pulgadas = App.sc.nextDouble();

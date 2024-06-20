@@ -38,6 +38,7 @@ public class Menu {
         T e;
         Inventario<T> lista;
         do {
+            clearScreen();
             System.out.println("Bienvenido al Sistema de Stock Juan Tecnologia");
             System.out.println("1. Buscar producto");
             System.out.println("2. Cargar producto");
@@ -85,8 +86,7 @@ public class Menu {
                     break;
                 case 5:
                     clearScreen();
-                    System.out.println("Todos los productos");
-                    System.out.println(unificarListas());
+                    menuMostrarProductos();
                     systemPause();
                     clearScreen();
                     break;
@@ -127,7 +127,55 @@ public class Menu {
     }
 
     
-/// Menu filtrado Marca y Stock ----------------------------------------------------------------------------------------------------------------------------------
+/// Menues mostrar - filtrado Marca y Stock ----------------------------------------------------------------------------------------------------------------------------------
+    
+    @SuppressWarnings("unchecked")
+    public static <T extends Producto> void menuMostrarProductos() {
+
+        int opcion;
+        T e = null;
+        Inventario<T> lista;
+        do {
+            clearScreen();
+            System.out.println("Que lista desea ver? ");
+            System.out.println("1. Categoria Especifica");
+            System.out.println("2. Todos");
+            System.out.println("0. Atras");
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null)
+                        break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    System.out.println(lista);
+                    systemPause();
+                    clearScreen();
+                    return;
+                case 2:
+                    Inventario<Producto> productos = new Inventario<>();
+                    productos = unificarListas();
+                    System.out.println(productos);
+                    systemPause();
+                    clearScreen();
+                    return;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Por favor ingrese un caracter valido");
+                    systemPause();
+                    clearScreen();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
     
     @SuppressWarnings("unchecked")
     public static <T extends Producto> void menuFiltrado() {

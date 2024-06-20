@@ -1,0 +1,16 @@
+[{
+    "descripcion": "Teclado de excelente calidad. Posee doble entrada para cable, y una robusta estructura metalica",
+    "tipo": "Teclado",
+    "color": "NEGRO",
+    "inalambrico": false,
+    "rgb": true,
+    "nombre": "Teclado Gamer 60 Nisuta Nskbgz61 ",
+    "marca": "Nisuta",
+    "precio": 55000,
+    "mecanico": true,
+    "cableRemovible": true,
+    "conexion": "USB",
+    "id": 8,
+    "porcentaje": 60,
+    "stock": 1
+}]

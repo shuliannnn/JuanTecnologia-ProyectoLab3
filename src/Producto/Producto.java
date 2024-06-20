@@ -21,18 +21,21 @@ public abstract class Producto {
     protected ColorP color;
     protected int stock;
 
-    
-    /// Metodos Abstractos --------------------------------------------------------------------------------------------------------------------------
-    
+    /// Metodos Abstractos
+    /// --------------------------------------------------------------------------------------------------------------------------
+
     public abstract void escanearDatosComparables(String print);
+
     public abstract void escanearDatosEspecificos();
+
     public abstract void modificarProducto();
+
     public abstract Producto clone();
+
     public abstract JSONObject toJSON();
 
-    
     /// Metodo de variacion de stock acepta positivos y negativos
-    
+
     public void modificarStock() {
         int input = 0;
         boolean validInput;
@@ -40,7 +43,7 @@ public abstract class Producto {
             try {
                 System.out.print("Ingrese la variacion de stock(+/-): ");
                 if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("El stock debe ser un número entero.");
                 }
                 input = App.sc.nextInt();
@@ -48,7 +51,7 @@ public abstract class Producto {
                 if (input < 0 && Math.abs(input) > stock)
                     throw new InvalidIntegerException("El stock no puede quedar negativo.");
 
-                    validInput = true;
+                validInput = true;
             } catch (InvalidIntegerException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
@@ -57,35 +60,35 @@ public abstract class Producto {
         stock += input;
     }
 
-    
-/// Equals -------------------------------------------
+    /// Equals -------------------------------------------
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
-        return true;
+            return true;
         if (obj == null)
-        return false;
+            return false;
         if (getClass() != obj.getClass())
-        return false;
+            return false;
         Producto other = (Producto) obj;
         if (nombre == null) {
             if (other.nombre != null)
-            return false;
+                return false;
         } else if (!nombre.equalsIgnoreCase(other.nombre))
             return false;
-            if (marca == null) {
+        if (marca == null) {
             if (other.marca != null)
-            return false;
+                return false;
         } else if (!marca.equalsIgnoreCase(other.marca))
-        return false;
+            return false;
         if (color != other.color)
             return false;
         return true;
     }
-    
-    /// Scanners ----------------------------------------------------------------------------------------------------------------------------------------------------
-    
+
+    /// Scanners
+    /// ----------------------------------------------------------------------------------------------------------------------------------------------------
+
     public static String escanearNombre() {
         String nombre = null;
         boolean validInput;
@@ -100,6 +103,9 @@ public abstract class Producto {
                 if (nombre.length() > 40) {
                     throw new InvalidInputException("El nombre no puede superar los 40 caracteres.");
                 }
+                if (nombre.isBlank()) {
+                    throw new InvalidInputException("El nombre no puede estar vacio");
+                }
                 validInput = true;
             } catch (InvalidInputException e) {
                 System.out.println(e.getMessage());
@@ -108,7 +114,7 @@ public abstract class Producto {
         } while (!validInput);
         return nombre;
     }
-    
+
     public static String escanearMarca() {
         String marca = null;
         boolean validInput;
@@ -119,19 +125,22 @@ public abstract class Producto {
                 if (!isValidInput(marca)) {
                     throw new InvalidInputException(
                             "La marca contiene caracteres no permitidos. Por favor, utilice solo letras, números y signos de puntuación básicos.");
-                        }
-                        if (marca.length() > 20) {
-                            throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
-                        }
-                        validInput = true;
-                    } catch (InvalidInputException e) {
+                }
+                if (marca.length() > 20) {
+                    throw new InvalidInputException("La marca no puede superar los 20 caracteres.");
+                }
+                if (marca.isBlank()) {
+                    throw new InvalidInputException("La marca no puede estar vacio");
+                }
+                validInput = true;
+            } catch (InvalidInputException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
             }
         } while (!validInput);
         return marca;
     }
-    
+
     public static ColorP escanearColor() {
         ColorP colorP = null;
         boolean validInput;
@@ -142,7 +151,7 @@ public abstract class Producto {
                     System.out.print(s + ", ");
                 }
                 System.out.print("): ");
-                colorP = ColorP.valueOf(App.sc.nextLine().toUpperCase());
+                colorP = ColorP.valueOf(App.sc.nextLine().trim().toUpperCase());
                 validInput = true;
             } catch (IllegalArgumentException e) {
                 System.out.println("El color debe ser uno de los valores especificados.");
@@ -151,7 +160,7 @@ public abstract class Producto {
         } while (!validInput);
         return colorP;
     }
-    
+
     protected static String escanearDescripcion() {
         String descripcion = null;
         boolean validInput;
@@ -174,7 +183,7 @@ public abstract class Producto {
         } while (!validInput);
         return descripcion;
     }
-    
+
     public static int escanearId() {
         int id;
         System.out.println("Ingrese un id: ");
@@ -199,7 +208,7 @@ public abstract class Producto {
             try {
                 System.out.print("Stock: ");
                 if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("El stock debe ser un número entero.");
                 }
                 stock = App.sc.nextInt();
@@ -215,7 +224,7 @@ public abstract class Producto {
         } while (!validInput);
         return stock;
     }
-    
+
     public static double escanearPrecio() {
         double precio = -1;
         boolean validInput;
@@ -223,15 +232,15 @@ public abstract class Producto {
             try {
                 System.out.print("Precio: ");
                 if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidDoubleException("El precio debe ser un número.");
                 }
                 precio = App.sc.nextDouble();
-                App.sc.nextLine(); // Consume newline
                 if (precio <= 0) {
                     throw new InvalidDoubleException("El precio debe ser un número positivo.");
                 }
                 validInput = true;
+                App.sc.nextLine(); // Consume newline
             } catch (InvalidDoubleException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
@@ -239,7 +248,7 @@ public abstract class Producto {
         } while (!validInput);
         return precio;
     }
-    
+
     /// Eleccion de categoria
     public static Producto elegirCategoria() {
         int opcion, opcionC, opcionA, opcionP;
@@ -379,11 +388,12 @@ public abstract class Producto {
         return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
     }
 
-    /// Constructores getters y setters  ------------------------------------------------------------------------------------------------------------------------------------------------
-    
+    /// Constructores getters y setters
+    /// ------------------------------------------------------------------------------------------------------------------------------------------------
+
     public Producto() {
     }
-    
+
     public Producto(String nombre, String marca, double precio, String descripcion, ColorP color, int stock) {
         this.nombre = nombre;
         this.marca = marca;
@@ -392,31 +402,31 @@ public abstract class Producto {
         this.color = color;
         this.stock = stock;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
-    
+
     public String getMarca() {
         return marca;
     }
-    
+
     public double getPrecio() {
         return precio;
     }
-    
+
     public String getDescripcion() {
         return descripcion;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public ColorP getColor() {
         return color;
     }
-    
+
     public int getStock() {
         return stock;
     }
@@ -424,35 +434,35 @@ public abstract class Producto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
+
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void setColor(ColorP color) {
         this.color = color;
     }
-    
+
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
     public int asignarId() {
         int nuevoId = Archivo.leerContadorId();
         Archivo.subirContadorId();
         return nuevoId;
     }
-    
+
 }

@@ -157,9 +157,9 @@ public double escanearPulgadas() {
         boolean validInput = false;
         do {
             try {
-                System.out.print("Tamaño Pantalla(pulgadas): ");
+                System.out.print("Tamaño Pantalla (pulgadas): ");
                 if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidDoubleException("La pulgadas debe ser un número.");
                 }
                 pulgadas = App.sc.nextDouble();

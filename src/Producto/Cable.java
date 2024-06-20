@@ -129,7 +129,7 @@ public class Cable extends Producto{
             try {
                 System.out.print("Largo del cable(metros, Ej: 1,5): ");
                 if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidDoubleException("El largo debe ser un número.");
                 }
                 largo = App.sc.nextDouble();

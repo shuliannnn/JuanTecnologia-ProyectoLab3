@@ -1,0 +1,16 @@
+[{
+    "descripcion": "Parlante increible con todo tipo de comodidades",
+    "tipo": "Parlante",
+    "color": "ROJO",
+    "resistencia": "IP68",
+    "inalambrico": true,
+    "nombre": "Jbl Flip 4",
+    "radio": "FM_AM",
+    "marca": "Jbl",
+    "potencia": 16,
+    "precio": 403980.99,
+    "microfono": true,
+    "conexion": "BLUETOOTH",
+    "id": 9,
+    "stock": 4
+}]

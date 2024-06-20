@@ -1,0 +1,19 @@
+[{
+    "descripcion": "Cuenta con bisagra plana de 180grados y un escudo de camara web fisica",
+    "pVideo": "Radeon Graphics",
+    "tipo": "Portatil",
+    "color": "NEGRO",
+    "procesador": "Ryzen 5 7520U",
+    "memoriaInterna": 512,
+    "nombre": "Asus Vivobook 15",
+    "marca": "Asus",
+    "mother": "Asus Motherboard",
+    "ethernet": false,
+    "precio": 1200000,
+    "microfono": false,
+    "bluetooth": true,
+    "pulgadas": 15.6,
+    "memoriaRam": 8,
+    "id": 4,
+    "stock": 189
+}]
