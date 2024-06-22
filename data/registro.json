@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "cambio": "El usuario dio de alta el producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 17 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\n",
         "fecha": "2024-06-20T13:04:50.929460900"
     },
@@ -18,5 +19,45 @@
     {
         "cambio": "El usuario dio de alta el producto: Cable: ID: 2\n  | Marca: yo | Nombre: yo | Color: ROJO |\n  | Stock: 10 | Precio: 10.0 |\n      Largo: 1.0\n      Descripcion: \n",
         "fecha": "2024-06-22T20:05:42.169367"
+=======
+        "cambio": "El usuario dio de alta el producto: Celular: ID: 1\n | Marca: r | Nombre: r | Color: ROSA |\n | Stock: 4 | Precio: 4.0 | \n      Memoria RAM: 4\n      Memoria Interna: 4\n      Pulgadas: 4.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 4\n      Descripcion: 4\n",
+        "fecha": "2024-06-20T15:55:19.302738200"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Celular: ID: 2\n | Marca: Samsung | Nombre: Samsung Galaxy A31 128GB Negro | Color: NEGRO |\n | Stock: 4 | Precio: 120.8 | \n      Memoria RAM: 4\n      Memoria Interna: 128\n      Pulgadas: 6.4 \n      Doble SIM: No \n      SO: ANDROID \n      Bateria(mAh): 5000\n      Descripcion: Es un celular muy pro\n",
+        "fecha": "2024-06-20T16:16:14.778147"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Celular: ID: 3\n | Marca: Apple | Nombre: Apple Iphone 13 Pro Max 512GB | Color: NEGRO |\n | Stock: 56 | Precio: 2550099.0 | \n      Memoria RAM: 6\n      Memoria Interna: 512\n      Pulgadas: 6.7 \n      Doble SIM: No \n      SO: IOS \n      Bateria(mAh): 4352\n      Descripcion: Es un bicho epectacula, IOS 15 con nuevas funcionalidades\n",
+        "fecha": "2024-06-20T16:19:23.088038900"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Portatil: ID: 4\n  | Marca: Asus | Nombre: Asus Vivobook 15 | Color: NEGRO |\n  | Stock: 189 | Precio: 1200000.0 |\n      Procesador: Ryzen 5 7520U \n      RAM: 8\n      Almacenamiento: 512\n      Placa de Video: Radeon Graphics\n      Bluetooth: Si\n      Mother: Asus Motherboard\n      Pulgadas: 15.6\n      Entrada Ethernet: No\n      Microfono: No\n      Descripcion: Cuenta con bisagra plana de 180grados y un escudo de camara web fisica\n",
+        "fecha": "2024-06-20T16:24:39.364681800"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: PC: ID: 5\n  | Marca: AMD | Nombre: AMD Ryzen 5 5600g 16GB | Color: NEGRO |\n  | Stock: 3 | Precio: 1100000.0 |\n      Procesador: Ryzen 5600g \n      RAM: 16\n      Almacenamiento: 480\n      Placa de Video: RTX 2060ti\n      Bluetooth: No\n      Mother: A320M\n      Tiene Perifericos: Si\n      Wifi: No\n      Descripcion: Computadora Gamer de ultima generacion preparada para todo tipo de juegos\n",
+        "fecha": "2024-06-20T16:33:16.136985600"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Cable: ID: 6\n  | Marca: Generico | Nombre: Vga a Hdmi | Color: GRIS |\n  | Stock: 100 | Precio: 3000.0 |\n      Largo: 1.0\n      Descripcion: Ambas terminales macho\n",
+        "fecha": "2024-06-20T16:36:26.416616600"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Mouse: ID: 7\n  | Marca: Redragon | Nombre: Redragon Storm Elite M988 | Color: NEGRO |\n  | Stock: 7 | Precio: 45000.0 | \n      Es inalambrico: No \n      Es RGB: Si\n      Conexion: USB \n      DPI: 32000 \n      Sensor: USB\n      Descripcion: Mouse Gamer con excelente ensor\n",
+        "fecha": "2024-06-20T16:40:39.727386900"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Teclado: ID: 8\n  | Marca: Nisuta | Nombre: Teclado Gamer 60 Nisuta Nskbgz61  | Color: NEGRO |\n  | Stock: 1 | Precio: 55000.0 | \n      Es inalambrico: No \n      Es RGB: Si\n      Conexion: USB \n      Porcentaje: 60 \n      Mecanico: Si\n      Cable Removible: Si\n      Descripcion: Teclado de excelente calidad. Posee doble entrada para cable, y una robusta estructura metalica\n",
+        "fecha": "2024-06-20T16:46:06.393061100"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Parlante: ID: 9\n  | Marca: Jbl | Nombre: Jbl Flip 4 | Color: ROJO |\n  | Stock: 4 | Precio: 403980.99 | \n      Resistencia: IP68\n      Conexion: BLUETOOTH\n      Microfono: Si \n      Es inalambrico: Si \n      Radio: FM_AM \n      Potencia: 16\n      Descripcion: Parlante increible con todo tipo de comodidades\n",
+        "fecha": "2024-06-20T16:48:35.236185300"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Auricular: ID: 10\n  | Marca:  | Nombre:  | Color: ROSA |\n  | Stock: 3 | Precio: 35000.0 | \n      Resistencia: IPXX\n      Conexion: USB\n      Microfono: No \n      Es inalambrico: No \n      Formato: ON_EAR \n      Canal: ESTEREO\n      Descripcion: \n",
+        "fecha": "2024-06-20T16:49:47.291895400"
+>>>>>>> 92dea2aca8853565cb4c5ab8310f7ec137144cf7
     }
 ]

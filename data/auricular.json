@@ -1,0 +1,16 @@
+[{
+    "descripcion": "",
+    "tipo": "Auricular",
+    "color": "ROSA",
+    "resistencia": "IPXX",
+    "formato": "ON_EAR",
+    "inalambrico": false,
+    "nombre": "",
+    "marca": "",
+    "precio": 35000,
+    "microfono": false,
+    "conexion": "USB",
+    "canal": "ESTEREO",
+    "id": 10,
+    "stock": 3
+}]

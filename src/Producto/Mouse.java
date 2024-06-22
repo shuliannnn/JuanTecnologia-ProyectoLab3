@@ -138,7 +138,7 @@ public class Mouse extends Periferico{
             try {
                 System.out.print("Dpi (máximo): ");
                 if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("El dpi debe ser un número entero.");
                 }
                 dpi = App.sc.nextInt();

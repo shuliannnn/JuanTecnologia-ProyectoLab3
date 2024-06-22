@@ -1,0 +1,15 @@
+[{
+    "descripcion": "Mouse Gamer con excelente ensor",
+    "tipo": "Mouse",
+    "color": "NEGRO",
+    "inalambrico": false,
+    "rgb": true,
+    "nombre": "Redragon Storm Elite M988",
+    "marca": "Redragon",
+    "precio": 45000,
+    "conexion": "USB",
+    "sensor": "OPTICO",
+    "id": 7,
+    "stock": 7,
+    "dpi": 32000
+}]

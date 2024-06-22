@@ -3,22 +3,22 @@ package App;
 import java.util.InputMismatchException;
 
 import Almacenamiento.*;
+import Almacenamiento.Registros.*;
 import Producto.*;
-import Registros.Historial;
 
-public class Menu {
+public abstract class Menu {
     
 
 /// Listas de productos ------------------------------------------------------------------------------------------------------------------------------------------------
 
-    static Inventario<Celular> listaCe = new Inventario<>();
-    static Inventario<Parlante> listaPa = new Inventario<>();
-    static Inventario<Pc> listaPc = new Inventario<>();
-    static Inventario<Portatil> listaPo = new Inventario<>();
-    static Inventario<Auricular> listaA = new Inventario<>();
-    static Inventario<Teclado> listaT = new Inventario<>();
-    static Inventario<Mouse> listaM = new Inventario<>();
-    static Inventario<Cable> listaCa = new Inventario<>();
+    private static Inventario<Celular> listaCe = new Inventario<>();
+    private static Inventario<Parlante> listaPa = new Inventario<>();
+    private static Inventario<Pc> listaPc = new Inventario<>();
+    private static Inventario<Portatil> listaPo = new Inventario<>();
+    private static Inventario<Auricular> listaA = new Inventario<>();
+    private static Inventario<Teclado> listaT = new Inventario<>();
+    private static Inventario<Mouse> listaM = new Inventario<>();
+    private static Inventario<Cable> listaCa = new Inventario<>();
     
 /// Menu Principal ---------------------------------------------------------------------------------------------------------------------------------------------------------
     
@@ -38,6 +38,7 @@ public class Menu {
         T e;
         Inventario<T> lista;
         do {
+            clearScreen();
             System.out.println("Bienvenido al Sistema de Stock Juan Tecnologia");
             System.out.println("1. Buscar producto");
             System.out.println("2. Cargar producto");
@@ -85,10 +86,7 @@ public class Menu {
                     break;
                 case 5:
                     clearScreen();
-                    System.out.println("Todos los productos");
-                    System.out.println(unificarListas());
-                    systemPause();
-                    clearScreen();
+                    menuMostrarProductos();
                     break;
                 case 6:
                     e = (T) Producto.elegirCategoria();
@@ -127,10 +125,58 @@ public class Menu {
     }
 
     
-/// Menu filtrado Marca y Stock ----------------------------------------------------------------------------------------------------------------------------------
+/// Menues mostrar - filtrado Marca y Stock ----------------------------------------------------------------------------------------------------------------------------------
     
     @SuppressWarnings("unchecked")
-    public static <T extends Producto> void menuFiltrado() {
+    private static <T extends Producto> void menuMostrarProductos() {
+
+        int opcion;
+        T e = null;
+        Inventario<T> lista;
+        do {
+            clearScreen();
+            System.out.println("Que lista desea ver? ");
+            System.out.println("1. Categoria Especifica");
+            System.out.println("2. Todos");
+            System.out.println("0. Atras");
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    e = (T) Producto.elegirCategoria();
+                    if (e == null)
+                        break;
+                    lista = (Inventario<T>) obtenerLista(e);
+                    System.out.println(lista);
+                    systemPause();
+                    clearScreen();
+                    return;
+                case 2:
+                    Inventario<Producto> productos = new Inventario<>();
+                    productos = unificarListas();
+                    System.out.println(productos);
+                    systemPause();
+                    clearScreen();
+                    return;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Por favor ingrese un caracter valido");
+                    systemPause();
+                    clearScreen();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private static <T extends Producto> void menuFiltrado() {
 
         int opcion;
         T e = null;
@@ -175,10 +221,37 @@ public class Menu {
         } while (opcion != 0);
     }
 
+    public static boolean confirmar(String entradaT, String entradaF, String resT, String resF) {
+        int opcion;
+        do {
+            System.out.println("1." + entradaT);
+            System.out.println("2." + entradaF);
+            System.out.print("-->");
+            try {
+                opcion = App.sc.nextInt();
+            } catch (InputMismatchException ex) {
+                opcion = -1;
+            }
+            App.sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    System.out.println(resT);
+                    return true;
+                case 2:
+                    System.out.println(resF);
+                    return false;
+                default:
+                    System.out.println("Por favor ingrese una opcion valida");
+                    break;
+            }
+        } while (opcion != 1 && opcion != 2);
+        return false;
+    }
+
 /// Manipulacion de listas ----------------------------------------------------------------------------------------------------------------------------------------
    
     @SuppressWarnings("unchecked")
-    public static <T extends Producto> Inventario<T> obtenerLista(T e) {
+    private static <T extends Producto> Inventario<T> obtenerLista(T e) {
         if (e instanceof Celular)
             return (Inventario<T>) listaCe;
         if (e instanceof Auricular)
@@ -198,7 +271,7 @@ public class Menu {
         return null;
     }
 
-    public static Inventario<Producto> unificarListas() {
+    private static Inventario<Producto> unificarListas() {
         Inventario<Producto> productos = new Inventario<>();
         productos.leerInventario(Archivo.obtenerNombreArchivo(new Celular()));
         productos.leerInventario(Archivo.obtenerNombreArchivo(new Auricular()));

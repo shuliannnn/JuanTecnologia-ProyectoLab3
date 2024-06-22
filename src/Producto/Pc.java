@@ -4,11 +4,10 @@ import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import Excepciones.InvalidCharacterException;
-import Interfaces.Memorias;
 import App.*;
 import Enumeradores.ColorP;
 
-public class Pc extends Computadora implements Memorias{
+public class Pc extends Computadora {
 
     private boolean perifericos;
     private boolean wifi;

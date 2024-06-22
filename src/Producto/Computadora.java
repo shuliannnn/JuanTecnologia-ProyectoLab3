@@ -3,10 +3,11 @@ package Producto;
 
 import Excepciones.InvalidCharacterException;
 import Excepciones.InvalidInputException;
+import Interfaces.Memorias;
 import App.App;
 import Enumeradores.ColorP;
 
-public abstract class Computadora extends Producto{
+public abstract class Computadora extends Producto implements Memorias{
 
     protected String procesador;
     protected int memoriaRam; 

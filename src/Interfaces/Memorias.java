@@ -12,7 +12,7 @@ public interface Memorias {
             try {
                 System.out.print("RAM (GB): ");
                 if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("La memoria RAM debe ser un número entero.");
                 }
                 memoria = App.sc.nextInt();
@@ -38,7 +38,7 @@ public interface Memorias {
             try {
                 System.out.print("Almacenamiento (GB): ");
                 if (!App.sc.hasNextInt()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidIntegerException("El almacenamiento debe ser un número entero.");
                 }
                 memoria = App.sc.nextInt();

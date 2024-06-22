@@ -8,8 +8,10 @@ import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import Almacenamiento.Registros.Registro;
 import Producto.*;
-import Registros.Registro;
+
 
 public abstract class Archivo {
 
@@ -88,7 +90,7 @@ public abstract class Archivo {
         try{
             for (int i = 0; i < productos.length(); i++) {
                 prod = productos.getJSONObject(i);
-                aux = ProductoFromJSON(prod);
+                aux = productoFromJSON(prod);
                 if(aux.getId() == p.getId()){
                     prod = p.toJSON();
                     productos.put(i, prod);
@@ -113,7 +115,7 @@ public abstract class Archivo {
         try{
             for (int i = 0; i < productos.length(); i++) {
                 prod = productos.getJSONObject(i);
-                aux = ProductoFromJSON(prod);
+                aux = productoFromJSON(prod);
                 if(aux.getId() == p.getId()){
                     productos.remove(i);
                     break;
@@ -133,7 +135,7 @@ public abstract class Archivo {
         Producto[] array = new Producto[productos.length()];
         try{
             for (int i = 0; i < array.length; i++) {
-                array[i] = ProductoFromJSON(productos.getJSONObject(i));
+                array[i] = productoFromJSON(productos.getJSONObject(i));
             }
         }catch(JSONException e){
             e.printStackTrace();
@@ -141,7 +143,7 @@ public abstract class Archivo {
         return array;
     }
 
-    public static Producto ProductoFromJSON(JSONObject json) throws JSONException{
+    private static Producto productoFromJSON(JSONObject json) throws JSONException{
         String tipo = "";
         try{
             tipo = json.getString("tipo");

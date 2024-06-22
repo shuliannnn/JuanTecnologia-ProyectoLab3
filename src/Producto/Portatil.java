@@ -7,9 +7,8 @@ import App.*;
 import Enumeradores.ColorP;
 import Excepciones.InvalidCharacterException;
 import Excepciones.InvalidDoubleException;
-import Interfaces.Memorias;
 
-public class Portatil extends Computadora implements Memorias {
+public class Portatil extends Computadora {
 
     private double pulgadas;
     private boolean ethernet;
@@ -153,14 +152,14 @@ public class Portatil extends Computadora implements Memorias {
 
 /// Scanners  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-public double escanearPulgadas() {
+    public double escanearPulgadas() {
         double pulgadas = -1;
         boolean validInput = false;
         do {
             try {
-                System.out.print("Tamaño Pantalla(pulgadas): ");
+                System.out.print("Tamaño Pantalla (pulgadas): ");
                 if (!App.sc.hasNextDouble()) {
-                    App.sc.next(); // Clear invalid input
+                    App.sc.nextLine(); // Clear invalid input
                     throw new InvalidDoubleException("La pulgadas debe ser un número.");
                 }
                 pulgadas = App.sc.nextDouble();

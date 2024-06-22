@@ -1,1 +1,54 @@
+<<<<<<< HEAD
 []
+=======
+[
+    {
+        "descripcion": "4",
+        "bateria": 4,
+        "tipo": "Celular",
+        "dobleSim": true,
+        "color": "ROSA",
+        "memoriaInterna": 4,
+        "nombre": "r",
+        "marca": "r",
+        "precio": 4,
+        "pulgadas": 4,
+        "memoriaRam": 4,
+        "id": 1,
+        "so": "IOS",
+        "stock": 4
+    },
+    {
+        "descripcion": "Es un celular muy pro",
+        "bateria": 5000,
+        "tipo": "Celular",
+        "dobleSim": false,
+        "color": "NEGRO",
+        "memoriaInterna": 128,
+        "nombre": "Samsung Galaxy A31 128GB Negro",
+        "marca": "Samsung",
+        "precio": 120.8,
+        "pulgadas": 6.4,
+        "memoriaRam": 4,
+        "id": 2,
+        "so": "ANDROID",
+        "stock": 4
+    },
+    {
+        "descripcion": "Es un bicho epectacula, IOS 15 con nuevas funcionalidades",
+        "bateria": 4352,
+        "tipo": "Celular",
+        "dobleSim": false,
+        "color": "NEGRO",
+        "memoriaInterna": 512,
+        "nombre": "Apple Iphone 13 Pro Max 512GB",
+        "marca": "Apple",
+        "precio": 2550099,
+        "pulgadas": 6.7,
+        "memoriaRam": 6,
+        "id": 3,
+        "so": "IOS",
+        "stock": 56
+    }
+]
+>>>>>>> 92dea2aca8853565cb4c5ab8310f7ec137144cf7

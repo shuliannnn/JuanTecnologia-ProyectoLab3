@@ -1,0 +1,18 @@
+[{
+    "descripcion": "Computadora Gamer de ultima generacion preparada para todo tipo de juegos",
+    "pVideo": "RTX 2060ti",
+    "tipo": "PC",
+    "wifi": false,
+    "color": "NEGRO",
+    "procesador": "Ryzen 5600g",
+    "memoriaInterna": 480,
+    "perifericos": true,
+    "nombre": "AMD Ryzen 5 5600g 16GB",
+    "marca": "AMD",
+    "mother": "A320M",
+    "precio": 1100000,
+    "bluetooth": false,
+    "memoriaRam": 16,
+    "id": 5,
+    "stock": 3
+}]
