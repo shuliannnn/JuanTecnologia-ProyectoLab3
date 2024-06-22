@@ -1,9 +1,10 @@
 package Producto;
 
-import Enumeradores.*;
+
 import Excepciones.InvalidCharacterException;
 import Excepciones.InvalidInputException;
 import App.App;
+import Enumeradores.ColorP;
 
 public abstract class Computadora extends Producto{
 

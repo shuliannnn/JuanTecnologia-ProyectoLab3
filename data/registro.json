@@ -1,0 +1,22 @@
+[
+    {
+        "cambio": "El usuario dio de alta el producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 17 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\n",
+        "fecha": "2024-06-20T13:04:50.929460900"
+    },
+    {
+        "cambio": "El usuario modifico el stock del producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\nEl stock disminuyo en 10",
+        "fecha": "2024-06-20T13:06:52.801812400"
+    },
+    {
+        "cambio": "El usuario realizo estas modificaciones del producto:\nAnterior: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\n\nActual: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: me parece que le erre, era PUTO\n",
+        "fecha": "2024-06-20T13:08:44.161212900"
+    },
+    {
+        "cambio": "El usuario dio de baja el producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: me parece que le erre, era PUTO\n",
+        "fecha": "2024-06-20T13:09:45.971406"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Cable: ID: 2\n  | Marca: yo | Nombre: yo | Color: ROJO |\n  | Stock: 10 | Precio: 10.0 |\n      Largo: 1.0\n      Descripcion: \n",
+        "fecha": "2024-06-22T20:05:42.169367"
+    }
+]

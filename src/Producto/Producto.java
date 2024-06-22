@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import Almacenamiento.Archivo;
 import Enumeradores.ColorP;
 import Excepciones.InvalidDoubleException;
+import Excepciones.InvalidEnumException;
 import Excepciones.InvalidInputException;
 import Excepciones.InvalidIntegerException;
 import App.App;
@@ -142,10 +143,15 @@ public abstract class Producto {
                     System.out.print(s + ", ");
                 }
                 System.out.print("): ");
-                colorP = ColorP.valueOf(App.sc.nextLine().toUpperCase());
-                validInput = true;
-            } catch (IllegalArgumentException e) {
-                System.out.println("El color debe ser uno de los valores especificados.");
+                
+                try {
+                    colorP = ColorP.valueOf(App.sc.nextLine().toUpperCase());
+                    validInput = true;
+                } catch (IllegalArgumentException e) {
+                    throw  new InvalidEnumException("El color debe ser uno de los valores especificados.");
+                }
+            } catch (InvalidEnumException e) {
+                System.out.println( e.getMessage());
                 validInput = false;
             }
         } while (!validInput);

@@ -1,7 +1,8 @@
 package Interfaces;
 
 import Enumeradores.Conexiones;
-import Excepciones.*;
+import Excepciones.InvalidCharacterException;
+import Excepciones.InvalidEnumException;
 import App.App;
 public interface Conectividad {
 

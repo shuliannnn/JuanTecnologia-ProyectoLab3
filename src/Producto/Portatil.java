@@ -4,8 +4,9 @@ import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import App.*;
-import Enumeradores.*;
-import Excepciones.*;
+import Enumeradores.ColorP;
+import Excepciones.InvalidCharacterException;
+import Excepciones.InvalidDoubleException;
 import Interfaces.Memorias;
 
 public class Portatil extends Computadora implements Memorias {

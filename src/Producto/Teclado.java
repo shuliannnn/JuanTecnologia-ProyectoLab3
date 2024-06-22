@@ -5,10 +5,14 @@ import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Enumeradores.*;
-import Excepciones.*;
+
+
 import App.App;
 import App.Menu;
+import Enumeradores.ColorP;
+import Enumeradores.Conexiones;
+import Excepciones.InvalidCharacterException;
+import Excepciones.InvalidIntegerException;
 
 public class Teclado extends Periferico{
 

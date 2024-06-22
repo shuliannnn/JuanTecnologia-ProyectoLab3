@@ -2,10 +2,13 @@ package Producto;
 import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
-import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import Excepciones.InvalidIntegerException;
 import App.*;
+import Enumeradores.ColorP;
+import Enumeradores.Conexiones;
+import Enumeradores.Radios;
+import Enumeradores.ResistenciasP;
 
 public class Parlante extends Audio { 
     private Radios radio;

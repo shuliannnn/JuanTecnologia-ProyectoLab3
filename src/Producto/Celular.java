@@ -3,10 +3,15 @@ package Producto;
 import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
-import Enumeradores.*;
-import Excepciones.*;
+
+import Excepciones.InvalidCharacterException;
+import Excepciones.InvalidDoubleException;
+import Excepciones.InvalidEnumException;
+import Excepciones.InvalidIntegerException;
 import Interfaces.Memorias;
 import App.*;
+import Enumeradores.ColorP;
+import Enumeradores.SoCelular;
 
 public class Celular extends Producto implements Memorias{
 
@@ -163,10 +168,15 @@ public class Celular extends Producto implements Memorias{
                     System.out.print(s+", ");
                 }
                 System.out.print("): ");
-                soCelular = SoCelular.valueOf(App.sc.nextLine().toUpperCase());
-                validInput = true;
-            } catch (IllegalArgumentException e) {
-                System.out.println("El sistema operativo debe ser uno de los valores especificados.");
+                
+                try{
+                    soCelular = SoCelular.valueOf(App.sc.nextLine().toUpperCase());
+                    validInput = true;
+                }catch(IllegalArgumentException e){
+                    throw new InvalidEnumException("Sistema Operativo Invalido");
+                }
+            } catch (InvalidEnumException e) {
+                System.out.println(e.getMessage());
                 validInput = false;
             }
         } while (!validInput);

@@ -1,10 +1,13 @@
 package Producto;
 
-import Enumeradores.*;
+
 import Excepciones.InvalidCharacterException;
 import Excepciones.InvalidEnumException;
 import Interfaces.Conectividad;
 import App.App;
+import Enumeradores.ColorP;
+import Enumeradores.Conexiones;
+import Enumeradores.ResistenciasP;
 
 public abstract class Audio extends Producto implements Conectividad {
     protected ResistenciasP resistencia;

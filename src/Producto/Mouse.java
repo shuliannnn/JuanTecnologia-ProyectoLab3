@@ -5,11 +5,14 @@ import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Enumeradores.*;
+
 import Excepciones.InvalidEnumException;
 import Excepciones.InvalidIntegerException;
 import App.App;
 import App.Menu;
+import Enumeradores.ColorP;
+import Enumeradores.Conexiones;
+import Enumeradores.Sensores;
 
 public class Mouse extends Periferico{
     private int dpi;

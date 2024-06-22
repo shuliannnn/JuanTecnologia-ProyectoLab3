@@ -3,9 +3,13 @@ package Producto;
 import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
-import Enumeradores.*;
 import Excepciones.InvalidEnumException;
 import App.*;
+import Enumeradores.CanalesAudio;
+import Enumeradores.ColorP;
+import Enumeradores.Conexiones;
+import Enumeradores.FormatoAuricular;
+import Enumeradores.ResistenciasP;
 
 public class Auricular extends Audio {
     private FormatoAuricular formato;

@@ -3,10 +3,10 @@ package Producto;
 import java.util.InputMismatchException;
 import org.json.JSONException;
 import org.json.JSONObject;
-import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Interfaces.Memorias;
 import App.*;
+import Enumeradores.ColorP;
 
 public class Pc extends Computadora implements Memorias{
 

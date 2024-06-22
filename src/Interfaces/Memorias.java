@@ -1,7 +1,8 @@
 package Interfaces;
 
-import Excepciones.*;
+
 import App.App;
+import Excepciones.InvalidIntegerException;
 public interface Memorias {
 
     default int escanearMemoriaRAM(){

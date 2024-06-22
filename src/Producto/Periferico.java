@@ -1,9 +1,10 @@
 package Producto;
 
-import Enumeradores.*;
 import Excepciones.InvalidCharacterException;
 import Interfaces.Conectividad;
 import App.App;
+import Enumeradores.ColorP;
+import Enumeradores.Conexiones;
 
 public abstract class Periferico extends Producto implements Conectividad{
     protected boolean inalambrico;
