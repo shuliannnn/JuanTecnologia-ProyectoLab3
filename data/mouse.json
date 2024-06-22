@@ -1,15 +1,47 @@
-[{
-    "descripcion": "Mouse Gamer con excelente ensor",
-    "tipo": "Mouse",
-    "color": "NEGRO",
-    "inalambrico": false,
-    "rgb": true,
-    "nombre": "Redragon Storm Elite M988",
-    "marca": "Redragon",
-    "precio": 45000,
-    "conexion": "USB",
-    "sensor": "OPTICO",
-    "id": 7,
-    "stock": 7,
-    "dpi": 32000
-}]
+[
+    {
+        "descripcion": "Mouse Gamer con excelente ensor",
+        "tipo": "Mouse",
+        "color": "NEGRO",
+        "inalambrico": false,
+        "rgb": true,
+        "nombre": "Redragon Storm Elite M988",
+        "marca": "Redragon",
+        "precio": 45000,
+        "conexion": "USB",
+        "sensor": "OPTICO",
+        "id": 7,
+        "stock": 7,
+        "dpi": 32000
+    },
+    {
+        "descripcion": "Orientado para ambas manos, 6 botones.",
+        "tipo": "Mouse",
+        "color": "BLANCO",
+        "inalambrico": true,
+        "rgb": true,
+        "nombre": "Seisa c004",
+        "marca": "Seisa",
+        "precio": 5330,
+        "conexion": "USB",
+        "sensor": "OPTICO",
+        "id": 11,
+        "stock": 20,
+        "dpi": 1000
+    },
+    {
+        "descripcion": "Mouse convencional ambidiestro, alimentacion con pilas.",
+        "tipo": "Mouse",
+        "color": "NEGRO",
+        "inalambrico": true,
+        "rgb": false,
+        "nombre": "Logitech M170",
+        "marca": "Logitech",
+        "precio": 9836,
+        "conexion": "USB",
+        "sensor": "OPTICO",
+        "id": 13,
+        "stock": 19,
+        "dpi": 1000
+    }
+]

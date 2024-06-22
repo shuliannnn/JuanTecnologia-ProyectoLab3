@@ -391,7 +391,7 @@ public abstract class Producto {
 
     protected static boolean isValidInput(String cadena) {
         // Permite letras, números, puntos, comas, guiones medios y espacios
-        return cadena.matches("^[a-zA-Z0-9.,\\-\\s]*$");
+        return cadena.matches("^[a-zA-Z0-9ñÑ.,\\-\\s]*$");
     }
 
     /// Constructores getters y setters

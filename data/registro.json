@@ -38,5 +38,41 @@
     {
         "cambio": "El usuario dio de alta el producto: Auricular: ID: 10\n  | Marca:  | Nombre:  | Color: ROSA |\n  | Stock: 3 | Precio: 35000.0 | \n      Resistencia: IPXX\n      Conexion: USB\n      Microfono: No \n      Es inalambrico: No \n      Formato: ON_EAR \n      Canal: ESTEREO\n      Descripcion: \n",
         "fecha": "2024-06-20T16:49:47.291895400"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Mouse: ID: 11\n  | Marca: Seisa | Nombre: Seisa c004 | Color: BLANCO |\n  | Stock: 20 | Precio: 5330.0 | \n      Es inalambrico: Si \n      Es RGB: Si\n      Conexion: USB \n      DPI: 1000 \n      Sensor: USB\n      Descripcion: Orientado para ambas manos, 6 botones.\n",
+        "fecha": "2024-06-22T20:23:50.054908300"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Auricular: ID: 12\n  | Marca: Logitech | Nombre: Logitech  | Color: NEGRO |\n  | Stock: 2 | Precio: 135500.0 | \n      Resistencia: IP00\n      Conexion: USB\n      Microfono: Si \n      Es inalambrico: Si \n      Formato: OVER_EAR \n      Canal: ESTEREO\n      Descripcion: 18 horas de bateria.\n",
+        "fecha": "2024-06-22T20:32:09.804414700"
+    },
+    {
+        "cambio": "El usuario realizo estas modificaciones del producto:\nAnterior: Auricular: ID: 12\n  | Marca: Logitech | Nombre: Logitech  | Color: NEGRO |\n  | Stock: 2 | Precio: 135500.0 | \n      Resistencia: IP00\n      Conexion: USB\n      Microfono: Si \n      Es inalambrico: Si \n      Formato: OVER_EAR \n      Canal: ESTEREO\n      Descripcion: 18 horas de bateria.\n\nActual: Auricular: ID: 12\n  | Marca: Logitech | Nombre: Logitech G Series G435 | Color: NEGRO |\n  | Stock: 2 | Precio: 135500.0 | \n      Resistencia: IP00\n      Conexion: USB\n      Microfono: Si \n      Es inalambrico: Si \n      Formato: OVER_EAR \n      Canal: ESTEREO\n      Descripcion: 18 horas de bateria.\n",
+        "fecha": "2024-06-22T20:33:18.164184500"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Mouse: ID: 13\n  | Marca: Logitech | Nombre: Logitech M170 | Color: NEGRO |\n  | Stock: 19 | Precio: 9836.0 | \n      Es inalambrico: Si \n      Es RGB: No\n      Conexion: USB \n      DPI: 1000 \n      Sensor: USB\n      Descripcion: Mouse convencional ambidiestro, alimentacion con pilas.\n",
+        "fecha": "2024-06-22T20:36:05.202374400"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Teclado: ID: 14\n  | Marca: Redragon | Nombre: Redragon Kumara K552 | Color: NEGRO |\n  | Stock: 50 | Precio: 80010.0 | \n      Es inalambrico: No \n      Es RGB: Si\n      Conexion: USB \n      Porcentaje: 75 \n      Mecanico: Si\n      Cable Removible: No\n      Descripcion: Switchs Outemu Red.\n",
+        "fecha": "2024-06-22T20:39:19.603414"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Cable: ID: 15\n  | Marca: Generico | Nombre: Hdmi | Color: NEGRO |\n  | Stock: 10 | Precio: 2500.0 |\n      Largo: 2.0\n      Descripcion: Cable hdmi clasico\n",
+        "fecha": "2024-06-22T20:43:46.976435600"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Cable: ID: 16\n  | Marca: Generico | Nombre: Alargue Usb | Color: NEGRO |\n  | Stock: 3 | Precio: 2900.0 |\n      Largo: 2.0\n      Descripcion: Usb macho hembra \n",
+        "fecha": "2024-06-22T20:44:36.283573900"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Parlante: ID: 17\n  | Marca: JBL | Nombre: Jbl Go 3 | Color: AZUL |\n  | Stock: 10 | Precio: 79999.0 | \n      Resistencia: IP68\n      Conexion: BLUETOOTH\n      Microfono: Si \n      Es inalambrico: Si \n      Radio: NO \n      Potencia: 4\n      Descripcion: Parlante facilmente transportable y sumergible.\n",
+        "fecha": "2024-06-22T20:48:03.320254900"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Parlante: ID: 18\n  | Marca: JBL | Nombre: Jbl Go 3 | Color: NEGRO |\n  | Stock: 20 | Precio: 85999.0 | \n      Resistencia: IP68\n      Conexion: BLUETOOTH\n      Microfono: Si \n      Es inalambrico: Si \n      Radio: NO \n      Potencia: 4\n      Descripcion: Parlante facilmente transportable y sumergible.\n",
+        "fecha": "2024-06-22T20:49:50.522709"
     }
 ]

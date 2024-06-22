@@ -1,16 +1,50 @@
-[{
-    "descripcion": "Parlante increible con todo tipo de comodidades",
-    "tipo": "Parlante",
-    "color": "ROJO",
-    "resistencia": "IP68",
-    "inalambrico": true,
-    "nombre": "Jbl Flip 4",
-    "radio": "FM_AM",
-    "marca": "Jbl",
-    "potencia": 16,
-    "precio": 403980.99,
-    "microfono": true,
-    "conexion": "BLUETOOTH",
-    "id": 9,
-    "stock": 4
-}]
+[
+    {
+        "descripcion": "Parlante increible con todo tipo de comodidades",
+        "tipo": "Parlante",
+        "color": "ROJO",
+        "resistencia": "IP68",
+        "inalambrico": true,
+        "nombre": "Jbl Flip 4",
+        "radio": "FM_AM",
+        "marca": "Jbl",
+        "potencia": 16,
+        "precio": 403980.99,
+        "microfono": true,
+        "conexion": "BLUETOOTH",
+        "id": 9,
+        "stock": 4
+    },
+    {
+        "descripcion": "Parlante facilmente transportable y sumergible.",
+        "tipo": "Parlante",
+        "color": "AZUL",
+        "resistencia": "IP68",
+        "inalambrico": true,
+        "nombre": "Jbl Go 3",
+        "radio": "NO",
+        "marca": "JBL",
+        "potencia": 4,
+        "precio": 79999,
+        "microfono": true,
+        "conexion": "BLUETOOTH",
+        "id": 17,
+        "stock": 10
+    },
+    {
+        "descripcion": "Parlante facilmente transportable y sumergible.",
+        "tipo": "Parlante",
+        "color": "NEGRO",
+        "resistencia": "IP68",
+        "inalambrico": true,
+        "nombre": "Jbl Go 3",
+        "radio": "NO",
+        "marca": "JBL",
+        "potencia": 4,
+        "precio": 85999,
+        "microfono": true,
+        "conexion": "BLUETOOTH",
+        "id": 18,
+        "stock": 20
+    }
+]
