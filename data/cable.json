@@ -1,15 +1,4 @@
 [{
-<<<<<<< HEAD
-    "descripcion": "",
-    "marca": "yo",
-    "tipo": "Cable",
-    "precio": 10,
-    "color": "ROJO",
-    "largo": 1,
-    "id": 2,
-    "stock": 10,
-    "nombre": "yo"
-=======
     "descripcion": "Ambas terminales macho",
     "marca": "Generico",
     "tipo": "Cable",
@@ -19,5 +8,4 @@
     "id": 6,
     "stock": 100,
     "nombre": "Vga a Hdmi"
->>>>>>> 92dea2aca8853565cb4c5ab8310f7ec137144cf7
 }]

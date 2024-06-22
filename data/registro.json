@@ -1,25 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "cambio": "El usuario dio de alta el producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 17 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\n",
-        "fecha": "2024-06-20T13:04:50.929460900"
-    },
-    {
-        "cambio": "El usuario modifico el stock del producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\nEl stock disminuyo en 10",
-        "fecha": "2024-06-20T13:06:52.801812400"
-    },
-    {
-        "cambio": "El usuario realizo estas modificaciones del producto:\nAnterior: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: putp\n\nActual: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: me parece que le erre, era PUTO\n",
-        "fecha": "2024-06-20T13:08:44.161212900"
-    },
-    {
-        "cambio": "El usuario dio de baja el producto: Celular: ID: 1\n | Marca: Iphone | Nombre: IPHONE 15 PRO MAX | Color: BLANCO |\n | Stock: 7 | Precio: 1190.0 | \n      Memoria RAM: 4\n      Memoria Interna: 256\n      Pulgadas:14.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 1000000\n      Descripcion: me parece que le erre, era PUTO\n",
-        "fecha": "2024-06-20T13:09:45.971406"
-    },
-    {
-        "cambio": "El usuario dio de alta el producto: Cable: ID: 2\n  | Marca: yo | Nombre: yo | Color: ROJO |\n  | Stock: 10 | Precio: 10.0 |\n      Largo: 1.0\n      Descripcion: \n",
-        "fecha": "2024-06-22T20:05:42.169367"
-=======
         "cambio": "El usuario dio de alta el producto: Celular: ID: 1\n | Marca: r | Nombre: r | Color: ROSA |\n | Stock: 4 | Precio: 4.0 | \n      Memoria RAM: 4\n      Memoria Interna: 4\n      Pulgadas: 4.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 4\n      Descripcion: 4\n",
         "fecha": "2024-06-20T15:55:19.302738200"
     },
@@ -58,6 +38,5 @@
     {
         "cambio": "El usuario dio de alta el producto: Auricular: ID: 10\n  | Marca:  | Nombre:  | Color: ROSA |\n  | Stock: 3 | Precio: 35000.0 | \n      Resistencia: IPXX\n      Conexion: USB\n      Microfono: No \n      Es inalambrico: No \n      Formato: ON_EAR \n      Canal: ESTEREO\n      Descripcion: \n",
         "fecha": "2024-06-20T16:49:47.291895400"
->>>>>>> 92dea2aca8853565cb4c5ab8310f7ec137144cf7
     }
 ]
