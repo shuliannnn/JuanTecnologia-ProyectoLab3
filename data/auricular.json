@@ -30,5 +30,21 @@
         "canal": "ESTEREO",
         "id": 12,
         "stock": 2
+    },
+    {
+        "descripcion": "Alcance inalambrico de 20 metros, duracion bateria 17 horas.",
+        "tipo": "Auricular",
+        "color": "CELESTE",
+        "resistencia": "IP00",
+        "formato": "OVER_EAR",
+        "inalambrico": true,
+        "nombre": "HyperX Cloud Stinger Core",
+        "marca": "HyperX",
+        "precio": 168509,
+        "microfono": true,
+        "conexion": "USB",
+        "canal": "E7_1",
+        "id": 20,
+        "stock": 3
     }
 ]

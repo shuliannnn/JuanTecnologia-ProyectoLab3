@@ -74,5 +74,25 @@
     {
         "cambio": "El usuario dio de alta el producto: Parlante: ID: 18\n  | Marca: JBL | Nombre: Jbl Go 3 | Color: NEGRO |\n  | Stock: 20 | Precio: 85999.0 | \n      Resistencia: IP68\n      Conexion: BLUETOOTH\n      Microfono: Si \n      Es inalambrico: Si \n      Radio: NO \n      Potencia: 4\n      Descripcion: Parlante facilmente transportable y sumergible.\n",
         "fecha": "2024-06-22T20:49:50.522709"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Mouse: ID: 19\n  | Marca: Kolke | Nombre: Kolke KEM248 | Color: NEGRO |\n  | Stock: 10 | Precio: 30320.0 | \n      Es inalambrico: Si \n      Es RGB: Si\n      Conexion: BLUETOOTH \n      DPI: 1600 \n      Sensor: OPTICO\n      Descripcion: Vertical y ergonomico.\n",
+        "fecha": "2024-06-25T00:04:22.339288200"
+    },
+    {
+        "cambio": "El usuario dio de baja el producto: Celular: ID: 1\n | Marca: r | Nombre: r | Color: ROSA |\n | Stock: 4 | Precio: 4.0 | \n      Memoria RAM: 4\n      Memoria Interna: 4\n      Pulgadas: 4.0 \n      Doble SIM: Si \n      SO: IOS \n      Bateria(mAh): 4\n      Descripcion: 4\n",
+        "fecha": "2024-06-25T00:06:46.034651400"
+    },
+    {
+        "cambio": "El usuario modifico el stock del producto: Mouse: ID: 19\n  | Marca: Kolke | Nombre: Kolke KEM248 | Color: NEGRO |\n  | Stock: 5 | Precio: 30320.0 | \n      Es inalambrico: Si \n      Es RGB: Si\n      Conexion: BLUETOOTH \n      DPI: 1600 \n      Sensor: OPTICO\n      Descripcion: Vertical y ergonomico.\nEl stock disminuyo en 5",
+        "fecha": "2024-06-25T00:07:29.227402200"
+    },
+    {
+        "cambio": "El usuario dio de alta el producto: Auricular: ID: 20\n  | Marca: HyperC | Nombre: HyperX Cloud Stinger Core | Color: CELESTE |\n  | Stock: 3 | Precio: 168509.0 | \n      Resistencia: IP00\n      Conexion: USB\n      Microfono: Si \n      Es inalambrico: Si \n      Formato: OVER_EAR \n      Canal: E7_1\n      Descripcion: Alcance inalambrico de 20 metros, duracion bateria 17 horas.\n",
+        "fecha": "2024-06-25T00:11:45.862114800"
+    },
+    {
+        "cambio": "El usuario realizo estas modificaciones del producto:\nAnterior: Auricular: ID: 20\n  | Marca: HyperC | Nombre: HyperX Cloud Stinger Core | Color: CELESTE |\n  | Stock: 3 | Precio: 168509.0 | \n      Resistencia: IP00\n      Conexion: USB\n      Microfono: Si \n      Es inalambrico: Si \n      Formato: OVER_EAR \n      Canal: E7_1\n      Descripcion: Alcance inalambrico de 20 metros, duracion bateria 17 horas.\n\nActual: Auricular: ID: 20\n  | Marca: HyperX | Nombre: HyperX Cloud Stinger Core | Color: CELESTE |\n  | Stock: 3 | Precio: 168509.0 | \n      Resistencia: IP00\n      Conexion: USB\n      Microfono: Si \n      Es inalambrico: Si \n      Formato: OVER_EAR \n      Canal: E7_1\n      Descripcion: Alcance inalambrico de 20 metros, duracion bateria 17 horas.\n",
+        "fecha": "2024-06-25T00:12:58.190948300"
     }
 ]

@@ -1,21 +1,5 @@
 [
     {
-        "descripcion": "4",
-        "bateria": 4,
-        "tipo": "Celular",
-        "dobleSim": true,
-        "color": "ROSA",
-        "memoriaInterna": 4,
-        "nombre": "r",
-        "marca": "r",
-        "precio": 4,
-        "pulgadas": 4,
-        "memoriaRam": 4,
-        "id": 1,
-        "so": "IOS",
-        "stock": 4
-    },
-    {
         "descripcion": "Es un celular muy pro",
         "bateria": 5000,
         "tipo": "Celular",

@@ -43,5 +43,20 @@
         "id": 13,
         "stock": 19,
         "dpi": 1000
+    },
+    {
+        "descripcion": "Vertical y ergonomico.",
+        "tipo": "Mouse",
+        "color": "NEGRO",
+        "inalambrico": true,
+        "rgb": true,
+        "nombre": "Kolke KEM248",
+        "marca": "Kolke",
+        "precio": 30320,
+        "conexion": "BLUETOOTH",
+        "sensor": "OPTICO",
+        "id": 19,
+        "stock": 5,
+        "dpi": 1600
     }
 ]
